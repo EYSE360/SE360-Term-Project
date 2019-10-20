@@ -2,10 +2,13 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+//import java.awt.*;
+//import javax.swing.*;
 public class Main {
     static List<Admin> adminList = new ArrayList<>();
     static List<Bar> barList = new ArrayList<>();
     public static void main(String[] args) {
+        //SimpleFrame frame = new SimpleFrame();
         while(true){
             System.out.println("WELCOME TO OUR PROGRAM. PRESS 1 FOR ADMIN LOG IN AND 2 FOR USER LOG IN: ");
             Scanner sc1 = new Scanner(System.in);
@@ -22,6 +25,7 @@ public class Main {
                             adminLogIn();
                             break;
                     }
+                    break;
                 }
                 case 2:{
                     System.out.println("Please press 1 if you are new and 2 if you have logged in before: ");
@@ -44,9 +48,10 @@ public class Main {
         Admin a = new Admin();
         Scanner sc = new Scanner(System.in);
         System.out.println("Welcome! Since this is your first time logging in our system, please enter your information below:");
-        System.out.println("Name: \nSurname: \nGovernment Number: \nDepartment: \nPosition: ");
+        System.out.println("Name: \nSurname: \nID Number: \nGovernment Number: \nDepartment: \nPosition: ");
         a.setName(sc.next());
         a.setSurname(sc.next());
+        a.setIDNumber(sc.nextInt());
         a.setGovNum(sc.nextInt());
         a.setDepartment(sc.next());
         a.setPosition(sc.next());
@@ -77,7 +82,6 @@ public class Main {
             }
             adminList.add(a);
         }
-
         else  System.out.println("Process terminated...");
     }
     public static void adminLogIn(){
@@ -86,14 +90,86 @@ public class Main {
         String tempID = sc.next();
         System.out.println("Password: ");
         int tempPW = sc.nextInt();
+
         for(Admin a : adminList) {
             if (tempID.equals(a.getUserName()) && tempPW == a.getPassword()) {
-                System.out.println("Welcome " + a.getName());
+                System.out.println("Welcome " + a.getName()+"\nWhat would you like to do?\n1)Edit information\n2)Display bars\n3)Send warning to a bar\n4)Report a bar");
+                int admindec = sc.nextInt();
+                switch (admindec){
+                    case 1:{
+                        System.out.println("What would you like to edit?\n1)Name\n2)Surname\n3)Department\n4)Position\n5)Username\n6)Password");
+                        int admindec2 = sc.nextInt();
+                        sc.nextLine();
+                        switch (admindec2){
+                            case 1:{
+                                System.out.println("Please enter the new name: ");
+                                String newName = sc.nextLine();
+                                a.setName(newName);
+                                System.out.println("Your name is successfully changed to "+newName);
+                                break;
+                            }
+                            case 2:{
+                                System.out.println("Please enter the new surname: ");
+                                String newSName=sc.nextLine();
+                                a.setSurname(newSName);
+                                System.out.println("Your surname is successfully changed to "+newSName);
+                                break;
+                            }
+                            case 3:{
+                                System.out.println("Please enter the new department: ");
+                                String newDep = sc.nextLine();
+                                a.setDepartment(newDep);
+                                System.out.println("Your department is successfully changed to "+newDep);
+                                break;
+                            }
+                            case 4:{
+                                System.out.println("Pleas enter the new position: ");
+                                String newPos = sc.nextLine();
+                                a.setPosition(newPos);
+                                System.out.println("Your position is successfully changed to "+newPos);
+                                break;
+                            }
+                            case 5:{
+                                System.out.println("Please enter your new username: ");
+                                String newUserName = sc.nextLine();
+                                a.setUserName(newUserName);
+                                System.out.println("Your username is successfully changed to "+newUserName);
+                                break;
+                            }
+                            case 6:{
+                                System.out.println("Please enter your new password: ");
+                                int newPW = sc.nextInt();
+                                sc.nextLine();
+                                a.setPassword(newPW);
+                                System.out.println("Your password is successfully changed to "+newPW);
+                                break;
+                            }
+                        }
+                        break;
+                    }
+                    case 2:{
+                        for(int i=0;i<barList.size();i++){
+                            barList.get(i).display();
+                        }
+                        System.out.println("Please enter the name of the bar if you want to display it's menu: ");
+                        sc.nextLine();
+                        String tempName = sc.nextLine();
+                        for(Bar bar:barList){
+                            if(bar.getName().equals(tempName)){
+                                bar.displayMenu();
+                                return;
+                            }
+                            else System.out.println("Wrong entry.");
+                        }
+                        break;
+                    }
+                }
             } else System.out.println("Wrong Username or password.\nTerminating the program...");
         }
     }
     public static void barUserLogInFirst(){
         Scanner input = new Scanner(System.in);
+        Scanner input1 = new Scanner(System.in);
         System.out.println("Please enter your information below: ");
         System.out.println("Bar's name: ");
         System.out.println("City that bar is located: ");
@@ -101,14 +177,15 @@ public class Main {
         Bar b = new Bar();
         b.setName(input.nextLine());
         b.setCity(input.nextLine());
-        if(input.next().equals("Y")) b.setAlcoholPermission(true);
-        else if(input.next().equals("N")) b.setAlcoholPermission(false);
+        String permission = input.next();
+        if(permission.equals("Y")) b.setAlcoholPermission(true);
+        else if(permission.equals("N")) b.setAlcoholPermission(false);
         System.out.println("Please check your information below. Do you accept? Y/N");
         b.display();
-        String yn = input.nextLine();
+        String yn = input1.nextLine();
         if(yn.equals("Y")) {
             barList.add(b);
-            System.out.println("Your bar is successfully saved! Your user name and password are set to 'Admin' and 123. Please don't forget to change those later.");
+            System.out.println("Your bar is successfully saved! Your user name and password are set to 'Bar' and 123. Please don't forget to change those later.");
         }
         else{
             System.out.println("Process terminated...");
@@ -122,14 +199,15 @@ public class Main {
         System.out.println("Please enter your password: ");
         int tempPw = sc.nextInt();
         for(Bar b: barList){
-            if(b.getBarPassword()==tempPw&&b.getBarUserName().equals(tempUser)){
-                System.out.println("Successfully logged in as "+b.getName()+"\nWhat would you like to do?\n1)Edit information of the bar.\n2)Enter a new beer\n3)Edit a beer\n4)Delete a beer");
+            if(b.getBarUserName().equals(tempUser)&&b.getBarPassword()==tempPw){
+                System.out.println("Successfully logged in as "+b.getName()+"\nWhat would you like to do?\n1)Edit information of the bar.\n2)Enter a new beer\n3)Edit a beer\n4)Delete a beer\nD5)isplay my menu");
                 int decision = sc.nextInt();
                 switch (decision){
                     case 1:{
                         System.out.println("Select the information that you want to edit:\n1)Bar name\n2)City\n3)Alcohol Permission\n4)Username\n5)Password");
                         Scanner s = new Scanner(System.in);
                         int val = s.nextInt();
+                        s.nextLine();
                         switch (val){
                             case 1:{
                                 System.out.println("Please enter the new name of the bar: ");
@@ -177,6 +255,7 @@ public class Main {
                         break;
                     }
                     case 2:{
+                        checkForPermission(b);
                         Scanner sc1 = new Scanner(System.in);
                         System.out.println("Please enter your new beer's information below: ");
                         System.out.println("Brand: ");
@@ -210,9 +289,10 @@ public class Main {
                             if(beer.getSerialNumber()==tempSNumber){
                                 System.out.println("What would you like to edit?\n1)Brand\n2)Type\n3)Alcohol Volume\n4)Price");
                                 int choicee = sc.nextInt();
+                                sc.nextLine();
                                 switch (choicee){
                                     case 1:{
-                                        System.out.println("Pleas enter the new brand: ");
+                                        System.out.println("Please enter the new brand: ");
                                         String newBrand = sc.nextLine();
                                         beer.setBrand(newBrand);
                                         System.out.println("The brand is successfully changed to "+newBrand);
@@ -260,6 +340,10 @@ public class Main {
                         }
                         break;
                     }
+                    case 5:{
+                        b.displayMenu();
+                        break;
+                    }
                 }
             }
             else {
@@ -272,5 +356,21 @@ public class Main {
         String ret = a.getName()+" "+a.getSurname()+" "+a.getGovNum()+" "+a.getDepartment()+" "+a.getPosition()+" "+a.getUserName()+" "+a.getPassword();
         return ret;
     }
+    public static void checkForPermission(Bar b){
+        if(b.getAlcoholPermission()==false){
+            System.out.println("Your bar is not eligible for selling beers. Please get a licence. Terminating the process...");
+            System.exit(1);
+        }
+    }
+    /*static class SimpleFrame
+            extends JFrame {
+        public SimpleFrame(){
 
+
+// change the size otherwise it is 0x0 pixels!
+            setSize(1920,1080);
+// when the user closes the frame, the program will exit
+            setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            setVisible(true);}
+    }*/
 }

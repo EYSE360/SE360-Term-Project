@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 import java.util.List;
 
-public class Bar {
+public class Bar extends User{
     private String name;
     private String city;
     private String barUserName;
@@ -27,7 +27,7 @@ public class Bar {
     public Bar(){
         name = "Unknown";
         city = "Unknown";
-        barUserName = "BarUserName";
+        barUserName = "Bar";
         barPassword = 123;
         alcoholPermission = false;
         beerList = new ArrayList<Beer>();
@@ -71,17 +71,19 @@ public class Bar {
         this.alcoholPermission = alcoholPermission;
     }
 
+    @Override
     public void display(){
         System.out.println("Bar name: "+getName()+"\nLocated city: "+getCity()+"\nAlcohol Permission: "+isTrue()+"\n\nBeer Menu: ");
-        System.out.println();
-        for(int i=0;i<beerList.size();i++){
-            beerList.get(i).display();
-            System.out.println();
-        }
+
     }
     public String isTrue(){
         if(alcoholPermission==true) return "Acquired!";
         else return "Not acquired!";
     }
-
+    public void displayMenu(){
+        for(int i=0;i<beerList.size();i++){
+            beerList.get(i).display();
+            System.out.println();
+        }
+    }
 }
