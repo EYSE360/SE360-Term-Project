@@ -1,3 +1,5 @@
+package models;
+
 public abstract class User {
     private String name;
     private String surname;
@@ -9,7 +11,7 @@ public abstract class User {
        this.name = "Unknown";
        this.surname = "Unknown";
        this.IDNumber = 0;
-       this.userName ="Admin";
+       this.userName ="models.Admin";
        this.password = 123;
    }
     public User(String name, String surname, int IDNumber){

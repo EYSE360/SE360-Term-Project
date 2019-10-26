@@ -1,3 +1,7 @@
+import models.Admin;
+import models.Bar;
+import models.Beer;
+
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -60,7 +64,7 @@ public class Main {
         a.display();
         String decision = sc1.nextLine();
         if(decision.equals("Y")) {
-            System.out.println("Welcome "+a.getName()+". Your username and password are set to 'Admin' and '123' as default. Please don't forget to change.");
+            System.out.println("Welcome "+a.getName()+". Your username and password are set to 'models.Admin' and '123' as default. Please don't forget to change.");
             BufferedWriter bw = null;
             try {
                 String mycontent = getAdminsProperties(a);
@@ -171,7 +175,7 @@ public class Main {
         Scanner input = new Scanner(System.in);
         Scanner input1 = new Scanner(System.in);
         System.out.println("Please enter your information below: ");
-        System.out.println("Bar's name: ");
+        System.out.println("models.Bar's name: ");
         System.out.println("City that bar is located: ");
         System.out.println("Do you have alcohol permission? Y/N");
         Bar b = new Bar();
@@ -185,7 +189,7 @@ public class Main {
         String yn = input1.nextLine();
         if(yn.equals("Y")) {
             barList.add(b);
-            System.out.println("Your bar is successfully saved! Your user name and password are set to 'Bar' and 123. Please don't forget to change those later.");
+            System.out.println("Your bar is successfully saved! Your user name and password are set to 'models.Bar' and 123. Please don't forget to change those later.");
         }
         else{
             System.out.println("Process terminated...");
@@ -204,7 +208,7 @@ public class Main {
                 int decision = sc.nextInt();
                 switch (decision){
                     case 1:{
-                        System.out.println("Select the information that you want to edit:\n1)Bar name\n2)City\n3)Alcohol Permission\n4)Username\n5)Password");
+                        System.out.println("Select the information that you want to edit:\n1)models.Bar name\n2)City\n3)Alcohol Permission\n4)Username\n5)Password");
                         Scanner s = new Scanner(System.in);
                         int val = s.nextInt();
                         s.nextLine();

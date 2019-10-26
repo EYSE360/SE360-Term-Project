@@ -1,7 +1,9 @@
+package models;
+
 import java.util.ArrayList;
 import java.util.List;
 
-public class Bar extends User{
+public class Bar extends User {
     private String name;
     private String city;
     private String barUserName;
@@ -27,7 +29,7 @@ public class Bar extends User{
     public Bar(){
         name = "Unknown";
         city = "Unknown";
-        barUserName = "Bar";
+        barUserName = "models.Bar";
         barPassword = 123;
         alcoholPermission = false;
         beerList = new ArrayList<Beer>();
@@ -73,7 +75,7 @@ public class Bar extends User{
 
     @Override
     public void display(){
-        System.out.println("Bar name: "+getName()+"\nLocated city: "+getCity()+"\nAlcohol Permission: "+isTrue()+"\n\nBeer Menu: ");
+        System.out.println("models.Bar name: "+getName()+"\nLocated city: "+getCity()+"\nAlcohol Permission: "+isTrue()+"\n\nmodels.Beer Menu: ");
 
     }
     public String isTrue(){

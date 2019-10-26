@@ -1,3 +1,7 @@
+package models;
+
+import models.User;
+
 public class MinistryOfHealth extends User {
     public MinistryOfHealth(String name, String surname, int IDNumber){
         super(name,surname,IDNumber);

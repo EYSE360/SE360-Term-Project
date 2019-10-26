@@ -1,3 +1,5 @@
+package models;
+
 public class Beer {
     private String brand;
     private String type;
