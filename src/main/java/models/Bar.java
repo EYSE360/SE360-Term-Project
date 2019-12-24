@@ -1,39 +1,27 @@
 package models;
 
-import java.util.ArrayList;
 import java.util.List;
 
-public class Bar extends User {
+public class Bar {
+    private long id;
     private String name;
     private String city;
-    private String barUserName;
-    private int barPassword;
-    private Boolean alcoholPermission;
-    private List<Beer> beerList;
+    private boolean alcoholPermission;
+    private List<Product> products;
+    private List<Category> categories;
+    private List<BarUser> barUsers;
 
-    public List<Beer> getBeerList() {
-        return beerList;
+    public Bar() {
     }
 
-    public void setBeerList(List<Beer> beerList) {
-        this.beerList = beerList;
+    public long getId() {
+        return id;
     }
 
-    public Bar(String name, String city, Boolean alcoholPermission) {
-        this.name = name;
-        this.city = city;
-        this.alcoholPermission = alcoholPermission;
-        beerList = new ArrayList<Beer>();
+    public void setId(long id) {
+        this.id = id;
     }
 
-    public Bar(){
-        name = "Unknown";
-        city = "Unknown";
-        barUserName = "models.Bar";
-        barPassword = 123;
-        alcoholPermission = false;
-        beerList = new ArrayList<Beer>();
-    }
     public String getName() {
         return name;
     }
@@ -50,42 +38,71 @@ public class Bar extends User {
         this.city = city;
     }
 
-    public Boolean getAlcoholPermission() {
+    public boolean isAlcoholPermission() {
         return alcoholPermission;
     }
-    public String getBarUserName() {
-        return barUserName;
-    }
 
-    public void setBarUserName(String barUserName) {
-        this.barUserName = barUserName;
-    }
-
-    public int getBarPassword() {
-        return barPassword;
-    }
-
-    public void setBarPassword(int barPassword) {
-        this.barPassword = barPassword;
-    }
-
-    public void setAlcoholPermission(Boolean alcoholPermission) {
+    public void setAlcoholPermission(boolean alcoholPermission) {
         this.alcoholPermission = alcoholPermission;
     }
 
-    @Override
-    public void display(){
-        System.out.println("models.Bar name: "+getName()+"\nLocated city: "+getCity()+"\nAlcohol Permission: "+isTrue()+"\n\nmodels.Beer Menu: ");
+    public List<Product> getProducts() {
+        return products;
+    }
 
+    public void setProducts(List<Product> products) {
+        this.products = products;
     }
-    public String isTrue(){
-        if(alcoholPermission==true) return "Acquired!";
-        else return "Not acquired!";
+
+    public void addProduct(Product product) {
+        products.add(product);
     }
-    public void displayMenu(){
-        for(int i=0;i<beerList.size();i++){
-            beerList.get(i).display();
-            System.out.println();
-        }
+
+    public void removeProduct(Product product) {
+        products.remove(product);
+    }
+
+    public List<Category> getCategories() {
+        return categories;
+    }
+
+    public void setCategories(List<Category> categories) {
+        this.categories = categories;
+    }
+
+    public void addCategory(Category category) {
+        categories.add(category);
+    }
+
+    public void removeCategory(Category category) {
+        categories.remove(category);
+    }
+
+    public List<BarUser> getBarUsers() {
+        return barUsers;
+    }
+
+    public void setBarUsers(List<BarUser> barUsers) {
+        this.barUsers = barUsers;
+    }
+
+    public void addBarUser(BarUser user) {
+        barUsers.add(user);
+    }
+
+    public void removeBarUser(BarUser user) {
+        barUsers.remove(user);
+    }
+
+    @Override
+    public String toString() {
+        return "Bar{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", city='" + city + '\'' +
+                ", alcoholPermission=" + alcoholPermission +
+                ", products=" + products +
+                ", barUsers=" + barUsers +
+                '}';
     }
 }

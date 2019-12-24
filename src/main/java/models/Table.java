@@ -1,25 +1,28 @@
 package models;
 
 public class Table {
-    private int id;
+    private long id;
+    private String shortCode;
     private String name;
-    private String shortcode;
+    private int customerCount;
 
     public Table() {
     }
 
-    public Table(int id, String name, String shortcode) {
-        this.id = id;
-        this.name = name;
-        this.shortcode = shortcode;
-    }
-
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
+    }
+
+    public String getShortCode() {
+        return shortCode;
+    }
+
+    public void setShortCode(String shortcode) {
+        this.shortCode = shortcode;
     }
 
     public String getName() {
@@ -30,11 +33,21 @@ public class Table {
         this.name = name;
     }
 
-    public String getShortcode() {
-        return shortcode;
+    public int getCustomerCount() {
+        return customerCount;
     }
 
-    public void setShortcode(String shortcode) {
-        this.shortcode = shortcode;
+    public void setCustomerCount(int customerCount) {
+        this.customerCount = customerCount;
+    }
+
+    @Override
+    public String toString() {
+        return "Table{" +
+                "id=" + id +
+                ", shortCode='" + shortCode + '\'' +
+                ", name='" + name + '\'' +
+                ", customerCount=" + customerCount +
+                '}';
     }
 }
