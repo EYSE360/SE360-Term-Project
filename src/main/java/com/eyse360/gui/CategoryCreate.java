@@ -9,12 +9,12 @@ package ey.se360_termproject_bcrs;
  *
  * @author Erel
  */
-public class WaiterCreate extends javax.swing.JFrame {
+public class CategoryCreate extends javax.swing.JFrame {
 
     /**
-     * Creates new form WaiterCreate
+     * Creates new form CategoryCreate
      */
-    public WaiterCreate() {
+    public CategoryCreate() {
         initComponents();
     }
 
@@ -29,21 +29,18 @@ public class WaiterCreate extends javax.swing.JFrame {
 
         NameLabel = new javax.swing.JLabel();
         NameTextField = new javax.swing.JTextField();
-        SSNLabel = new javax.swing.JLabel();
-        SSNTextField = new javax.swing.JTextField();
-        PhoneNumberLabel = new javax.swing.JLabel();
-        PhoneNumberTextField = new javax.swing.JTextField();
+        TypeLable = new javax.swing.JLabel();
+        TypeComboBox = new javax.swing.JComboBox<>();
         CreateButton = new javax.swing.JButton();
         CancelButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setMinimumSize(new java.awt.Dimension(394, 306));
 
         NameLabel.setText("Name");
 
-        SSNLabel.setText("SSN");
+        TypeLable.setText("Type");
 
-        PhoneNumberLabel.setText("Phone Number");
+        TypeComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         CreateButton.setText("Create");
         CreateButton.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -64,56 +61,50 @@ public class WaiterCreate extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(120, 120, 120)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(24, 24, 24)
+                        .addGap(157, 157, 157)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(NameLabel)
-                            .addComponent(SSNLabel)
-                            .addComponent(PhoneNumberLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(TypeLable)
                             .addComponent(NameTextField)
-                            .addComponent(SSNTextField)
-                            .addComponent(PhoneNumberTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(TypeComboBox, 0, 100, Short.MAX_VALUE)))
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(94, 94, 94)
                         .addComponent(CreateButton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(56, 56, 56)
                         .addComponent(CancelButton)))
-                .addContainerGap(129, Short.MAX_VALUE))
+                .addContainerGap(111, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(28, 28, 28)
+                .addGap(49, 49, 49)
                 .addComponent(NameLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(NameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(28, 28, 28)
-                .addComponent(SSNLabel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(TypeLable)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(SSNTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(28, 28, 28)
-                .addComponent(PhoneNumberLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(PhoneNumberTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(28, 28, 28)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(TypeComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(30, 30, 30)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(CreateButton)
                     .addComponent(CancelButton))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(83, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void CreateButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CreateButtonMouseClicked
-        //Add to list
-        dispose();
-    }//GEN-LAST:event_CreateButtonMouseClicked
-
     private void CancelButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CancelButtonMouseClicked
         dispose();
     }//GEN-LAST:event_CancelButtonMouseClicked
+
+    private void CreateButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CreateButtonMouseClicked
+        //Add to category list
+        dispose();
+    }//GEN-LAST:event_CreateButtonMouseClicked
 
     /**
      * @param args the command line arguments
@@ -132,20 +123,20 @@ public class WaiterCreate extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(WaiterCreate.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CategoryCreate.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(WaiterCreate.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CategoryCreate.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(WaiterCreate.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CategoryCreate.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(WaiterCreate.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CategoryCreate.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new WaiterCreate().setVisible(true);
+                new CategoryCreate().setVisible(true);
             }
         });
     }
@@ -155,9 +146,7 @@ public class WaiterCreate extends javax.swing.JFrame {
     private javax.swing.JButton CreateButton;
     private javax.swing.JLabel NameLabel;
     private javax.swing.JTextField NameTextField;
-    private javax.swing.JLabel PhoneNumberLabel;
-    private javax.swing.JTextField PhoneNumberTextField;
-    private javax.swing.JLabel SSNLabel;
-    private javax.swing.JTextField SSNTextField;
+    private javax.swing.JComboBox<String> TypeComboBox;
+    private javax.swing.JLabel TypeLable;
     // End of variables declaration//GEN-END:variables
 }

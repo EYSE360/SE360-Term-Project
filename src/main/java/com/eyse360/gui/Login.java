@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.eyse360.gui;
+package ey.se360_termproject_bcrs;
 
 import com.bulenkov.darcula.DarculaLaf;
 import java.awt.event.ItemEvent;
