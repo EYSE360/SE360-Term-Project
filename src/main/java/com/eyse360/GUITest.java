@@ -1,12 +1,10 @@
 package com.eyse360;
 
 import com.eyse360.controllers.BarDAO;
+import com.eyse360.controllers.BarUserDAO;
 import com.eyse360.controllers.CategoryDAO;
 import com.eyse360.controllers.ProductDAO;
-import com.eyse360.models.Bar;
-import com.eyse360.models.Category;
-import com.eyse360.models.Food;
-import com.eyse360.models.Product;
+import com.eyse360.models.*;
 import com.eyse360.tools.Tools;
 
 import java.util.List;
@@ -16,6 +14,7 @@ public class GUITest {
     private static BarDAO barDao;
     private static CategoryDAO catDao;
     private static ProductDAO productDAO;
+    private static BarUserDAO barUserDAO;
     public static Bar bar;
     static List<Category> categories;
 
@@ -24,13 +23,48 @@ public class GUITest {
         barDao = new BarDAO();
         catDao = new CategoryDAO();
         productDAO = new ProductDAO();
+        barUserDAO = new BarUserDAO();
         bar = barDao.getById(1);
+        Category category = catDao.getById(1);
+        System.out.println(category);
 
-        categories = catDao.getAllByBar(bar);
+        category.setName("Bira");
+        category.setDescription("Biralar");
+        category.setType("beverage");
+
+        catDao.update(category);
+
+        category = catDao.getById(1);
+
+        System.out.println(category);
+
+/*        List<BarUser> barUsers = barUserDAO.getAllByBar(bar);
+
+        System.out.println(barUsers);*/
+
+        /*categories = catDao.getAllByBar(bar);
 
         for (Category category: categories) {
             category.setProducts(productDAO.getAllByBarAndCategory(bar, category));
         }
+
+        System.out.println(categories);*/
+
+/*        BarManager manager1 = new BarManager();
+        manager1.setUserName("smguy9");
+        manager1.setPassword("mybeteth");
+        manager1.setSSN("15847749746");
+        manager1.setFullName("Yağızcan Arslan");
+        manager1.setPhoneNumber("05071223053");
+        barUserDAO.save(manager1);*/
+
+/*        Waiter waiter1 = new Waiter();
+        waiter1.setUserName("eray");
+        waiter1.setPassword("123456");
+        waiter1.setSSN("12312312312");
+        waiter1.setFullName("Eray Aslan");
+        waiter1.setPhoneNumber("05551231212");
+        barUserDAO.save(waiter1);*/
 
 //        Category category = new Category();
 //        category.setName("Pizza");

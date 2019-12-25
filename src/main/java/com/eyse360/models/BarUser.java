@@ -4,9 +4,10 @@ public abstract class BarUser {
     protected long id;
     protected String userName;
     protected String password;
-    protected long SSN;
+    protected String SSN;
     protected String fullName;
     protected String phoneNumber;
+    protected String role;
 
     public long getId() {
         return id;
@@ -32,11 +33,11 @@ public abstract class BarUser {
         this.password = password;
     }
 
-    public long getSSN() {
+    public String getSSN() {
         return SSN;
     }
 
-    public void setSSN(long SSN) {
+    public void setSSN(String SSN) {
         this.SSN = SSN;
     }
 
@@ -54,5 +55,26 @@ public abstract class BarUser {
 
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
+
+    @Override
+    public String toString() {
+        return "BarUser{" +
+                "id=" + id +
+                ", userName='" + userName + '\'' +
+                ", password='" + password + '\'' +
+                ", SSN='" + SSN + '\'' +
+                ", fullName='" + fullName + '\'' +
+                ", phoneNumber='" + phoneNumber + '\'' +
+                ", role='" + role + '\'' +
+                '}';
     }
 }

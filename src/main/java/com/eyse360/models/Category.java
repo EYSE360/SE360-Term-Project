@@ -8,7 +8,6 @@ public class Category {
     private String name;
     private String description;
     private String type;
-    private Bar bar;
     private List<Product> products;
 
     public Category() {
@@ -47,14 +46,6 @@ public class Category {
         this.type = type;
     }
 
-    public Bar getBar() {
-        return bar;
-    }
-
-    public void setBar(Bar b) {
-        this.bar = b;
-    }
-
     public List<Product> getProducts() {
         return products;
     }
@@ -78,7 +69,6 @@ public class Category {
                 ", name='" + name + '\'' +
                 ", description='" + description + '\'' +
                 ", type='" + type + '\'' +
-                ", bar=" + bar +
                 '}';
     }
 }

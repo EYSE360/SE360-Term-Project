@@ -13,8 +13,13 @@ import java.util.Optional;
 
 public class ProductDAO implements DAO<Product> {
     @Override
-    public Optional<Product> get(Product product) {
-        return Optional.empty();
+    public Product get(Product product) {
+        return null;
+    }
+
+    @Override
+    public Product getById(int id) {
+        return null;
     }
 
     @Override
@@ -80,13 +85,15 @@ public class ProductDAO implements DAO<Product> {
 
     public List<Product> getAllByBarAndCategory(Bar bar, Category category) {
         GUITest.conn.connect();
+
+        List<Product> productList = null;
+
         String query = "SELECT * FROM products WHERE bar = ? AND category = ?";
         try {
             PreparedStatement pstmt = GUITest.conn.getConnection().prepareStatement(query);
             pstmt.setInt(1, (int) bar.getId());
             pstmt.setInt(2, (int) category.getId());
             ResultSet rs = pstmt.executeQuery();
-            List<Product> productList = null;
             if (rs.next()) {
                 productList = new ArrayList<>();
             }
@@ -130,17 +137,23 @@ public class ProductDAO implements DAO<Product> {
             }
             pstmt.close();
             rs.close();
-            return productList;
+            GUITest.conn.disconnect();
+
         } catch (SQLException e) {
             e.printStackTrace();
         }
+
         GUITest.conn.disconnect();
-        return null;
+
+        return productList;
     }
 
     @Override
     public int save(Product product) {
         GUITest.conn.connect();
+
+        int id = 0;
+
         String query = "INSERT INTO products (type, category, bar) VALUES (?, ?, ?)";
         try {
             PreparedStatement pstmt = GUITest.conn.getConnection().prepareStatement(query, PreparedStatement.RETURN_GENERATED_KEYS);
@@ -152,17 +165,20 @@ public class ProductDAO implements DAO<Product> {
                 ResultSet rs = pstmt.getGeneratedKeys();
 
                 if (rs.next()) {
-                    int id = rs.getInt(1);
+                    int productId = rs.getInt(1);
                     String query2 = "INSERT INTO foods (product, name, price, description) VALUES (?, ?, ?, ?)";
                     PreparedStatement pstmt2 = GUITest.conn.getConnection().prepareStatement(query2);
-                    pstmt2.setInt(1, id);
+                    pstmt2.setInt(1, productId);
                     pstmt2.setString(2, product.getName());
                     pstmt2.setDouble(3, product.getPrice());
                     pstmt2.setString(4, product.getDescription());
                     pstmt2.executeUpdate();
 
-                    return rs.getInt(1);
+                    id = rs.getInt(1);
+                    pstmt2.close();
                 }
+                pstmt.close();
+                rs.close();
             } else if (product instanceof Beverage) {
                 pstmt.setString(1, "beverage");
                 pstmt.setInt(2, (int) product.getCategory().getId());
@@ -171,10 +187,10 @@ public class ProductDAO implements DAO<Product> {
                 ResultSet rs = pstmt.getGeneratedKeys();
 
                 if (rs.next()) {
-                    int id = rs.getInt(1);
+                    int productId = rs.getInt(1);
                     String query2 = "INSERT INTO beverages (product, name, price, description, brand, alcoholVolume) VALUES (?, ?, ?, ?, ?, ?)";
                     PreparedStatement pstmt2 = GUITest.conn.getConnection().prepareStatement(query2);
-                    pstmt2.setInt(1, id);
+                    pstmt2.setInt(1, productId);
                     pstmt2.setString(2, product.getName());
                     pstmt2.setDouble(3, product.getPrice());
                     pstmt2.setString(4, product.getDescription());
@@ -182,15 +198,19 @@ public class ProductDAO implements DAO<Product> {
                     pstmt2.setDouble(6, ((Beverage) product).getAlcoholVolume());
                     pstmt2.executeUpdate();
 
-                    return rs.getInt(1);
+                    id = rs.getInt(1);
+                    pstmt2.close();
                 }
+                pstmt.close();
+                rs.close();
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
 
         GUITest.conn.disconnect();
-        return 0;
+
+        return id;
     }
 
     @Override
@@ -207,7 +227,6 @@ public class ProductDAO implements DAO<Product> {
                 ResultSet rs = pstmt.getGeneratedKeys();
 
                 if (rs.next()) {
-                    int id = rs.getInt(1);
                     String query2 = "UPDATE foods SET name = ?, price = ?, description = ? WHERE product = ?";
                     PreparedStatement pstmt2 = GUITest.conn.getConnection().prepareStatement(query2);
                     pstmt2.setString(1, product.getName());
@@ -224,18 +243,18 @@ public class ProductDAO implements DAO<Product> {
                 ResultSet rs = pstmt.getGeneratedKeys();
 
                 if (rs.next()) {
-                    int id = rs.getInt(1);
-                    String query2 = "INSERT INTO beverages (product, name, price, description, brand, alcoholVolume) VALUES (?, ?, ?, ?, ?, ?)";
+                    String query2 = "UPDATE beverages SET name = ?, price = ?, description = ?, brand = ?, alcoholVolume = ? WHERE product = ?";
                     PreparedStatement pstmt2 = GUITest.conn.getConnection().prepareStatement(query2);
-                    pstmt2.setInt(1, id);
-                    pstmt2.setString(2, product.getName());
-                    pstmt2.setDouble(3, product.getPrice());
-                    pstmt2.setString(4, product.getDescription());
-                    pstmt2.setString(5, ((Beverage) product).getBrand());
-                    pstmt2.setDouble(6, ((Beverage) product).getAlcoholVolume());
+                    pstmt2.setString(1, product.getName());
+                    pstmt2.setDouble(2, product.getPrice());
+                    pstmt2.setString(3, product.getDescription());
+                    pstmt2.setString(4, ((Beverage) product).getBrand());
+                    pstmt2.setDouble(5, ((Beverage) product).getAlcoholVolume());
+                    pstmt2.setInt(6, (int) product.getId());
                     pstmt2.executeUpdate();
                 }
             }
+            pstmt.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }

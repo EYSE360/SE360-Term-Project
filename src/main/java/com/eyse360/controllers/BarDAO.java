@@ -13,13 +13,15 @@ import java.util.Optional;
 
 public class BarDAO implements DAO<Bar> {
     @Override
-    public Optional<Bar> get(Bar bar) {
-        return Optional.empty();
+    public Bar get(Bar bar) {
+        return null;
     }
 
     public Bar getById(int id) {
         GUITest.conn.connect();
+
         Bar b = null;
+
         String query = "SELECT * FROM bars WHERE id = ? LIMIT 1";
         try {
             PreparedStatement pstmt = GUITest.conn.getConnection().prepareStatement(query);
@@ -41,17 +43,20 @@ public class BarDAO implements DAO<Bar> {
         }
 
         GUITest.conn.disconnect();
+
         return b;
     }
 
     @Override
     public List<Bar> getAll() {
         GUITest.conn.connect();
+
+        List<Bar> barList = null;
+
         String query = "SELECT * FROM bars";
         try {
             PreparedStatement pstmt = GUITest.conn.getConnection().prepareStatement(query);
             ResultSet rs = pstmt.executeQuery();
-            List<Bar> barList = null;
             if (rs.next()) {
                 barList = new ArrayList<>();
             }
@@ -66,17 +71,20 @@ public class BarDAO implements DAO<Bar> {
             }
             pstmt.close();
             rs.close();
-            return barList;
         } catch (SQLException e) {
             e.printStackTrace();
         }
+
         GUITest.conn.disconnect();
-        return null;
+
+        return barList;
     }
 
     @Override
     public int save(Bar b) {
         GUITest.conn.connect();
+        int id = 0;
+
         String query = "INSERT INTO bars (name, city, alcoholPermission) VALUES (?, ?, ?)";
         try {
             PreparedStatement pstmt = GUITest.conn.getConnection().prepareStatement(query, PreparedStatement.RETURN_GENERATED_KEYS);
@@ -87,13 +95,16 @@ public class BarDAO implements DAO<Bar> {
             ResultSet rs = pstmt.getGeneratedKeys();
 
             if (rs.next())
-                return rs.getInt(1);
+                id = rs.getInt(1);
+            pstmt.close();
+            rs.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
 
         GUITest.conn.disconnect();
-        return 0;
+
+        return id;
     }
 
     @Override
@@ -106,6 +117,7 @@ public class BarDAO implements DAO<Bar> {
             pstmt.setInt(3, b.getAlcoholPermission() ? 1 : 0);
             pstmt.setInt(4, (int) b.getId());
             pstmt.executeUpdate();
+            pstmt.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }

@@ -8,8 +8,13 @@ import java.util.Optional;
 
 public class CheckDAO implements DAO<Check> {
     @Override
-    public Optional<Check> get(Check check) {
-        return Optional.empty();
+    public Check get(Check check) {
+        return null;
+    }
+
+    @Override
+    public Check getById(int id) {
+        return null;
     }
 
     @Override

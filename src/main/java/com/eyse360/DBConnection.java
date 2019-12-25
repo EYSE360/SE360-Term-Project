@@ -13,7 +13,7 @@ public class DBConnection {
     public DBConnection() {
         this.connectionUrl = "jdbc:mariadb://localhost/se360";
         this.username = "root";
-        this.password = "";
+        this.password = "mybeteth";
     }
 
     public DBConnection(String connectionUrl, String username, String password) {

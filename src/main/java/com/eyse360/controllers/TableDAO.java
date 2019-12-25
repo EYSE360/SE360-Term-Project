@@ -8,8 +8,13 @@ import java.util.Optional;
 
 public class TableDAO implements DAO<Table> {
     @Override
-    public Optional<Table> get(Table table) {
-        return Optional.empty();
+    public Table get(Table table) {
+        return null;
+    }
+
+    @Override
+    public Table getById(int id) {
+        return null;
     }
 
     @Override
