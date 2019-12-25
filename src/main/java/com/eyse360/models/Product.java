@@ -1,4 +1,4 @@
-package models;
+package com.eyse360.models;
 
 public abstract class Product {
     protected long id;
@@ -37,5 +37,13 @@ public abstract class Product {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
     }
 }

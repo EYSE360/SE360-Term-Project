@@ -1,4 +1,4 @@
-package models;
+package com.eyse360.models;
 
 public class Food extends Product {
 

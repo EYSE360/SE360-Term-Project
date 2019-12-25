@@ -1,4 +1,4 @@
-package models;
+package com.eyse360.models;
 
 public abstract class BarUser {
     protected long id;

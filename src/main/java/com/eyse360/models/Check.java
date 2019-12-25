@@ -1,4 +1,4 @@
-package models;
+package com.eyse360.models;
 
 import java.util.HashMap;
 import java.util.Map;

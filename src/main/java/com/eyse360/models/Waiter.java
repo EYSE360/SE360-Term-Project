@@ -1,9 +1,9 @@
-package models;
+package com.eyse360.models;
 
-public class BarManager extends BarUser {
+public class Waiter extends BarUser {
     @Override
     public String toString() {
-        return "BarManager{" +
+        return "Waiter{" +
                 "id=" + id +
                 ", userName='" + userName + '\'' +
                 ", password='" + password + '\'' +
