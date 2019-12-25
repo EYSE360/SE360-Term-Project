@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ey.se360_termproject_bcrs;
+package com.eyse360.gui;
 
 import com.bulenkov.darcula.DarculaLaf;
 import javax.swing.UnsupportedLookAndFeelException;
@@ -29,7 +29,6 @@ public class Bar extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
-
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ey.se360_termproject_bcrs;
+package com.eyse360.gui;
 
 /**
  *

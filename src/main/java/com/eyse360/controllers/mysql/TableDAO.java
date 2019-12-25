@@ -2,12 +2,14 @@ package com.eyse360.controllers.mysql;
 
 import com.eyse360.DAO;
 import com.eyse360.GUITest;
+import com.eyse360.models.Bar;
 import com.eyse360.models.Category;
 import com.eyse360.models.Table;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -78,6 +80,39 @@ public class TableDAO implements DAO<Table> {
     @Override
     public List<Table> getAll() {
         return null;
+    }
+
+    public List<Table> getAllByBar(Bar bar) {
+        GUITest.conn.connect();
+
+        List<Table> tableList = null;
+
+        String query = "SELECT * FROM product_categories WHERE id_bar = ?";
+        try {
+            PreparedStatement pstmt = GUITest.conn.getConnection().prepareStatement(query);
+            pstmt.setInt(1, (int) bar.getId());
+            ResultSet rs = pstmt.executeQuery();
+            if (rs.next()) {
+                tableList = new ArrayList<>();
+            }
+            rs.beforeFirst();
+            while (rs.next()) {
+                Table t = new Table();
+                t.setId(rs.getInt("id"));
+                t.setName(rs.getString("name"));
+                t.setShortCode(rs.getString("shortcode"));
+                t.setCustomerCount(rs.getInt("customerCount"));
+                tableList.add(t);
+            }
+            pstmt.close();
+            rs.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        GUITest.conn.disconnect();
+
+        return tableList;
     }
 
     @Override
