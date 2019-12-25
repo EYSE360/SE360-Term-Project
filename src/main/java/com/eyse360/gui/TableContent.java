@@ -27,56 +27,58 @@ public class TableContent extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        TableNameLabel = new javax.swing.JLabel();
-        CustomerCountLabel = new javax.swing.JLabel();
-        TotalTimeLabel = new javax.swing.JLabel();
-        WaiterNameLabel = new javax.swing.JLabel();
-        TableNameTextField = new javax.swing.JTextField();
-        CustomerCountTextField = new javax.swing.JTextField();
-        TotalTimeTextField = new javax.swing.JTextField();
-        IncrementCustomerCountButton = new javax.swing.JButton();
-        DecrementCustomerCountButton = new javax.swing.JButton();
-        TableInfoLabel = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jTextField1 = new javax.swing.JTextField();
+        CustomerCount_TextField = new javax.swing.JTextField();
+        jTextField3 = new javax.swing.JTextField();
+        jTextField4 = new javax.swing.JTextField();
+        jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
+        jLabel5 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        CheckLogTable = new javax.swing.JTable();
-        AddProductButton = new javax.swing.JButton();
-        QuantityLabel = new javax.swing.JLabel();
-        IncrementQuantityButton = new javax.swing.JButton();
-        DecrementQuantityButton = new javax.swing.JButton();
-        RemoveFromTableButton = new javax.swing.JButton();
-        TotalLabel = new javax.swing.JLabel();
-        TotalTextField = new javax.swing.JTextField();
+        jTable1 = new javax.swing.JTable();
+        jLabel6 = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jList1 = new javax.swing.JList<>();
+        jButton3 = new javax.swing.JButton();
+        jLabel7 = new javax.swing.JLabel();
+        jButton4 = new javax.swing.JButton();
+        jButton5 = new javax.swing.JButton();
+        jButton6 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        TableNameLabel.setText("Table Name:");
+        jLabel1.setText("Table Name:");
 
-        CustomerCountLabel.setText("Customer Count:");
+        jLabel2.setText("Customer Count:");
 
-        TotalTimeLabel.setText("Total Time:");
+        jLabel3.setText("Total Time:");
 
-        WaiterNameLabel.setText("Waiter Name");
+        jLabel4.setText("Check:");
 
-        CustomerCountTextField.setText("0");
+        CustomerCount_TextField.setText("0");
 
-        IncrementCustomerCountButton.setText("+");
-        IncrementCustomerCountButton.addMouseListener(new java.awt.event.MouseAdapter() {
+        jButton1.setText("+");
+        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                IncrementCustomerCountButtonMouseClicked(evt);
+                jButton1MouseClicked(evt);
             }
         });
 
-        DecrementCustomerCountButton.setText("-");
-        DecrementCustomerCountButton.addMouseListener(new java.awt.event.MouseAdapter() {
+        jButton2.setText("-");
+        jButton2.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                DecrementCustomerCountButtonMouseClicked(evt);
+                jButton2MouseClicked(evt);
             }
         });
 
-        TableInfoLabel.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        TableInfoLabel.setText("TABLE INFO");
+        jLabel5.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        jLabel5.setText("TABLE INFO");
 
-        CheckLogTable.setModel(new javax.swing.table.DefaultTableModel(
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -84,170 +86,132 @@ public class TableContent extends javax.swing.JFrame {
                 "Product", "Category", "Quantity"
             }
         ));
-        jScrollPane1.setViewportView(CheckLogTable);
+        jScrollPane1.setViewportView(jTable1);
 
-        AddProductButton.setText("Add Product");
-        AddProductButton.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                AddProductButtonMouseClicked(evt);
-            }
-        });
+        jLabel6.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        jLabel6.setText("PRODUCT LIST");
 
-        QuantityLabel.setText("Quantity");
+        jScrollPane2.setViewportView(jList1);
 
-        IncrementQuantityButton.setText("+");
-        IncrementQuantityButton.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                IncrementQuantityButtonMouseClicked(evt);
-            }
-        });
+        jButton3.setText("Add Product");
 
-        DecrementQuantityButton.setText("-");
-        DecrementQuantityButton.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                DecrementQuantityButtonMouseClicked(evt);
-            }
-        });
+        jLabel7.setText("Quantity");
 
-        RemoveFromTableButton.setText("Remove");
-        RemoveFromTableButton.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                RemoveFromTableButtonMouseClicked(evt);
-            }
-        });
+        jButton4.setText("+");
 
-        TotalLabel.setText("Total:");
+        jButton5.setText("-");
+
+        jButton6.setText("Remove");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(49, 49, 49)
+                .addComponent(jLabel5)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel6)
+                .addGap(110, 110, 110))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 592, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 592, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(QuantityLabel)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(DecrementQuantityButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(IncrementQuantityButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addComponent(RemoveFromTableButton))
-                        .addContainerGap())
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(TableNameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(CustomerCountLabel)
-                            .addComponent(TotalTimeLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(TotalTimeTextField)
-                            .addComponent(CustomerCountTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
-                            .addComponent(TableNameTextField))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(IncrementCustomerCountButton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(DecrementCustomerCountButton)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(97, 97, 97)
-                                .addComponent(TotalLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(TotalTextField))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                        .addComponent(AddProductButton)
-                                        .addGap(43, 43, 43))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                        .addComponent(WaiterNameLabel)
-                                        .addGap(71, 71, 71)))))
-                        .addGap(97, 97, 97))))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(51, 51, 51)
-                .addComponent(TableInfoLabel)
-                .addGap(0, 0, Short.MAX_VALUE))
+                                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel2)
+                                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jTextField3)
+                                    .addComponent(CustomerCount_TextField, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
+                                    .addComponent(jTextField4)
+                                    .addComponent(jTextField1)))
+                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(jButton3)
+                                .addGap(50, 50, 50)))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel7)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(jButton5, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jButton6))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(7, 7, 7)
-                .addComponent(TableInfoLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(19, 19, 19)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5)
+                    .addComponent(jLabel6))
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(TableNameLabel)
-                            .addComponent(TableNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(42, 42, 42)
+                            .addComponent(jLabel1)
+                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(12, 12, 12)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(CustomerCountLabel)
-                            .addComponent(CustomerCountTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(IncrementCustomerCountButton)
-                            .addComponent(DecrementCustomerCountButton))
+                            .addComponent(jLabel2)
+                            .addComponent(CustomerCount_TextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButton1)
+                            .addComponent(jButton2))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(TotalTimeLabel)
-                            .addComponent(TotalTimeTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(30, 30, 30)
-                        .addComponent(WaiterNameLabel)
-                        .addGap(39, 39, 39)
+                            .addComponent(jLabel3)
+                            .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(20, 20, 20)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(TotalLabel)
-                            .addComponent(TotalTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(34, 34, 34)
-                        .addComponent(AddProductButton)))
+                            .addComponent(jLabel4)
+                            .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jButton3)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(12, 12, 12)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(QuantityLabel)
+                        .addComponent(jLabel7)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(IncrementQuantityButton)
+                        .addComponent(jButton4)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(DecrementQuantityButton)
+                        .addComponent(jButton5)
                         .addGap(40, 40, 40)
-                        .addComponent(RemoveFromTableButton)))
-                .addContainerGap(24, Short.MAX_VALUE))
+                        .addComponent(jButton6)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void IncrementCustomerCountButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_IncrementCustomerCountButtonMouseClicked
-        String s = CustomerCountTextField.getText();
+    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
+        String s = CustomerCount_TextField.getText();
         int var = Integer.parseInt(s);
-        CustomerCountTextField.setText(Integer.toString(var++));
-    }//GEN-LAST:event_IncrementCustomerCountButtonMouseClicked
+        CustomerCount_TextField.setText(Integer.toString(var++));
+    }//GEN-LAST:event_jButton1MouseClicked
 
-    private void DecrementCustomerCountButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DecrementCustomerCountButtonMouseClicked
-        String s = CustomerCountTextField.getText();
+    private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
+        String s = CustomerCount_TextField.getText();
         int var = Integer.parseInt(s);
         if(var!=0)
-        CustomerCountTextField.setText(Integer.toString(var--));
-    }//GEN-LAST:event_DecrementCustomerCountButtonMouseClicked
-
-    private void AddProductButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_AddProductButtonMouseClicked
-        SelectProductFrame spf = new SelectProductFrame();
-        spf.setVisible(true);
-    }//GEN-LAST:event_AddProductButtonMouseClicked
-
-    private void RemoveFromTableButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_RemoveFromTableButtonMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_RemoveFromTableButtonMouseClicked
-
-    private void IncrementQuantityButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_IncrementQuantityButtonMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_IncrementQuantityButtonMouseClicked
-
-    private void DecrementQuantityButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DecrementQuantityButtonMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_DecrementQuantityButtonMouseClicked
+        CustomerCount_TextField.setText(Integer.toString(var--));
+    }//GEN-LAST:event_jButton2MouseClicked
 
     /**
      * @param args the command line arguments
@@ -285,24 +249,26 @@ public class TableContent extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton AddProductButton;
-    private javax.swing.JTable CheckLogTable;
-    private javax.swing.JLabel CustomerCountLabel;
-    private javax.swing.JTextField CustomerCountTextField;
-    private javax.swing.JButton DecrementCustomerCountButton;
-    private javax.swing.JButton DecrementQuantityButton;
-    private javax.swing.JButton IncrementCustomerCountButton;
-    private javax.swing.JButton IncrementQuantityButton;
-    private javax.swing.JLabel QuantityLabel;
-    private javax.swing.JButton RemoveFromTableButton;
-    private javax.swing.JLabel TableInfoLabel;
-    private javax.swing.JLabel TableNameLabel;
-    private javax.swing.JTextField TableNameTextField;
-    private javax.swing.JLabel TotalLabel;
-    private javax.swing.JTextField TotalTextField;
-    private javax.swing.JLabel TotalTimeLabel;
-    private javax.swing.JTextField TotalTimeTextField;
-    private javax.swing.JLabel WaiterNameLabel;
+    private javax.swing.JTextField CustomerCount_TextField;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton5;
+    private javax.swing.JButton jButton6;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JList<String> jList1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTable jTable1;
+    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField jTextField3;
+    private javax.swing.JTextField jTextField4;
     // End of variables declaration//GEN-END:variables
 }

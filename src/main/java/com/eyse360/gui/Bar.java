@@ -30,139 +30,90 @@ public class Bar extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        BarMainTabbedPane = new javax.swing.JTabbedPane();
-        MainTableTab = new javax.swing.JPanel();
-        Table1Button = new javax.swing.JButton();
-        ManagementTab = new javax.swing.JPanel();
-        ManagementTabbedPane = new javax.swing.JTabbedPane();
+        jTabbedPane1 = new javax.swing.JTabbedPane();
+        jPanel1 = new javax.swing.JPanel();
+        jButton1 = new javax.swing.JButton();
+        jPanel2 = new javax.swing.JPanel();
+        jTabbedPane2 = new javax.swing.JTabbedPane();
         CategoryTab = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        CategoryList = new javax.swing.JList<>();
-        CategoryIDLabel = new javax.swing.JLabel();
-        CategoryNameLabel = new javax.swing.JLabel();
-        CategoryDescriptionLabel = new javax.swing.JLabel();
-        CategoryIDTextField = new javax.swing.JTextField();
-        CategoryNameTextField = new javax.swing.JTextField();
-        JScrollPane = new javax.swing.JScrollPane();
-        CategoryDescriptionTextArea = new javax.swing.JTextArea();
-        CategoryIDLabel1 = new javax.swing.JLabel();
-        CategoryCreateButton = new javax.swing.JButton();
-        CategoryRemoveButton = new javax.swing.JButton();
-        CategoryUpdateButton = new javax.swing.JButton();
-        CategoryTypeComboBox = new javax.swing.JComboBox<>();
+        jList1 = new javax.swing.JList<>();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jTextField1 = new javax.swing.JTextField();
+        jTextField2 = new javax.swing.JTextField();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTextArea1 = new javax.swing.JTextArea();
         ProductTab = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
-        ProductList = new javax.swing.JList<>();
-        ProductIDLabel = new javax.swing.JLabel();
-        ProductNameLabel = new javax.swing.JLabel();
-        ProductDescriptionLabel = new javax.swing.JLabel();
-        ProductIDTextField = new javax.swing.JTextField();
-        ProductNameTextFİeld = new javax.swing.JTextField();
+        jList2 = new javax.swing.JList<>();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jTextField3 = new javax.swing.JTextField();
+        jTextField4 = new javax.swing.JTextField();
         jScrollPane4 = new javax.swing.JScrollPane();
-        ProductDescriptionTextArea = new javax.swing.JTextArea();
-        ProductPriceLabel = new javax.swing.JLabel();
-        ProductPriceTextField = new javax.swing.JTextField();
-        ProductCategoryLabel = new javax.swing.JLabel();
-        ProductCategoryComboBox = new javax.swing.JComboBox<>();
-        ProductAddButton = new javax.swing.JButton();
-        ProductRemoveButton = new javax.swing.JButton();
-        ProductUpdateButton = new javax.swing.JButton();
-        ProductBrandLabel = new javax.swing.JLabel();
-        ProductBrandTextField = new javax.swing.JTextField();
-        ProductAlcoholVolumeLabel = new javax.swing.JLabel();
-        ProductAlcoholVolumeTextField = new javax.swing.JTextField();
+        jTextArea2 = new javax.swing.JTextArea();
+        jLabel11 = new javax.swing.JLabel();
+        jTextField9 = new javax.swing.JTextField();
+        jLabel12 = new javax.swing.JLabel();
+        jComboBox1 = new javax.swing.JComboBox<>();
+        jButton2 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
+        jButton4 = new javax.swing.JButton();
         WaiterTab = new javax.swing.JPanel();
         jScrollPane7 = new javax.swing.JScrollPane();
-        WaiterList = new javax.swing.JList<>();
-        WaiterIDLabel = new javax.swing.JLabel();
-        WaiterNameLabel = new javax.swing.JLabel();
-        WaiterIDTextField = new javax.swing.JTextField();
-        WaiterNameTextField = new javax.swing.JTextField();
-        WaiterAddButton = new javax.swing.JButton();
-        WaiterRemoveButton = new javax.swing.JButton();
-        WaiterUpdateButton = new javax.swing.JButton();
-        WaiterSSNLabel = new javax.swing.JLabel();
-        WaiterSSNTextField = new javax.swing.JTextField();
-        WaiterPhoneNumberLabel = new javax.swing.JLabel();
-        WaiterPhoneNumberTextField = new javax.swing.JTextField();
+        jList5 = new javax.swing.JList<>();
+        jLabel15 = new javax.swing.JLabel();
+        jLabel16 = new javax.swing.JLabel();
+        jTextField12 = new javax.swing.JTextField();
+        jTextField13 = new javax.swing.JTextField();
+        jButton6 = new javax.swing.JButton();
+        jButton8 = new javax.swing.JButton();
+        jButton9 = new javax.swing.JButton();
+        jLabel20 = new javax.swing.JLabel();
+        jTextField15 = new javax.swing.JTextField();
+        jLabel21 = new javax.swing.JLabel();
+        jTextField16 = new javax.swing.JTextField();
         TableTab = new javax.swing.JPanel();
         jScrollPane6 = new javax.swing.JScrollPane();
-        TableList = new javax.swing.JList<>();
-        TableAddButton = new javax.swing.JButton();
-        TableRemoveButton = new javax.swing.JButton();
-        TableShortCodeLabel = new javax.swing.JLabel();
-        TableShortCodeTextField = new javax.swing.JTextField();
-        TableNameLabel = new javax.swing.JLabel();
-        TableNameTextField = new javax.swing.JTextField();
-        TableIDLabel = new javax.swing.JLabel();
-        TableIDTextField = new javax.swing.JTextField();
-        TableUpdateButton = new javax.swing.JButton();
+        jList4 = new javax.swing.JList<>();
+        jButton5 = new javax.swing.JButton();
+        jButton7 = new javax.swing.JButton();
+        jLabel13 = new javax.swing.JLabel();
+        jTextField10 = new javax.swing.JTextField();
+        jLabel14 = new javax.swing.JLabel();
+        jTextField11 = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setMinimumSize(new java.awt.Dimension(700, 700));
-        setResizable(false);
 
-        BarMainTabbedPane.setTabPlacement(javax.swing.JTabbedPane.LEFT);
+        jTabbedPane1.setTabPlacement(javax.swing.JTabbedPane.LEFT);
 
-        MainTableTab.setLayout(new java.awt.GridLayout(3, 0));
+        jPanel1.setLayout(new java.awt.GridLayout(3, 0));
 
-        Table1Button.setText("jButton1");
-        Table1Button.addMouseListener(new java.awt.event.MouseAdapter() {
+        jButton1.setText("jButton1");
+        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                Table1ButtonMouseClicked(evt);
+                jButton1MouseClicked(evt);
             }
         });
-        MainTableTab.add(Table1Button);
+        jPanel1.add(jButton1);
 
-        BarMainTabbedPane.addTab("Table", MainTableTab);
+        jTabbedPane1.addTab("Table", jPanel1);
 
-        ManagementTabbedPane.setMinimumSize(new java.awt.Dimension(700, 700));
-        ManagementTabbedPane.setPreferredSize(new java.awt.Dimension(700, 700));
+        jScrollPane1.setViewportView(jList1);
 
-        jScrollPane1.setViewportView(CategoryList);
+        jLabel1.setText("ID");
+        jLabel1.setToolTipText("");
 
-        CategoryIDLabel.setText("ID");
-        CategoryIDLabel.setToolTipText("");
+        jLabel2.setText("Name");
 
-        CategoryNameLabel.setText("Name");
+        jLabel3.setText("Description");
 
-        CategoryDescriptionLabel.setText("Description");
-
-        CategoryIDTextField.setEditable(false);
-
-        CategoryDescriptionTextArea.setColumns(20);
-        CategoryDescriptionTextArea.setRows(5);
-        JScrollPane.setViewportView(CategoryDescriptionTextArea);
-
-        CategoryIDLabel1.setText("Type");
-        CategoryIDLabel1.setToolTipText("");
-
-        CategoryCreateButton.setText("Add");
-        CategoryCreateButton.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                CategoryCreateButtonMouseClicked(evt);
-            }
-        });
-
-        CategoryRemoveButton.setText("Remove");
-        CategoryRemoveButton.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                CategoryRemoveButtonMouseClicked(evt);
-            }
-        });
-
-        CategoryUpdateButton.setText("Update");
-        CategoryUpdateButton.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                CategoryUpdateButtonMouseClicked(evt);
-            }
-        });
-
-        CategoryTypeComboBox.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                CategoryTypeComboBoxActionPerformed(evt);
-            }
-        });
+        jTextArea1.setColumns(20);
+        jTextArea1.setRows(5);
+        jScrollPane2.setViewportView(jTextArea1);
 
         javax.swing.GroupLayout CategoryTabLayout = new javax.swing.GroupLayout(CategoryTab);
         CategoryTab.setLayout(CategoryTabLayout);
@@ -171,34 +122,20 @@ public class Bar extends javax.swing.JFrame {
             .addGroup(CategoryTabLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(CategoryTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(CategoryTabLayout.createSequentialGroup()
+                        .addGap(52, 52, 52)
                         .addGroup(CategoryTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(CategoryTabLayout.createSequentialGroup()
-                                .addComponent(CategoryNameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(CategoryNameTextField))
-                            .addGroup(CategoryTabLayout.createSequentialGroup()
-                                .addComponent(CategoryDescriptionLabel)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(JScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 280, Short.MAX_VALUE)))
-                        .addGap(6, 6, 6))
-                    .addGroup(CategoryTabLayout.createSequentialGroup()
-                        .addComponent(CategoryIDLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(CategoryIDTextField))
-                    .addGroup(CategoryTabLayout.createSequentialGroup()
-                        .addComponent(CategoryRemoveButton)
-                        .addGap(66, 66, 66)
-                        .addComponent(CategoryUpdateButton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(CategoryCreateButton)
-                        .addContainerGap())
-                    .addGroup(CategoryTabLayout.createSequentialGroup()
-                        .addComponent(CategoryIDLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(CategoryTypeComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel3)
+                            .addGroup(CategoryTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(jTextField1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 75, Short.MAX_VALUE)
+                                .addComponent(jTextField2, javax.swing.GroupLayout.Alignment.LEADING)))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, CategoryTabLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 364, Short.MAX_VALUE)
                         .addContainerGap())))
         );
         CategoryTabLayout.setVerticalGroup(
@@ -207,243 +144,185 @@ public class Bar extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jScrollPane1))
             .addGroup(CategoryTabLayout.createSequentialGroup()
-                .addGap(16, 16, 16)
-                .addGroup(CategoryTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(CategoryIDLabel)
-                    .addComponent(CategoryIDTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(42, 42, 42)
-                .addGroup(CategoryTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(CategoryNameLabel)
-                    .addComponent(CategoryNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(70, 70, 70)
-                .addGroup(CategoryTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(CategoryIDLabel1)
-                    .addComponent(CategoryTypeComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGroup(CategoryTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(CategoryTabLayout.createSequentialGroup()
-                        .addGap(62, 62, 62)
-                        .addComponent(JScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(CategoryTabLayout.createSequentialGroup()
-                        .addGap(149, 149, 149)
-                        .addComponent(CategoryDescriptionLabel)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 180, Short.MAX_VALUE)
-                .addGroup(CategoryTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(CategoryUpdateButton)
-                    .addComponent(CategoryRemoveButton)
-                    .addComponent(CategoryCreateButton))
+                .addGap(20, 20, 20)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 169, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
-        ManagementTabbedPane.addTab("Categories", CategoryTab);
+        jTabbedPane2.addTab("Categories", CategoryTab);
 
-        jScrollPane3.setViewportView(ProductList);
+        jScrollPane3.setViewportView(jList2);
 
-        ProductIDLabel.setText("ID");
-        ProductIDLabel.setToolTipText("");
+        jLabel4.setText("ID");
+        jLabel4.setToolTipText("");
 
-        ProductNameLabel.setText("Name");
+        jLabel5.setText("Name");
 
-        ProductDescriptionLabel.setText("Description");
+        jLabel6.setText("Description");
 
-        ProductIDTextField.setEnabled(false);
+        jTextField3.setEnabled(false);
 
-        ProductNameTextFİeld.addActionListener(new java.awt.event.ActionListener() {
+        jTextField4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ProductNameTextFİeldActionPerformed(evt);
+                jTextField4ActionPerformed(evt);
             }
         });
 
-        ProductDescriptionTextArea.setColumns(20);
-        ProductDescriptionTextArea.setRows(5);
-        jScrollPane4.setViewportView(ProductDescriptionTextArea);
+        jTextArea2.setColumns(20);
+        jTextArea2.setRows(5);
+        jScrollPane4.setViewportView(jTextArea2);
 
-        ProductPriceLabel.setText("Price");
-        ProductPriceLabel.setToolTipText("");
+        jLabel11.setText("Price");
+        jLabel11.setToolTipText("");
 
-        ProductPriceTextField.addActionListener(new java.awt.event.ActionListener() {
+        jTextField9.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ProductPriceTextFieldActionPerformed(evt);
+                jTextField9ActionPerformed(evt);
             }
         });
 
-        ProductCategoryLabel.setText("Category");
+        jLabel12.setText("Category");
 
-        ProductCategoryComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
-        ProductAddButton.setText("Add");
-        ProductAddButton.addMouseListener(new java.awt.event.MouseAdapter() {
+        jButton2.setText("Add");
+        jButton2.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                ProductAddButtonMouseClicked(evt);
-            }
-        });
-        ProductAddButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ProductAddButtonActionPerformed(evt);
+                jButton2MouseClicked(evt);
             }
         });
 
-        ProductRemoveButton.setText("Remove");
-        ProductRemoveButton.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                ProductRemoveButtonMouseClicked(evt);
-            }
-        });
+        jButton3.setText("Remove");
 
-        ProductUpdateButton.setText("Update");
-        ProductUpdateButton.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                ProductUpdateButtonMouseClicked(evt);
-            }
-        });
-
-        ProductBrandLabel.setText("Brand");
-
-        ProductAlcoholVolumeLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        ProductAlcoholVolumeLabel.setText("Alcohol Volume");
-        ProductAlcoholVolumeLabel.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
+        jButton4.setText("Update");
 
         javax.swing.GroupLayout ProductTabLayout = new javax.swing.GroupLayout(ProductTab);
         ProductTab.setLayout(ProductTabLayout);
         ProductTabLayout.setHorizontalGroup(
             ProductTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(ProductTabLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(ProductTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(ProductTabLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
                         .addGroup(ProductTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel6)
                             .addGroup(ProductTabLayout.createSequentialGroup()
-                                .addComponent(ProductCategoryLabel)
-                                .addGap(31, 31, 31))
-                            .addGroup(ProductTabLayout.createSequentialGroup()
-                                .addComponent(ProductNameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(33, 33, 33))
-                            .addGroup(ProductTabLayout.createSequentialGroup()
-                                .addComponent(ProductIDLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(33, 33, 33)))
-                        .addGap(0, 0, Short.MAX_VALUE))
+                                .addGroup(ProductTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(44, 44, 44)
+                                .addGroup(ProductTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(ProductTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jTextField9, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGroup(ProductTabLayout.createSequentialGroup()
+                                            .addComponent(jLabel12, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addGap(22, 22, 22)))))))
                     .addGroup(ProductTabLayout.createSequentialGroup()
-                        .addGroup(ProductTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(ProductPriceLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(ProductBrandLabel)
-                            .addComponent(ProductAlcoholVolumeLabel)
-                            .addComponent(ProductRemoveButton)
-                            .addComponent(ProductDescriptionLabel))
-                        .addGap(33, 43, Short.MAX_VALUE)))
-                .addGroup(ProductTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(ProductTabLayout.createSequentialGroup()
-                        .addGap(14, 14, 14)
-                        .addComponent(ProductUpdateButton)
-                        .addGap(92, 92, 92)
-                        .addComponent(ProductAddButton))
-                    .addGroup(ProductTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(ProductBrandTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 230, Short.MAX_VALUE)
-                        .addComponent(ProductAlcoholVolumeTextField)
-                        .addComponent(ProductNameTextFİeld)
-                        .addComponent(ProductCategoryComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jScrollPane4)
-                        .addComponent(ProductPriceTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 230, Short.MAX_VALUE)
-                        .addComponent(ProductIDTextField)))
-                .addGap(6, 6, 6))
+                        .addGap(26, 26, 26)
+                        .addComponent(jButton2)
+                        .addGap(53, 53, 53)
+                        .addComponent(jButton3)
+                        .addGap(79, 79, 79)
+                        .addComponent(jButton4)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         ProductTabLayout.setVerticalGroup(
             ProductTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(ProductTabLayout.createSequentialGroup()
-                .addGroup(ProductTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(ProductTabLayout.createSequentialGroup()
-                        .addGap(4, 4, 4)
-                        .addGroup(ProductTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(ProductIDLabel)
-                            .addComponent(ProductIDTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(ProductTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(ProductNameLabel)
-                            .addComponent(ProductNameTextFİeld, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(12, 12, 12)
-                        .addGroup(ProductTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(ProductCategoryComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(ProductCategoryLabel))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 9, Short.MAX_VALUE)
+                .addGroup(ProductTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, ProductTabLayout.createSequentialGroup()
                         .addGroup(ProductTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(ProductTabLayout.createSequentialGroup()
-                                .addGap(64, 64, 64)
-                                .addComponent(ProductDescriptionLabel)))
-                        .addGap(18, 18, 18)
-                        .addGroup(ProductTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(ProductPriceLabel)
-                            .addComponent(ProductPriceTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(ProductTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(ProductBrandLabel)
-                            .addComponent(ProductBrandTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(ProductTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(ProductAlcoholVolumeLabel)
-                            .addComponent(ProductAlcoholVolumeTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(237, 237, 237)
+                                .addGap(8, 8, 8)
+                                .addComponent(jLabel4))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ProductTabLayout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(jLabel11)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(ProductTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(ProductAddButton)
-                            .addComponent(ProductRemoveButton)
-                            .addComponent(ProductUpdateButton)))
-                    .addGroup(ProductTabLayout.createSequentialGroup()
+                            .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTextField9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(ProductTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel5)
+                            .addComponent(jLabel12))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(ProductTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel6)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, ProductTabLayout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jScrollPane3)))
-                .addContainerGap())
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(26, 26, 26)
+                .addGroup(ProductTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton2)
+                    .addComponent(jButton3)
+                    .addComponent(jButton4))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        ManagementTabbedPane.addTab("Products", ProductTab);
+        jTabbedPane2.addTab("Products", ProductTab);
 
-        jScrollPane7.setViewportView(WaiterList);
+        jScrollPane7.setViewportView(jList5);
 
-        WaiterIDLabel.setText("ID");
-        WaiterIDLabel.setToolTipText("");
+        jLabel15.setText("ID");
+        jLabel15.setToolTipText("");
 
-        WaiterNameLabel.setText("Name");
+        jLabel16.setText("Name");
 
-        WaiterIDTextField.setEnabled(false);
+        jTextField12.setEnabled(false);
 
-        WaiterNameTextField.addActionListener(new java.awt.event.ActionListener() {
+        jTextField13.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                WaiterNameTextFieldActionPerformed(evt);
+                jTextField13ActionPerformed(evt);
             }
         });
 
-        WaiterAddButton.setText("Add");
-        WaiterAddButton.addMouseListener(new java.awt.event.MouseAdapter() {
+        jButton6.setText("Add");
+        jButton6.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                WaiterAddButtonMouseClicked(evt);
+                jButton6MouseClicked(evt);
             }
         });
 
-        WaiterRemoveButton.setText("Remove");
-        WaiterRemoveButton.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                WaiterRemoveButtonMouseClicked(evt);
-            }
-        });
+        jButton8.setText("Remove");
 
-        WaiterUpdateButton.setText("Update");
-        WaiterUpdateButton.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                WaiterUpdateButtonMouseClicked(evt);
-            }
-        });
+        jButton9.setText("Update");
 
-        WaiterSSNLabel.setText("SSN");
+        jLabel20.setText("SSN");
 
-        WaiterSSNTextField.addActionListener(new java.awt.event.ActionListener() {
+        jTextField15.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                WaiterSSNTextFieldActionPerformed(evt);
+                jTextField15ActionPerformed(evt);
             }
         });
 
-        WaiterPhoneNumberLabel.setText("Phone Number");
+        jLabel21.setText("Phone Number");
 
-        WaiterPhoneNumberTextField.addActionListener(new java.awt.event.ActionListener() {
+        jTextField16.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                WaiterPhoneNumberTextFieldActionPerformed(evt);
+                jTextField16ActionPerformed(evt);
             }
         });
 
@@ -453,91 +332,74 @@ public class Bar extends javax.swing.JFrame {
             WaiterTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(WaiterTabLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(WaiterTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(WaiterTabLayout.createSequentialGroup()
+                        .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addGroup(WaiterTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(WaiterIDLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(WaiterNameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(WaiterSSNLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(WaiterPhoneNumberLabel))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(WaiterTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(WaiterIDTextField)
-                            .addComponent(WaiterNameTextField)
-                            .addComponent(WaiterSSNTextField)
-                            .addComponent(WaiterPhoneNumberTextField)))
+                            .addComponent(jTextField12, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTextField13, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel20, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTextField15, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel21)
+                            .addGroup(WaiterTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(jButton9)
+                                .addComponent(jTextField16, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(WaiterTabLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(WaiterRemoveButton)
-                        .addGap(84, 84, 84)
-                        .addComponent(WaiterUpdateButton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 78, Short.MAX_VALUE)
-                        .addComponent(WaiterAddButton)))
-                .addContainerGap())
+                        .addComponent(jButton6)
+                        .addGap(53, 53, 53)
+                        .addComponent(jButton8)))
+                .addContainerGap(273, Short.MAX_VALUE))
         );
         WaiterTabLayout.setVerticalGroup(
             WaiterTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(WaiterTabLayout.createSequentialGroup()
-                .addGroup(WaiterTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(WaiterTabLayout.createSequentialGroup()
-                        .addGap(4, 4, 4)
-                        .addGroup(WaiterTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(WaiterIDLabel)
-                            .addComponent(WaiterIDTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(28, 28, 28)
-                        .addGroup(WaiterTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(WaiterNameLabel)
-                            .addComponent(WaiterNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(28, 28, 28)
-                        .addGroup(WaiterTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(WaiterSSNLabel)
-                            .addComponent(WaiterSSNTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(28, 28, 28)
-                        .addGroup(WaiterTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(WaiterPhoneNumberLabel)
-                            .addComponent(WaiterPhoneNumberTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 452, Short.MAX_VALUE)
-                        .addGroup(WaiterTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(WaiterRemoveButton)
-                            .addComponent(WaiterUpdateButton)
-                            .addComponent(WaiterAddButton)))
-                    .addComponent(jScrollPane7))
-                .addContainerGap())
+                .addGroup(WaiterTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, WaiterTabLayout.createSequentialGroup()
+                        .addGap(8, 8, 8)
+                        .addComponent(jLabel15)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jTextField12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel16)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jTextField13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel20)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jTextField15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel21)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jTextField16, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, WaiterTabLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(26, 26, 26)
+                .addGroup(WaiterTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton6)
+                    .addComponent(jButton8)
+                    .addComponent(jButton9))
+                .addContainerGap(46, Short.MAX_VALUE))
         );
 
-        ManagementTabbedPane.addTab("Waiters", WaiterTab);
+        jTabbedPane2.addTab("Waiters", WaiterTab);
 
-        jScrollPane6.setViewportView(TableList);
+        jScrollPane6.setViewportView(jList4);
 
-        TableAddButton.setText("Add");
-        TableAddButton.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                TableAddButtonMouseClicked(evt);
-            }
-        });
+        jButton5.setText("Add New Table");
 
-        TableRemoveButton.setText("Remove");
+        jButton7.setText("Remove Selected Table");
 
-        TableShortCodeLabel.setText("Short Code");
+        jLabel13.setText("Short Code");
 
-        TableNameLabel.setText("Name");
+        jLabel14.setText("Name");
 
-        TableNameTextField.addActionListener(new java.awt.event.ActionListener() {
+        jTextField11.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                TableNameTextFieldActionPerformed(evt);
-            }
-        });
-
-        TableIDLabel.setText("ID");
-
-        TableIDTextField.setEditable(false);
-
-        TableUpdateButton.setText("Update");
-        TableUpdateButton.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                TableUpdateButtonMouseClicked(evt);
+                jTextField11ActionPerformed(evt);
             }
         });
 
@@ -550,70 +412,55 @@ public class Bar extends javax.swing.JFrame {
                 .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(TableTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(TableTabLayout.createSequentialGroup()
-                        .addComponent(TableRemoveButton)
-                        .addGap(80, 80, 80)
-                        .addComponent(TableUpdateButton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 84, Short.MAX_VALUE)
-                        .addComponent(TableAddButton))
-                    .addGroup(TableTabLayout.createSequentialGroup()
-                        .addComponent(TableNameLabel)
-                        .addGap(90, 90, 90)
-                        .addComponent(TableNameTextField))
-                    .addGroup(TableTabLayout.createSequentialGroup()
-                        .addComponent(TableShortCodeLabel)
-                        .addGap(60, 60, 60)
-                        .addComponent(TableShortCodeTextField))
-                    .addGroup(TableTabLayout.createSequentialGroup()
-                        .addComponent(TableIDLabel)
-                        .addGap(112, 112, 112)
-                        .addComponent(TableIDTextField)))
-                .addContainerGap())
+                    .addComponent(jButton5)
+                    .addComponent(jButton7))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 93, Short.MAX_VALUE)
+                .addGroup(TableTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel13)
+                    .addComponent(jLabel14)
+                    .addComponent(jTextField10)
+                    .addComponent(jTextField11, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(29, 29, 29))
         );
         TableTabLayout.setVerticalGroup(
             TableTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, TableTabLayout.createSequentialGroup()
-                .addGroup(TableTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(TableTabLayout.createSequentialGroup()
-                        .addGap(25, 25, 25)
-                        .addGroup(TableTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(TableIDLabel)
-                            .addComponent(TableIDTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(31, 31, 31)
-                        .addGroup(TableTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(TableShortCodeLabel)
-                            .addComponent(TableShortCodeTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(27, 27, 27)
-                        .addGroup(TableTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(TableNameLabel)
-                            .addComponent(TableNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 481, Short.MAX_VALUE)
-                        .addGroup(TableTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(TableRemoveButton)
-                            .addComponent(TableUpdateButton)
-                            .addComponent(TableAddButton)))
-                    .addComponent(jScrollPane6))
+            .addGroup(TableTabLayout.createSequentialGroup()
+                .addComponent(jScrollPane6)
                 .addContainerGap())
+            .addGroup(TableTabLayout.createSequentialGroup()
+                .addGap(103, 103, 103)
+                .addComponent(jLabel13)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(TableTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTextField10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton5))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel14)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(TableTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTextField11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton7))
+                .addContainerGap(104, Short.MAX_VALUE))
         );
 
-        ManagementTabbedPane.addTab("Tables", TableTab);
+        jTabbedPane2.addTab("Tables", TableTab);
 
-        javax.swing.GroupLayout ManagementTabLayout = new javax.swing.GroupLayout(ManagementTab);
-        ManagementTab.setLayout(ManagementTabLayout);
-        ManagementTabLayout.setHorizontalGroup(
-            ManagementTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 601, Short.MAX_VALUE)
-            .addGroup(ManagementTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(ManagementTabbedPane, javax.swing.GroupLayout.PREFERRED_SIZE, 601, Short.MAX_VALUE))
+            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(jTabbedPane2))
         );
-        ManagementTabLayout.setVerticalGroup(
-            ManagementTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 700, Short.MAX_VALUE)
-            .addGroup(ManagementTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(ManagementTabbedPane, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 347, Short.MAX_VALUE)
+            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(jTabbedPane2))
         );
 
-        BarMainTabbedPane.addTab("Management", ManagementTab);
+        jTabbedPane1.addTab("Management", jPanel2);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -621,104 +468,58 @@ public class Bar extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 692, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(BarMainTabbedPane, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.Alignment.TRAILING))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 710, Short.MAX_VALUE)
+            .addGap(0, 357, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
-                    .addComponent(BarMainTabbedPane)
+                    .addComponent(jTabbedPane1)
                     .addContainerGap()))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void ProductNameTextFİeldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ProductNameTextFİeldActionPerformed
+    private void jTextField4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField4ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_ProductNameTextFİeldActionPerformed
+    }//GEN-LAST:event_jTextField4ActionPerformed
 
-    private void Table1ButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Table1ButtonMouseClicked
+    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
         TableContent tc = new TableContent();
         tc.setVisible(true);
-    }//GEN-LAST:event_Table1ButtonMouseClicked
+    }//GEN-LAST:event_jButton1MouseClicked
 
-    private void ProductPriceTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ProductPriceTextFieldActionPerformed
+    private void jTextField9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField9ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_ProductPriceTextFieldActionPerformed
+    }//GEN-LAST:event_jTextField9ActionPerformed
 
-    private void ProductAddButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ProductAddButtonMouseClicked
+    private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
         ProductCreate pc = new ProductCreate();
         pc.setVisible(true);
-    }//GEN-LAST:event_ProductAddButtonMouseClicked
+    }//GEN-LAST:event_jButton2MouseClicked
 
-    private void TableNameTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TableNameTextFieldActionPerformed
+    private void jTextField11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField11ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_TableNameTextFieldActionPerformed
+    }//GEN-LAST:event_jTextField11ActionPerformed
 
-    private void WaiterNameTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_WaiterNameTextFieldActionPerformed
+    private void jTextField13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField13ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_WaiterNameTextFieldActionPerformed
+    }//GEN-LAST:event_jTextField13ActionPerformed
 
-    private void WaiterAddButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_WaiterAddButtonMouseClicked
+    private void jButton6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton6MouseClicked
         WaiterCreate wc = new WaiterCreate();
         wc.setVisible(true);
-    }//GEN-LAST:event_WaiterAddButtonMouseClicked
+    }//GEN-LAST:event_jButton6MouseClicked
 
-    private void WaiterSSNTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_WaiterSSNTextFieldActionPerformed
+    private void jTextField15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField15ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_WaiterSSNTextFieldActionPerformed
+    }//GEN-LAST:event_jTextField15ActionPerformed
 
-    private void WaiterPhoneNumberTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_WaiterPhoneNumberTextFieldActionPerformed
+    private void jTextField16ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField16ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_WaiterPhoneNumberTextFieldActionPerformed
-
-    private void CategoryCreateButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CategoryCreateButtonMouseClicked
-       CategoryCreate cc = new CategoryCreate();
-       cc.setVisible(true);
-    }//GEN-LAST:event_CategoryCreateButtonMouseClicked
-
-    private void ProductAddButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ProductAddButtonActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_ProductAddButtonActionPerformed
-
-    private void CategoryRemoveButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CategoryRemoveButtonMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_CategoryRemoveButtonMouseClicked
-
-    private void CategoryUpdateButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CategoryUpdateButtonMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_CategoryUpdateButtonMouseClicked
-
-    private void ProductRemoveButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ProductRemoveButtonMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_ProductRemoveButtonMouseClicked
-
-    private void ProductUpdateButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ProductUpdateButtonMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_ProductUpdateButtonMouseClicked
-
-    private void WaiterRemoveButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_WaiterRemoveButtonMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_WaiterRemoveButtonMouseClicked
-
-    private void WaiterUpdateButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_WaiterUpdateButtonMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_WaiterUpdateButtonMouseClicked
-
-    private void TableAddButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TableAddButtonMouseClicked
-       TableCreate tc = new TableCreate();
-       tc.setVisible(true);
-    }//GEN-LAST:event_TableAddButtonMouseClicked
-
-    private void TableUpdateButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TableUpdateButtonMouseClicked
-        //TODO add your handling code here:
-    }//GEN-LAST:event_TableUpdateButtonMouseClicked
-
-    private void CategoryTypeComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CategoryTypeComboBoxActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_CategoryTypeComboBoxActionPerformed
+    }//GEN-LAST:event_jTextField16ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -742,72 +543,60 @@ public class Bar extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTabbedPane BarMainTabbedPane;
-    private javax.swing.JButton CategoryCreateButton;
-    private javax.swing.JLabel CategoryDescriptionLabel;
-    private javax.swing.JTextArea CategoryDescriptionTextArea;
-    private javax.swing.JLabel CategoryIDLabel;
-    private javax.swing.JLabel CategoryIDLabel1;
-    private javax.swing.JTextField CategoryIDTextField;
-    private javax.swing.JList<String> CategoryList;
-    private javax.swing.JLabel CategoryNameLabel;
-    private javax.swing.JTextField CategoryNameTextField;
-    private javax.swing.JButton CategoryRemoveButton;
     private javax.swing.JPanel CategoryTab;
-    private javax.swing.JComboBox<String> CategoryTypeComboBox;
-    private javax.swing.JButton CategoryUpdateButton;
-    private javax.swing.JScrollPane JScrollPane;
-    private javax.swing.JPanel MainTableTab;
-    private javax.swing.JPanel ManagementTab;
-    private javax.swing.JTabbedPane ManagementTabbedPane;
-    private javax.swing.JButton ProductAddButton;
-    private javax.swing.JLabel ProductAlcoholVolumeLabel;
-    private javax.swing.JTextField ProductAlcoholVolumeTextField;
-    private javax.swing.JLabel ProductBrandLabel;
-    private javax.swing.JTextField ProductBrandTextField;
-    private javax.swing.JComboBox<String> ProductCategoryComboBox;
-    private javax.swing.JLabel ProductCategoryLabel;
-    private javax.swing.JLabel ProductDescriptionLabel;
-    private javax.swing.JTextArea ProductDescriptionTextArea;
-    private javax.swing.JLabel ProductIDLabel;
-    private javax.swing.JTextField ProductIDTextField;
-    private javax.swing.JList<String> ProductList;
-    private javax.swing.JLabel ProductNameLabel;
-    private javax.swing.JTextField ProductNameTextFİeld;
-    private javax.swing.JLabel ProductPriceLabel;
-    private javax.swing.JTextField ProductPriceTextField;
-    private javax.swing.JButton ProductRemoveButton;
     private javax.swing.JPanel ProductTab;
-    private javax.swing.JButton ProductUpdateButton;
-    private javax.swing.JButton Table1Button;
-    private javax.swing.JButton TableAddButton;
-    private javax.swing.JLabel TableIDLabel;
-    private javax.swing.JTextField TableIDTextField;
-    private javax.swing.JList<String> TableList;
-    private javax.swing.JLabel TableNameLabel;
-    private javax.swing.JTextField TableNameTextField;
-    private javax.swing.JButton TableRemoveButton;
-    private javax.swing.JLabel TableShortCodeLabel;
-    private javax.swing.JTextField TableShortCodeTextField;
     private javax.swing.JPanel TableTab;
-    private javax.swing.JButton TableUpdateButton;
-    private javax.swing.JButton WaiterAddButton;
-    private javax.swing.JLabel WaiterIDLabel;
-    private javax.swing.JTextField WaiterIDTextField;
-    private javax.swing.JList<String> WaiterList;
-    private javax.swing.JLabel WaiterNameLabel;
-    private javax.swing.JTextField WaiterNameTextField;
-    private javax.swing.JLabel WaiterPhoneNumberLabel;
-    private javax.swing.JTextField WaiterPhoneNumberTextField;
-    private javax.swing.JButton WaiterRemoveButton;
-    private javax.swing.JLabel WaiterSSNLabel;
-    private javax.swing.JTextField WaiterSSNTextField;
     private javax.swing.JPanel WaiterTab;
-    private javax.swing.JButton WaiterUpdateButton;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton5;
+    private javax.swing.JButton jButton6;
+    private javax.swing.JButton jButton7;
+    private javax.swing.JButton jButton8;
+    private javax.swing.JButton jButton9;
+    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel20;
+    private javax.swing.JLabel jLabel21;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JList<String> jList1;
+    private javax.swing.JList<String> jList2;
+    private javax.swing.JList<String> jList4;
+    private javax.swing.JList<String> jList5;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JScrollPane jScrollPane7;
+    private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JTabbedPane jTabbedPane2;
+    private javax.swing.JTextArea jTextArea1;
+    private javax.swing.JTextArea jTextArea2;
+    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField jTextField10;
+    private javax.swing.JTextField jTextField11;
+    private javax.swing.JTextField jTextField12;
+    private javax.swing.JTextField jTextField13;
+    private javax.swing.JTextField jTextField15;
+    private javax.swing.JTextField jTextField16;
+    private javax.swing.JTextField jTextField2;
+    private javax.swing.JTextField jTextField3;
+    private javax.swing.JTextField jTextField4;
+    private javax.swing.JTextField jTextField9;
     // End of variables declaration//GEN-END:variables
 }
