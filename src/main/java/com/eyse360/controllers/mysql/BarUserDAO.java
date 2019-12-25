@@ -1,4 +1,4 @@
-package com.eyse360.controllers;
+package com.eyse360.controllers.mysql;
 
 import com.eyse360.DAO;
 import com.eyse360.GUITest;
@@ -14,12 +14,93 @@ import java.util.Optional;
 public class BarUserDAO implements DAO<BarUser> {
     @Override
     public BarUser get(BarUser barUser) {
-        return null;
+
+        GUITest.conn.connect();
+
+        BarUser returnUser = null;
+
+        String query = "SELECT * FROM bar_users WHERE id = ? LIMIT 1";
+        try {
+            PreparedStatement pstmt = GUITest.conn.getConnection().prepareStatement(query);
+            pstmt.setInt(1, (int) barUser.getId());
+            ResultSet rs = pstmt.executeQuery();
+            if (rs.next()) {
+                if (rs.getString("userRole").equals("manager")) {
+                    returnUser = new BarManager();
+                    returnUser.setId(rs.getInt("id"));
+                    returnUser.setUserName(rs.getString("username"));
+                    returnUser.setPassword(rs.getString("password"));
+                    returnUser.setSSN(rs.getString("SSN"));
+                    returnUser.setFullName(rs.getString("fullName"));
+                    returnUser.setPhoneNumber(rs.getString("phoneNumber"));
+                    returnUser.setRole(rs.getString("userRole"));
+                } else if (rs.getString("userRole").equals("waiter")) {
+                    returnUser = new Waiter();
+                    returnUser.setId(rs.getInt("id"));
+                    returnUser.setUserName(rs.getString("username"));
+                    returnUser.setPassword(rs.getString("password"));
+                    returnUser.setSSN(rs.getString("SSN"));
+                    returnUser.setFullName(rs.getString("fullName"));
+                    returnUser.setPhoneNumber(rs.getString("phoneNumber"));
+                    returnUser.setRole(rs.getString("userRole"));
+                }
+            }
+            pstmt.close();
+            rs.close();
+
+            GUITest.conn.disconnect();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        GUITest.conn.disconnect();
+
+        return returnUser;
     }
 
     @Override
     public BarUser getById(int id) {
-        return null;
+        GUITest.conn.connect();
+
+        BarUser barUser = null;
+
+        String query = "SELECT * FROM bar_users WHERE id = ? LIMIT 1";
+        try {
+            PreparedStatement pstmt = GUITest.conn.getConnection().prepareStatement(query);
+            pstmt.setInt(1, id);
+            ResultSet rs = pstmt.executeQuery();
+            if (rs.next()) {
+                if (rs.getString("userRole").equals("manager")) {
+                    barUser = new BarManager();
+                    barUser.setId(rs.getInt("id"));
+                    barUser.setUserName(rs.getString("username"));
+                    barUser.setPassword(rs.getString("password"));
+                    barUser.setSSN(rs.getString("SSN"));
+                    barUser.setFullName(rs.getString("fullName"));
+                    barUser.setPhoneNumber(rs.getString("phoneNumber"));
+                    barUser.setRole(rs.getString("userRole"));
+                } else if (rs.getString("userRole").equals("waiter")) {
+                    barUser = new Waiter();
+                    barUser.setId(rs.getInt("id"));
+                    barUser.setUserName(rs.getString("username"));
+                    barUser.setPassword(rs.getString("password"));
+                    barUser.setSSN(rs.getString("SSN"));
+                    barUser.setFullName(rs.getString("fullName"));
+                    barUser.setPhoneNumber(rs.getString("phoneNumber"));
+                    barUser.setRole(rs.getString("userRole"));
+                }
+            }
+            pstmt.close();
+            rs.close();
+
+            GUITest.conn.disconnect();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        GUITest.conn.disconnect();
+
+        return barUser;
     }
 
     @Override

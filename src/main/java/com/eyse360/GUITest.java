@@ -1,11 +1,7 @@
 package com.eyse360;
 
-import com.eyse360.controllers.BarDAO;
-import com.eyse360.controllers.BarUserDAO;
-import com.eyse360.controllers.CategoryDAO;
-import com.eyse360.controllers.ProductDAO;
+import com.eyse360.controllers.mysql.*;
 import com.eyse360.models.*;
-import com.eyse360.tools.Tools;
 
 import java.util.List;
 
@@ -15,6 +11,7 @@ public class GUITest {
     private static CategoryDAO catDao;
     private static ProductDAO productDAO;
     private static BarUserDAO barUserDAO;
+    private static TableDAO tableDAO;
     public static Bar bar;
     static List<Category> categories;
 
@@ -24,8 +21,23 @@ public class GUITest {
         catDao = new CategoryDAO();
         productDAO = new ProductDAO();
         barUserDAO = new BarUserDAO();
+        tableDAO = new TableDAO();
+
         bar = barDao.getById(1);
-        Category category = catDao.getById(1);
+
+        Table table = tableDAO.getById(2);
+
+        System.out.println(table);
+
+        /*Table table1 = new Table();
+        table1.setName("Garden 1");
+        table1.setShortCode("G1");
+        table1.setCustomerCount(0);
+        table1.setId(tableDAO.save(table1));
+
+        System.out.println(table1); */
+
+        /*Category category = catDao.getById(1);
         System.out.println(category);
 
         category.setName("Bira");
@@ -36,7 +48,7 @@ public class GUITest {
 
         category = catDao.getById(1);
 
-        System.out.println(category);
+        System.out.println(category);*/
 
 /*        List<BarUser> barUsers = barUserDAO.getAllByBar(bar);
 

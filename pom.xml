@@ -8,13 +8,27 @@
     <artifactId>SE360-Term-Project</artifactId>
     <version>1.0-SNAPSHOT</version>
 
+    <repositories>
+        <repository>
+            <id>my-repo1</id>
+            <name>your custom repo</name>
+            <url>https://repo.spring.io/plugins-release/</url>
+        </repository>
+    </repositories>
+
     <dependencies>
         <!-- https://mvnrepository.com/artifact/org.mariadb.jdbc/mariadb-java-client -->
         <dependency>
             <groupId>org.mariadb.jdbc</groupId>
             <artifactId>mariadb-java-client</artifactId>
             <version>2.5.2</version>
+        </dependency><!-- https://mvnrepository.com/artifact/com.bulenkov/darcula -->
+        <dependency>
+            <groupId>com.bulenkov</groupId>
+            <artifactId>darcula</artifactId>
+            <version>2018.2</version>
         </dependency>
+
     </dependencies>
 
     <properties>

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ey.se360_termproject_bcrs;
+package com.eyse360.gui;
 
 import com.bulenkov.darcula.DarculaLaf;
 import java.awt.event.ItemEvent;
@@ -110,7 +110,7 @@ public class Login extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
-        Bar bar = new Bar();
+        ey.se360_termproject_bcrs.Bar bar = new ey.se360_termproject_bcrs.Bar();
         dispose();
         bar.setVisible(true);
     }//GEN-LAST:event_jButton1MouseClicked

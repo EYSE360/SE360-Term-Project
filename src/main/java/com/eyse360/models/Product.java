@@ -5,7 +5,6 @@ public abstract class Product {
     protected String name;
     protected double price;
     protected String description;
-    protected Category category;
 
     public long getId() {
         return id;
@@ -37,13 +36,5 @@ public abstract class Product {
 
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    public Category getCategory() {
-        return category;
-    }
-
-    public void setCategory(Category category) {
-        this.category = category;
     }
 }

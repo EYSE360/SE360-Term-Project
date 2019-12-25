@@ -1,4 +1,4 @@
-package com.eyse360.controllers;
+package com.eyse360.controllers.mysql;
 
 import com.eyse360.DAO;
 import com.eyse360.models.Check;

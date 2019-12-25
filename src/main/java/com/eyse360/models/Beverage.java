@@ -33,7 +33,6 @@ public class Beverage extends Product {
                 ", name='" + name + '\'' +
                 ", price=" + price +
                 ", description='" + description + '\'' +
-                ", category=" + category +
                 '}';
     }
 }

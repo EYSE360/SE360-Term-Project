@@ -1,4 +1,4 @@
-package com.eyse360.controllers;
+package com.eyse360.controllers.mysql;
 
 import com.eyse360.DAO;
 import com.eyse360.GUITest;
@@ -19,7 +19,59 @@ public class ProductDAO implements DAO<Product> {
 
     @Override
     public Product getById(int id) {
-        return null;
+        GUITest.conn.connect();
+
+        Product product = null;
+
+        String query = "SELECT * FROM products WHERE id = ? LIMIT 1";
+        try {
+            PreparedStatement pstmt = GUITest.conn.getConnection().prepareStatement(query);
+            pstmt.setInt(1, id);
+            ResultSet rs = pstmt.executeQuery();
+            if (rs.next()) {
+                if (rs.getString("type").equals("food")) {
+                    product = new Food();
+                    product.setId(rs.getInt("id"));
+                    String query2 = "SELECT * FROM foods WHERE product = ? LIMIT 1";
+                    PreparedStatement pstmt2 = GUITest.conn.getConnection().prepareStatement(query2);
+                    pstmt2.setInt(1, id);
+                    ResultSet rs2 = pstmt2.executeQuery();
+                    if (rs2.next()) {
+                        product.setName(rs.getString("name"));
+                        product.setPrice(rs.getDouble("price"));
+                        product.setDescription(rs.getString("description"));
+                    }
+                    rs2.close();
+                    pstmt2.close();
+                } else if (rs.getString("type").equals("beverage")) {
+                    product = new Beverage();
+                    product.setId(rs.getInt("id"));
+                    String query2 = "SELECT * FROM beverages WHERE product = ? LIMIT 1";
+                    PreparedStatement pstmt2 = GUITest.conn.getConnection().prepareStatement(query2);
+                    pstmt2.setInt(1, id);
+                    ResultSet rs2 = pstmt2.executeQuery();
+                    if (rs2.next()) {
+                        product.setName(rs.getString("name"));
+                        product.setPrice(rs.getDouble("price"));
+                        product.setDescription(rs.getString("description"));
+                        ((Beverage) product).setBrand(rs.getString("brand"));
+                        ((Beverage) product).setAlcoholVolume(rs.getDouble("alcoholVolume"));
+                    }
+                    rs2.close();
+                    pstmt2.close();
+                }
+            }
+            pstmt.close();
+            rs.close();
+
+            GUITest.conn.disconnect();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        GUITest.conn.disconnect();
+
+        return product;
     }
 
     @Override
@@ -27,13 +79,16 @@ public class ProductDAO implements DAO<Product> {
         return null;
     }
 
-    public List<Product> getAllByBar(Bar bar) {GUITest.conn.connect();
+    public List<Product> getAllByBar(Bar bar) {
+        GUITest.conn.connect();
+
+        List<Product> productList = null;
+
         String query = "SELECT * FROM products WHERE bar = ?";
         try {
             PreparedStatement pstmt = GUITest.conn.getConnection().prepareStatement(query);
             pstmt.setInt(1, (int) bar.getId());
             ResultSet rs = pstmt.executeQuery();
-            List<Product> productList = null;
             if (rs.next()) {
                 productList = new ArrayList<>();
             }
@@ -75,12 +130,11 @@ public class ProductDAO implements DAO<Product> {
             }
             pstmt.close();
             rs.close();
-            return productList;
         } catch (SQLException e) {
             e.printStackTrace();
         }
         GUITest.conn.disconnect();
-        return null;
+        return productList;
     }
 
     public List<Product> getAllByBarAndCategory(Bar bar, Category category) {
@@ -110,7 +164,6 @@ public class ProductDAO implements DAO<Product> {
                         product.setName(rs2.getString("name"));
                         product.setPrice(rs2.getDouble("price"));
                         product.setDescription(rs2.getString("description"));
-                        product.setCategory(category);
                         productList.add(product);
                     }
                     rs2.close();
@@ -128,7 +181,6 @@ public class ProductDAO implements DAO<Product> {
                         product.setDescription(rs2.getString("description"));
                         product.setBrand(rs.getString("brand"));
                         product.setAlcoholVolume(rs.getDouble("alcoholVolume"));
-                        product.setCategory(category);
                         productList.add(product);
                     }
                     rs2.close();
@@ -150,6 +202,10 @@ public class ProductDAO implements DAO<Product> {
 
     @Override
     public int save(Product product) {
+        return 0;
+    }
+
+    public int saveByCategory(Product product, Category category) {
         GUITest.conn.connect();
 
         int id = 0;
@@ -159,7 +215,7 @@ public class ProductDAO implements DAO<Product> {
             PreparedStatement pstmt = GUITest.conn.getConnection().prepareStatement(query, PreparedStatement.RETURN_GENERATED_KEYS);
             if (product instanceof Food) {
                 pstmt.setString(1, "food");
-                pstmt.setInt(2, (int) product.getCategory().getId());
+                pstmt.setInt(2, (int) category.getId());
                 pstmt.setInt(3, (int) GUITest.bar.getId());
                 pstmt.executeUpdate();
                 ResultSet rs = pstmt.getGeneratedKeys();
@@ -181,7 +237,7 @@ public class ProductDAO implements DAO<Product> {
                 rs.close();
             } else if (product instanceof Beverage) {
                 pstmt.setString(1, "beverage");
-                pstmt.setInt(2, (int) product.getCategory().getId());
+                pstmt.setInt(2, (int) category.getId());
                 pstmt.setInt(3, (int) GUITest.bar.getId());
                 pstmt.executeUpdate();
                 ResultSet rs = pstmt.getGeneratedKeys();
@@ -214,14 +270,17 @@ public class ProductDAO implements DAO<Product> {
     }
 
     @Override
-    public void update(Product product) {
+    public void update(Product product) {  }
+
+    public void update(Product product, Category category) {
+
         GUITest.conn.connect();
         String query = "UPDATE products SET type = ?, category = ? WHERE id = ?";
         try {
             PreparedStatement pstmt = GUITest.conn.getConnection().prepareStatement(query, PreparedStatement.RETURN_GENERATED_KEYS);
             if (product instanceof Food) {
                 pstmt.setString(1, "food");
-                pstmt.setInt(2, (int) product.getCategory().getId());
+                pstmt.setInt(2, (int) category.getId());
                 pstmt.setInt(3, (int) product.getId());
                 pstmt.executeUpdate();
                 ResultSet rs = pstmt.getGeneratedKeys();
@@ -237,7 +296,7 @@ public class ProductDAO implements DAO<Product> {
                 }
             } else if (product instanceof Beverage) {
                 pstmt.setString(1, "beverage");
-                pstmt.setInt(2, (int) product.getCategory().getId());
+                pstmt.setInt(2, (int) category.getId());
                 pstmt.setInt(3, (int) GUITest.bar.getId());
                 pstmt.executeUpdate();
                 ResultSet rs = pstmt.getGeneratedKeys();

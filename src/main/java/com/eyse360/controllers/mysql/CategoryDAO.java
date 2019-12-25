@@ -1,4 +1,4 @@
-package com.eyse360.controllers;
+package com.eyse360.controllers.mysql;
 
 import com.eyse360.DAO;
 import com.eyse360.GUITest;
@@ -15,7 +15,33 @@ import java.util.Optional;
 public class CategoryDAO implements DAO<Category> {
     @Override
     public Category get(Category category) {
-        return null;
+        GUITest.conn.connect();
+
+        Category returnCategory = null;
+
+        String query = "SELECT * FROM product_categories WHERE id = ? LIMIT 1";
+        try {
+            PreparedStatement pstmt = GUITest.conn.getConnection().prepareStatement(query);
+            pstmt.setInt(1, (int) category.getId());
+            ResultSet rs = pstmt.executeQuery();
+            if (rs.next()) {
+                returnCategory = new Category();
+                returnCategory.setId(rs.getInt("id"));
+                returnCategory.setName(rs.getString("name"));
+                returnCategory.setDescription(rs.getString("description"));
+                returnCategory.setType(rs.getString("type"));
+            }
+            pstmt.close();
+            rs.close();
+
+            GUITest.conn.disconnect();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        GUITest.conn.disconnect();
+
+        return returnCategory;
     }
 
     @Override

@@ -1,4 +1,4 @@
-package com.eyse360.controllers;
+package com.eyse360.controllers.mysql;
 import com.eyse360.DAO;
 import com.eyse360.GUITest;
 import com.eyse360.models.Bar;
@@ -14,25 +14,21 @@ import java.util.Optional;
 public class BarDAO implements DAO<Bar> {
     @Override
     public Bar get(Bar bar) {
-        return null;
-    }
-
-    public Bar getById(int id) {
         GUITest.conn.connect();
 
-        Bar b = null;
+        Bar returnBar = null;
 
         String query = "SELECT * FROM bars WHERE id = ? LIMIT 1";
         try {
             PreparedStatement pstmt = GUITest.conn.getConnection().prepareStatement(query);
-            pstmt.setInt(1, id);
+            pstmt.setInt(1, (int) bar.getId());
             ResultSet rs = pstmt.executeQuery();
             if (rs.next()) {
-                b = new Bar();
-                b.setId(rs.getInt("id"));
-                b.setName(rs.getString("name"));
-                b.setCity(rs.getString("city"));
-                b.setAlcoholPermission(rs.getBoolean("alcoholPermission"));
+                returnBar = new Bar();
+                returnBar.setId(rs.getInt("id"));
+                returnBar.setName(rs.getString("name"));
+                returnBar.setCity(rs.getString("city"));
+                returnBar.setAlcoholPermission(rs.getBoolean("alcoholPermission"));
             }
             pstmt.close();
             rs.close();
@@ -44,7 +40,37 @@ public class BarDAO implements DAO<Bar> {
 
         GUITest.conn.disconnect();
 
-        return b;
+        return returnBar;
+    }
+
+    public Bar getById(int id) {
+        GUITest.conn.connect();
+
+        Bar bar = null;
+
+        String query = "SELECT * FROM bars WHERE id = ? LIMIT 1";
+        try {
+            PreparedStatement pstmt = GUITest.conn.getConnection().prepareStatement(query);
+            pstmt.setInt(1, id);
+            ResultSet rs = pstmt.executeQuery();
+            if (rs.next()) {
+                bar = new Bar();
+                bar.setId(rs.getInt("id"));
+                bar.setName(rs.getString("name"));
+                bar.setCity(rs.getString("city"));
+                bar.setAlcoholPermission(rs.getBoolean("alcoholPermission"));
+            }
+            pstmt.close();
+            rs.close();
+
+            GUITest.conn.disconnect();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        GUITest.conn.disconnect();
+
+        return bar;
     }
 
     @Override
