@@ -221,18 +221,18 @@ public class ProductDAO implements DAO<Product> {
                 ResultSet rs = pstmt.getGeneratedKeys();
 
                 if (rs.next()) {
-                    int productId = rs.getInt(1);
+                    id = rs.getInt(1);
                     String query2 = "INSERT INTO foods (product, name, price, description) VALUES (?, ?, ?, ?)";
                     PreparedStatement pstmt2 = GUITest.conn.getConnection().prepareStatement(query2);
-                    pstmt2.setInt(1, productId);
+                    pstmt2.setInt(1, id);
                     pstmt2.setString(2, product.getName());
                     pstmt2.setDouble(3, product.getPrice());
                     pstmt2.setString(4, product.getDescription());
                     pstmt2.executeUpdate();
 
-                    id = rs.getInt(1);
                     pstmt2.close();
                 }
+
                 pstmt.close();
                 rs.close();
             } else if (product instanceof Beverage) {
@@ -243,10 +243,10 @@ public class ProductDAO implements DAO<Product> {
                 ResultSet rs = pstmt.getGeneratedKeys();
 
                 if (rs.next()) {
-                    int productId = rs.getInt(1);
+                    id = rs.getInt(1);
                     String query2 = "INSERT INTO beverages (product, name, price, description, brand, alcoholVolume) VALUES (?, ?, ?, ?, ?, ?)";
                     PreparedStatement pstmt2 = GUITest.conn.getConnection().prepareStatement(query2);
-                    pstmt2.setInt(1, productId);
+                    pstmt2.setInt(1, id);
                     pstmt2.setString(2, product.getName());
                     pstmt2.setDouble(3, product.getPrice());
                     pstmt2.setString(4, product.getDescription());
@@ -254,9 +254,9 @@ public class ProductDAO implements DAO<Product> {
                     pstmt2.setDouble(6, ((Beverage) product).getAlcoholVolume());
                     pstmt2.executeUpdate();
 
-                    id = rs.getInt(1);
                     pstmt2.close();
                 }
+
                 pstmt.close();
                 rs.close();
             }

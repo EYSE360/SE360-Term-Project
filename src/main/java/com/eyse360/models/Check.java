@@ -6,7 +6,6 @@ import java.util.Map;
 public class Check {
     private long id;
     private Map<Product, Integer> products;
-    private Table table;
     private int time;
     private Waiter waiter;
 
@@ -28,14 +27,6 @@ public class Check {
 
     public void setProducts(Map<Product, Integer> products) {
         this.products = products;
-    }
-
-    public Table getTable() {
-        return table;
-    }
-
-    public void setTable(Table table) {
-        this.table = table;
     }
 
     public int getTime() {
@@ -67,7 +58,6 @@ public class Check {
         return "Check{" +
                 "id=" + id +
                 ", products=" + products +
-                ", table=" + table +
                 ", time=" + time +
                 ", waiter=" + waiter +
                 '}';
