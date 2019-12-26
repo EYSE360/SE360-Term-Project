@@ -207,9 +207,16 @@ public class CategoryDAO implements DAO<Category> {
             pstmt.setString(2, category.getDescription());
             pstmt.setString(3, category.getType());
             pstmt.setInt(4, (int) category.getId());
-
             pstmt.executeUpdate();
             pstmt.close();
+
+            String query2 = "UPDATE products SET type = ? WHERE category = ?";
+            PreparedStatement pstmt2 = conn.getConnection().prepareStatement(query2);
+            pstmt2.setString(1, category.getType());
+            pstmt2.setInt(2, (int) category.getId());
+            pstmt2.executeUpdate();
+            pstmt2.close();
+
         } catch (SQLException e) {
             e.printStackTrace();
         }

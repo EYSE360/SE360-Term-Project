@@ -24,6 +24,9 @@ public class CategoryCreateFrame extends javax.swing.JFrame {
         DescriptionLabel = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         DescriptionTextArea = new javax.swing.JTextArea();
+        DescriptionTextArea.setWrapStyleWord(true);
+        DescriptionTextArea.setLineWrap(true);
+
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 

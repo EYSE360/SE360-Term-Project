@@ -8,16 +8,18 @@ import com.eyse360.models.Category;
 import com.eyse360.models.Check;
 import com.eyse360.models.Product;
 import com.eyse360.models.Table;
-import javax.swing.DefaultComboBoxModel;
-import javax.swing.DefaultListModel;
+
+import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.List;
 
 public class SelectProductFrame extends javax.swing.JFrame {
 
     private Bar currentBar;
     
-    private DefaultComboBoxModel comboboxModel;
-    private DefaultListModel defaultListModel;
+    private static DefaultComboBoxModel<Category> comboboxModel;
+    private static DefaultListModel<Product> defaultListModel;
     private static CategoryDAO catDao;
     private static ProductDAO productDao;
     private static TableDAO tableDao;
@@ -29,15 +31,18 @@ public class SelectProductFrame extends javax.swing.JFrame {
         currentBar = bar;
         
         initComponents();
-        
-        comboboxModel = new DefaultComboBoxModel();
+
+        comboboxModel = new DefaultComboBoxModel<>();
         CategoryComboBox.setModel(comboboxModel);
+
+        defaultListModel = new DefaultListModel<>();
+        ProductList.setModel(defaultListModel);
+
+
         List<Category> categoryList = catDao.getAllByBar(bar);
+        System.out.println(categoryList);
         for (Category category : categoryList)
             comboboxModel.addElement(category);
-        
-        defaultListModel = new DefaultListModel();
-        ProductList.setModel(defaultListModel);
     }
 
     @SuppressWarnings("unchecked")
@@ -53,8 +58,8 @@ public class SelectProductFrame extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        CategoryComboBox.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+        CategoryComboBox.addActionListener (new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
                 CategoryComboBoxItemStateChanged(evt);
             }
         });
@@ -117,12 +122,22 @@ public class SelectProductFrame extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_SelectButtonMouseClicked
 
-    private void CategoryComboBoxItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_CategoryComboBox�temStateChanged
+    private void CategoryComboBoxItemStateChanged(java.awt.event.ActionEvent  evt) {//GEN-FIRST:event_CategoryComboBox�temStateChanged
+        System.out.println((Category)CategoryComboBox.getSelectedItem());
         Category category = (Category) CategoryComboBox.getSelectedItem();
-        defaultListModel.removeAllElements();
         List<Product> productList = productDao.getAllByBarAndCategory(currentBar, category);
-        for (Product product : productList)
-            defaultListModel.addElement(product);
+        if(productList != null){
+            try {
+                defaultListModel.removeAllElements();
+            } catch (NullPointerException e) {
+
+            }
+            for (Product product : productList)
+                defaultListModel.addElement(product);
+        }else{
+            JOptionPane.showMessageDialog(this,"There is nothing to be shown!");
+
+        }
     }//GEN-LAST:event_CategoryComboBox�temStateChanged
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

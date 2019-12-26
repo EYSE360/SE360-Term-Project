@@ -56,6 +56,8 @@ public class ProductCreateFrame extends javax.swing.JFrame {
         BrandTextField = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         DescriptionTextArea = new javax.swing.JTextArea();
+        DescriptionTextArea.setWrapStyleWord(true);
+        DescriptionTextArea.setLineWrap(true);
         CancelButton = new javax.swing.JButton();
         CategoryComboBox = new javax.swing.JComboBox<>();
 

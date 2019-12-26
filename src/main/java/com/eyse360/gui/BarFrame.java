@@ -208,8 +208,10 @@ public class BarFrame extends javax.swing.JFrame {
 
         CategoryIDTextField.setEditable(false);
 
-        CategoryDescriptionTextArea.setColumns(20);
+        CategoryDescriptionTextArea.setColumns(18);
         CategoryDescriptionTextArea.setRows(5);
+        CategoryDescriptionTextArea.setWrapStyleWord(true);
+        CategoryDescriptionTextArea.setLineWrap(true);
         JScrollPane.setViewportView(CategoryDescriptionTextArea);
 
         CategoryIDLabel1.setText("Type");
@@ -332,8 +334,10 @@ public class BarFrame extends javax.swing.JFrame {
 
         ProductIDTextField.setEnabled(false);
 
-        ProductDescriptionTextArea.setColumns(20);
+        ProductDescriptionTextArea.setColumns(10);
         ProductDescriptionTextArea.setRows(5);
+        ProductDescriptionTextArea.setWrapStyleWord(true);
+        ProductDescriptionTextArea.setLineWrap(true);
         jScrollPane4.setViewportView(ProductDescriptionTextArea);
 
         ProductPriceLabel.setText("Price");
@@ -823,8 +827,8 @@ public class BarFrame extends javax.swing.JFrame {
         category.setDescription(CategoryDescriptionTextArea.getText());
         category.setType((String) CategoryTypeComboBox.getSelectedItem());
         categoryDao.update(category);
-        
         CategoryList.updateUI();
+        JOptionPane.showMessageDialog(this,"Category Updated Successfully!");
     }//GEN-LAST:event_CategoryUpdateButtonMouseClicked
 
     private void ProductRemoveButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ProductRemoveButtonMouseClicked
@@ -847,10 +851,9 @@ public class BarFrame extends javax.swing.JFrame {
             ((Beverage) product).setBrand(ProductBrandTextField.getText());
             ((Beverage) product).setAlcoholVolume(Double.parseDouble(ProductAlcoholVolumeTextField.getText()));
         }
-        
         productDao.update(product);
-        
         ProductList.updateUI();
+        JOptionPane.showMessageDialog(this,"Product Updated Successfully!");
     }//GEN-LAST:event_ProductUpdateButtonMouseClicked
 
     private void WaiterRemoveButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_WaiterRemoveButtonMouseClicked
@@ -873,6 +876,7 @@ public class BarFrame extends javax.swing.JFrame {
         barUserDao.update(waiter);
         
         WaiterList.updateUI();
+        JOptionPane.showMessageDialog(this,"Waiter Updated Successfully!");
     }//GEN-LAST:event_WaiterUpdateButtonMouseClicked
 
     private void TableAddButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TableAddButtonMouseClicked
@@ -887,6 +891,7 @@ public class BarFrame extends javax.swing.JFrame {
         
         tableDao.update(table);
         TableList.updateUI();
+        JOptionPane.showMessageDialog(this,"Table Updated Successfully!");
     }//GEN-LAST:event_TableUpdateButtonMouseClicked
 
     private void CategoryTypeComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CategoryTypeComboBoxActionPerformed
@@ -957,6 +962,7 @@ public class BarFrame extends javax.swing.JFrame {
         CategoryIDTextField.setText(String.valueOf(selected.getId()));
         CategoryNameTextField.setText(selected.getName());
         CategoryDescriptionTextArea.setText(selected.getDescription());
+
         CategoryTypeComboBox.setSelectedItem(selected.getType());
     }//GEN-LAST:event_CategoryListMouseClicked
 
@@ -1081,7 +1087,7 @@ public class BarFrame extends javax.swing.JFrame {
         int index = TableList.getSelectedIndex();
         tableDao.delete(table);
         tableModel.remove(index);
-        
+
         resetTableForm();
     }//GEN-LAST:event_TableRemoveButtonMouseClicked
 
