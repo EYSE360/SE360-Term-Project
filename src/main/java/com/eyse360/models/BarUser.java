@@ -8,6 +8,7 @@ public abstract class BarUser {
     protected String fullName;
     protected String phoneNumber;
     protected String role;
+    protected Bar bar;
 
     public long getId() {
         return id;
@@ -64,6 +65,16 @@ public abstract class BarUser {
     public void setRole(String role) {
         this.role = role;
     }
+
+    public Bar getBar() {
+        return bar;
+    }
+
+    public void setBar(Bar bar) {
+        this.bar = bar;
+    }
+    
+    
 
     @Override
     public String toString() {

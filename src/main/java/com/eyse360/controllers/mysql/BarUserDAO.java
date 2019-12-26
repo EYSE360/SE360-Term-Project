@@ -15,7 +15,9 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class BarUserDAO implements DAO<BarUser> {
+    public static List<BarUser> barUserList = null;
     DBConnection conn = new DBConnection();
+    
     @Override
     public BarUser get(BarUser barUser) {
         conn.connect();
@@ -106,6 +108,46 @@ public class BarUserDAO implements DAO<BarUser> {
         return barUser;
     }
     
+    public BarUser login(String userName, String password) {
+        conn.connect();
+        BarDAO barDAO = new BarDAO();
+
+        BarUser barUser = null;
+
+        String query = "SELECT * FROM bar_users WHERE userName = ? AND password = ? LIMIT 1";
+        try {
+            PreparedStatement pstmt = conn.getConnection().prepareStatement(query);
+            pstmt.setString(1, userName);
+            pstmt.setString(2, password);
+            ResultSet rs = pstmt.executeQuery();
+            if (rs.next()) {
+                if (rs.getString("userRole").equals("manager")) {
+                    barUser = new BarManager();
+                } else if (rs.getString("userRole").equals("waiter")) {
+                    barUser = new Waiter();
+                }
+                barUser.setId(rs.getInt("id"));
+                barUser.setUserName(rs.getString("username"));
+                barUser.setPassword(rs.getString("password"));
+                barUser.setSSN(rs.getString("SSN"));
+                barUser.setFullName(rs.getString("fullName"));
+                barUser.setPhoneNumber(rs.getString("phoneNumber"));
+                barUser.setRole(rs.getString("userRole"));
+                barUser.setBar(barDAO.getById(rs.getInt("bar")));
+            }
+            pstmt.close();
+            rs.close();
+
+            conn.disconnect();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        conn.disconnect();
+
+        return barUser;
+    }
+    
     public List<Waiter> getAllWaitersByBar(Bar bar) {
         conn.connect();
         List<Waiter> waiters = null;
@@ -147,7 +189,7 @@ public class BarUserDAO implements DAO<BarUser> {
     public List<BarUser> getAllByBar(Bar b) {
         conn.connect();
 
-        List<BarUser> barUserList = null;
+        //List<BarUser> barUserList = null;
 
         String query = "SELECT * FROM bar_users WHERE bar = ?";
         try {
@@ -207,7 +249,7 @@ public class BarUserDAO implements DAO<BarUser> {
             pstmt.setString(4, barUser.getFullName());
             pstmt.setString(5, barUser.getPhoneNumber());
             pstmt.setString(6, barUser instanceof BarManager ? "manager" : "waiter");
-            pstmt.setInt(7, (int) GUITest.bar.getId());
+            pstmt.setInt(7, (int) barUser.getBar().getId());
             pstmt.executeUpdate();
             ResultSet rs = pstmt.getGeneratedKeys();
 

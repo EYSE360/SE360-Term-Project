@@ -5,17 +5,44 @@
  */
 package com.eyse360.gui;
 
+import com.eyse360.controllers.mysql.CategoryDAO;
+import com.eyse360.controllers.mysql.ProductDAO;
+import com.eyse360.models.Bar;
+import com.eyse360.models.Category;
+import com.eyse360.models.Check;
+import com.eyse360.models.Product;
+import com.eyse360.models.Table;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.DefaultListModel;
+
 /**
  *
  * @author Erel
  */
 public class SelectProductFrame extends javax.swing.JFrame {
 
+    private Bar currentBar;
+    
+    private DefaultComboBoxModel comboboxModel;
+    private DefaultListModel defaultListModel;
+    private static CategoryDAO catDao;
+    private static ProductDAO productDao;
     /**
      * Creates new form AddCategoryTOTable
      */
-    public SelectProductFrame() {
+    public SelectProductFrame(Table table, Bar bar, Check check) {
+        catDao = new CategoryDAO();
+        productDao = new ProductDAO();
+        currentBar = bar;
+        
         initComponents();
+        
+        comboboxModel = new DefaultComboBoxModel();
+        CategoryComboBox.setModel(comboboxModel);
+        comboboxModel.addAll(catDao.getAllByBar(bar));
+        
+        defaultListModel = new DefaultListModel();
+        ProductList.setModel(defaultListModel);
     }
 
     /**
@@ -36,7 +63,11 @@ public class SelectProductFrame extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        CategoryComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        CategoryComboBox.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                CategoryComboBox›temStateChanged(evt);
+            }
+        });
 
         CategoriesLabel.setText("Categories");
 
@@ -49,6 +80,7 @@ public class SelectProductFrame extends javax.swing.JFrame {
             }
         });
 
+        ProductList.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jScrollPane1.setViewportView(ProductList);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -91,46 +123,15 @@ public class SelectProductFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_SelectButtonMouseClicked
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(SelectProductFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(SelectProductFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(SelectProductFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(SelectProductFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new SelectProductFrame().setVisible(true);
-            }
-        });
-    }
+    private void CategoryComboBox›temStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_CategoryComboBox›temStateChanged
+        Category category = (Category) CategoryComboBox.getSelectedItem();
+        defaultListModel.addAll(productDao.getAllByBarAndCategory(currentBar, category));
+    }//GEN-LAST:event_CategoryComboBox›temStateChanged
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel CategoriesLabel;
-    private javax.swing.JComboBox<String> CategoryComboBox;
-    private javax.swing.JList<String> ProductList;
+    private javax.swing.JComboBox<Category> CategoryComboBox;
+    private javax.swing.JList<Product> ProductList;
     private javax.swing.JLabel ProductListLabel;
     private javax.swing.JButton SelectButton;
     private javax.swing.JScrollPane jScrollPane1;

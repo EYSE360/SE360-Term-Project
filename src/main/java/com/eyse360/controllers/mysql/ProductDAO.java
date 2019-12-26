@@ -12,6 +12,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class ProductDAO implements DAO<Product> {
     DBConnection conn = new DBConnection();
@@ -35,33 +37,17 @@ public class ProductDAO implements DAO<Product> {
                 if (rs.getString("type").equals("food")) {
                     product = new Food();
                     product.setId(rs.getInt("id"));
-                    String query2 = "SELECT * FROM foods WHERE product = ? LIMIT 1";
-                    PreparedStatement pstmt2 = conn.getConnection().prepareStatement(query2);
-                    pstmt2.setInt(1, id);
-                    ResultSet rs2 = pstmt2.executeQuery();
-                    if (rs2.next()) {
-                        product.setName(rs.getString("name"));
-                        product.setPrice(rs.getDouble("price"));
-                        product.setDescription(rs.getString("description"));
-                    }
-                    rs2.close();
-                    pstmt2.close();
+                    product.setName(rs.getString("name"));
+                    product.setPrice(rs.getDouble("price"));
+                    product.setDescription(rs.getString("description"));
                 } else if (rs.getString("type").equals("beverage")) {
                     product = new Beverage();
                     product.setId(rs.getInt("id"));
-                    String query2 = "SELECT * FROM beverages WHERE product = ? LIMIT 1";
-                    PreparedStatement pstmt2 = conn.getConnection().prepareStatement(query2);
-                    pstmt2.setInt(1, id);
-                    ResultSet rs2 = pstmt2.executeQuery();
-                    if (rs2.next()) {
-                        product.setName(rs.getString("name"));
-                        product.setPrice(rs.getDouble("price"));
-                        product.setDescription(rs.getString("description"));
-                        ((Beverage) product).setBrand(rs.getString("brand"));
-                        ((Beverage) product).setAlcoholVolume(rs.getDouble("alcoholVolume"));
-                    }
-                    rs2.close();
-                    pstmt2.close();
+                    product.setName(rs.getString("name"));
+                    product.setPrice(rs.getDouble("price"));
+                    product.setDescription(rs.getString("description"));
+                    ((Beverage) product).setBrand(rs.getString("brand"));
+                    ((Beverage) product).setAlcoholVolume(rs.getDouble("alcoholVolume"));
                 }
             }
             pstmt.close();
@@ -99,43 +85,27 @@ public class ProductDAO implements DAO<Product> {
             rs.beforeFirst();
             while (rs.next()) {
                 if (rs.getString("type").equals("food")) {
-                    String query2 = "SELECT * FROM foods WHERE product = ? LIMIT 1";
-                    PreparedStatement pstmt2 = conn.getConnection().prepareStatement(query2);
-                    pstmt2.setInt(1, rs.getInt("id"));
-                    ResultSet rs2 = pstmt2.executeQuery();
-                    while (rs2.next()) {
-                        Food product = new Food();
-                        product.setId(rs.getInt("id"));
-                        product.setName(rs2.getString("name"));
-                        product.setPrice(rs2.getDouble("price"));
-                        product.setDescription(rs2.getString("description"));
-                        product.setCategory(categoryDAO.getById(rs.getInt("category")));
-                        productList.add(product);
-                    }
-                    rs2.close();
-                    pstmt2.close();
+                    Food product = new Food();
+                    product.setId(rs.getInt("id"));
+                    product.setName(rs.getString("name"));
+                    product.setPrice(rs.getDouble("price"));
+                    product.setDescription(rs.getString("description"));
+                    product.setCategory(categoryDAO.getById(rs.getInt("category")));
+                    productList.add(product);
                 } else if (rs.getString("type").equals("beverage")) {
-                    String query2 = "SELECT * FROM beverages WHERE product = ? LIMIT 1";
-                    PreparedStatement pstmt2 = conn.getConnection().prepareStatement(query2);
-                    pstmt2.setInt(1, rs.getInt("id"));
-                    ResultSet rs2 = pstmt2.executeQuery();
-                    while (rs2.next()) {
-                        Beverage product = new Beverage();
-                        product.setId(rs.getInt("id"));
-                        product.setName(rs2.getString("name"));
-                        product.setPrice(rs2.getDouble("price"));
-                        product.setDescription(rs2.getString("description"));
-                        product.setBrand(rs2.getString("brand"));
-                        product.setAlcoholVolume(rs2.getDouble("alcoholVolume"));
-                        product.setCategory(categoryDAO.getById(rs.getInt("category")));
-                        productList.add(product);
-                    }
-                    rs2.close();
-                    pstmt2.close();
+                    Beverage product = new Beverage();
+                    product.setId(rs.getInt("id"));
+                    product.setName(rs.getString("name"));
+                    product.setPrice(rs.getDouble("price"));
+                    product.setDescription(rs.getString("description"));
+                    product.setBrand(rs.getString("brand"));
+                    product.setAlcoholVolume(rs.getDouble("alcoholVolume"));
+                    product.setCategory(categoryDAO.getById(rs.getInt("category")));
+                    productList.add(product);
                 }
             }
-            pstmt.close();
             rs.close();
+            pstmt.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -160,43 +130,25 @@ public class ProductDAO implements DAO<Product> {
             rs.beforeFirst();
             while (rs.next()) {
                 if (rs.getString("type").equals("food")) {
-                    String query2 = "SELECT * FROM foods WHERE product = ? LIMIT 1";
-                    PreparedStatement pstmt2 = conn.getConnection().prepareStatement(query2);
-                    pstmt2.setInt(1, rs.getInt("id"));
-                    ResultSet rs2 = pstmt2.executeQuery();
-                    while (rs2.next()) {
-                        Food product = new Food();
-                        product.setId(rs.getInt("id"));
-                        product.setName(rs2.getString("name"));
-                        product.setPrice(rs2.getDouble("price"));
-                        product.setDescription(rs2.getString("description"));
-                        productList.add(product);
-                    }
-                    rs2.close();
-                    pstmt2.close();
+                    Food product = new Food();
+                    product.setId(rs.getInt("id"));
+                    product.setName(rs.getString("name"));
+                    product.setPrice(rs.getDouble("price"));
+                    product.setDescription(rs.getString("description"));
+                    productList.add(product);
                 } else if (rs.getString("type").equals("beverage")) {
-                    String query2 = "SELECT * FROM foods WHERE product = ? LIMIT 1";
-                    PreparedStatement pstmt2 = conn.getConnection().prepareStatement(query2);
-                    pstmt2.setInt(1, rs.getInt("id"));
-                    ResultSet rs2 = pstmt2.executeQuery();
-                    while (rs2.next()) {
-                        Beverage product = new Beverage();
-                        product.setId(rs.getInt("id"));
-                        product.setName(rs2.getString("name"));
-                        product.setPrice(rs2.getDouble("price"));
-                        product.setDescription(rs2.getString("description"));
-                        product.setBrand(rs.getString("brand"));
-                        product.setAlcoholVolume(rs.getDouble("alcoholVolume"));
-                        productList.add(product);
-                    }
-                    rs2.close();
-                    pstmt2.close();
+                    Beverage product = new Beverage();
+                    product.setId(rs.getInt("id"));
+                    product.setName(rs.getString("name"));
+                    product.setPrice(rs.getDouble("price"));
+                    product.setDescription(rs.getString("description"));
+                    product.setBrand(rs.getString("brand"));
+                    product.setAlcoholVolume(rs.getDouble("alcoholVolume"));
+                    productList.add(product);
                 }
             }
-            pstmt.close();
             rs.close();
-            conn.disconnect();
-
+            pstmt.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -211,123 +163,51 @@ public class ProductDAO implements DAO<Product> {
         conn.connect();
 
         int id = 0;
-
-        String query = "INSERT INTO products (type, category, bar) VALUES (?, ?, ?)";
-        try {
-            PreparedStatement pstmt = conn.getConnection().prepareStatement(query, PreparedStatement.RETURN_GENERATED_KEYS);
-            if (product instanceof Food) {
-                pstmt.setString(1, "food");
-                pstmt.setInt(2, (int) product.getCategory().getId());
-                pstmt.setInt(3, (int) BarFrame.currentBar.getId());
+        if (product instanceof Food) {
+            String query = "INSERT INTO products (category, name, price, description, type, bar) VALUES (?, ?, ?, ?, ?, ?)";
+            try {
+                PreparedStatement pstmt = conn.getConnection().prepareStatement(query, PreparedStatement.RETURN_GENERATED_KEYS);
+                pstmt.setInt(1, (int) product.getCategory().getId());
+                pstmt.setString(2, product.getName());
+                pstmt.setDouble(3, product.getPrice());
+                pstmt.setString(4, product.getDescription());
+                pstmt.setString(5, "food");
+                pstmt.setInt(6, (int) BarFrame.currentBar.getId());
                 pstmt.executeUpdate();
                 ResultSet rs = pstmt.getGeneratedKeys();
-
-                if (rs.next()) {
+                
+                if (rs.next())
                     id = rs.getInt(1);
-                    String query2 = "INSERT INTO foods (product, name, price, description) VALUES (?, ?, ?, ?)";
-                    PreparedStatement pstmt2 = conn.getConnection().prepareStatement(query2);
-                    pstmt2.setInt(1, id);
-                    pstmt2.setString(2, product.getName());
-                    pstmt2.setDouble(3, product.getPrice());
-                    pstmt2.setString(4, product.getDescription());
-                    pstmt2.executeUpdate();
 
-                    pstmt2.close();
-                }
-
-                pstmt.close();
                 rs.close();
-            } else if (product instanceof Beverage) {
-                pstmt.setString(1, "beverage");
-                pstmt.setInt(2, (int) product.getCategory().getId());
-                pstmt.setInt(3, (int) BarFrame.currentBar.getId());
-                pstmt.executeUpdate();
-                ResultSet rs = pstmt.getGeneratedKeys();
-
-                if (rs.next()) {
-                    id = rs.getInt(1);
-                    String query2 = "INSERT INTO beverages (product, name, price, description, brand, alcoholVolume) VALUES (?, ?, ?, ?, ?, ?)";
-                    PreparedStatement pstmt2 = conn.getConnection().prepareStatement(query2);
-                    pstmt2.setInt(1, id);
-                    pstmt2.setString(2, product.getName());
-                    pstmt2.setDouble(3, product.getPrice());
-                    pstmt2.setString(4, product.getDescription());
-                    pstmt2.setString(5, ((Beverage) product).getBrand());
-                    pstmt2.setDouble(6, ((Beverage) product).getAlcoholVolume());
-                    pstmt2.executeUpdate();
-
-                    pstmt2.close();
-                }
-
                 pstmt.close();
-                rs.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(ProductDAO.class.getName()).log(Level.SEVERE, null, ex);
             }
-        } catch (SQLException e) {
-            e.printStackTrace();
         }
-
-        conn.disconnect();
-
-        return id;
-    }
-
-    public int saveByCategory(Product product, Category category) {
-        conn.connect();
-
-        int id = 0;
-
-        String query = "INSERT INTO products (type, category, bar) VALUES (?, ?, ?)";
-        try {
-            PreparedStatement pstmt = conn.getConnection().prepareStatement(query, PreparedStatement.RETURN_GENERATED_KEYS);
-            if (product instanceof Food) {
-                pstmt.setString(1, "food");
-                pstmt.setInt(2, (int) category.getId());
-                pstmt.setInt(3, (int) GUITest.bar.getId());
+        else if (product instanceof Beverage) {
+            String query = "INSERT INTO products (category, name, price, description, brand, alcoholVolume, type, bar) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+            try {
+                PreparedStatement pstmt = conn.getConnection().prepareStatement(query, PreparedStatement.RETURN_GENERATED_KEYS);
+                pstmt.setInt(1, (int) product.getCategory().getId());
+                pstmt.setString(2, product.getName());
+                pstmt.setDouble(3, product.getPrice());
+                pstmt.setString(4, product.getDescription());
+                pstmt.setString(5, ((Beverage) product).getBrand());
+                pstmt.setDouble(6, ((Beverage) product).getAlcoholVolume());
+                pstmt.setString(7, "beverage");
+                pstmt.setInt(8, (int) BarFrame.currentBar.getId());
                 pstmt.executeUpdate();
                 ResultSet rs = pstmt.getGeneratedKeys();
-
-                if (rs.next()) {
+                
+                if (rs.next())
                     id = rs.getInt(1);
-                    String query2 = "INSERT INTO foods (product, name, price, description) VALUES (?, ?, ?, ?)";
-                    PreparedStatement pstmt2 = conn.getConnection().prepareStatement(query2);
-                    pstmt2.setInt(1, id);
-                    pstmt2.setString(2, product.getName());
-                    pstmt2.setDouble(3, product.getPrice());
-                    pstmt2.setString(4, product.getDescription());
-                    pstmt2.executeUpdate();
 
-                    pstmt2.close();
-                }
-
-                pstmt.close();
                 rs.close();
-            } else if (product instanceof Beverage) {
-                pstmt.setString(1, "beverage");
-                pstmt.setInt(2, (int) category.getId());
-                pstmt.setInt(3, (int) GUITest.bar.getId());
-                pstmt.executeUpdate();
-                ResultSet rs = pstmt.getGeneratedKeys();
-
-                if (rs.next()) {
-                    id = rs.getInt(1);
-                    String query2 = "INSERT INTO beverages (product, name, price, description, brand, alcoholVolume) VALUES (?, ?, ?, ?, ?, ?)";
-                    PreparedStatement pstmt2 = conn.getConnection().prepareStatement(query2);
-                    pstmt2.setInt(1, id);
-                    pstmt2.setString(2, product.getName());
-                    pstmt2.setDouble(3, product.getPrice());
-                    pstmt2.setString(4, product.getDescription());
-                    pstmt2.setString(5, ((Beverage) product).getBrand());
-                    pstmt2.setDouble(6, ((Beverage) product).getAlcoholVolume());
-                    pstmt2.executeUpdate();
-
-                    pstmt2.close();
-                }
-
                 pstmt.close();
-                rs.close();
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }   
         }
 
         conn.disconnect();
@@ -337,48 +217,43 @@ public class ProductDAO implements DAO<Product> {
 
     @Override
     public void update(Product product) {
+        System.out.println(product);
         conn.connect();
-        String query = "UPDATE products SET type = ?, category = ? WHERE id = ?";
-        try {
-            PreparedStatement pstmt = conn.getConnection().prepareStatement(query, PreparedStatement.RETURN_GENERATED_KEYS);
-            if (product instanceof Food) {
-                pstmt.setString(1, "food");
-                pstmt.setInt(2, (int) product.getCategory().getId());
-                pstmt.setInt(3, (int) product.getId());
+        if (product instanceof Food) {
+            String query = "UPDATE products SET category = ?, name = ?, price = ?, description = ?, type = ? WHERE id = ?";
+            try {
+                PreparedStatement pstmt = conn.getConnection().prepareStatement(query);
+                pstmt.setInt(1, (int) product.getCategory().getId());
+                pstmt.setString(2, product.getName());
+                pstmt.setDouble(3, product.getPrice());
+                pstmt.setString(4, product.getDescription());
+                pstmt.setString(5, "food");
+                pstmt.setInt(6, (int) product.getId());
+                
                 pstmt.executeUpdate();
-                ResultSet rs = pstmt.getGeneratedKeys();
-
-                if (rs.next()) {
-                    String query2 = "UPDATE foods SET name = ?, price = ?, description = ? WHERE product = ?";
-                    PreparedStatement pstmt2 = conn.getConnection().prepareStatement(query2);
-                    pstmt2.setString(1, product.getName());
-                    pstmt2.setDouble(2, product.getPrice());
-                    pstmt2.setString(3, product.getDescription());
-                    pstmt2.setInt(4, (int) product.getId());
-                    pstmt2.executeUpdate();
-                }
-            } else if (product instanceof Beverage) {
-                pstmt.setString(1, "beverage");
-                pstmt.setInt(2, (int) product.getCategory().getId());
-                pstmt.setInt(3, (int) product.getId());
-                pstmt.executeUpdate();
-                ResultSet rs = pstmt.getGeneratedKeys();
-
-                if (rs.next()) {
-                    String query2 = "UPDATE beverages SET name = ?, price = ?, description = ?, brand = ?, alcoholVolume = ? WHERE product = ?";
-                    PreparedStatement pstmt2 = conn.getConnection().prepareStatement(query2);
-                    pstmt2.setString(1, product.getName());
-                    pstmt2.setDouble(2, product.getPrice());
-                    pstmt2.setString(3, product.getDescription());
-                    pstmt2.setString(4, ((Beverage) product).getBrand());
-                    pstmt2.setDouble(5, ((Beverage) product).getAlcoholVolume());
-                    pstmt2.setInt(6, (int) product.getId());
-                    pstmt2.executeUpdate();
-                }
+                pstmt.close();
+            }  catch (SQLException e) {
+               e.printStackTrace();
             }
-            pstmt.close();
-        } catch (SQLException e) {
-            e.printStackTrace();
+        } else if (product instanceof Beverage) {
+            String query = "UPDATE products SET category = ?, name = ?, price = ?, description = ?, brand = ?, alcoholVolume = ?, type = ? WHERE id = ?";
+            try {
+                PreparedStatement pstmt = conn.getConnection().prepareStatement(query);
+                pstmt.setInt(1, (int) product.getCategory().getId());
+                pstmt.setString(2, product.getName());
+                pstmt.setDouble(3, product.getPrice());
+                pstmt.setString(4, product.getDescription());
+                pstmt.setString(5, ((Beverage) product).getBrand());
+                pstmt.setDouble(6, ((Beverage) product).getAlcoholVolume());                    
+                pstmt.setString(7, "beverage");
+                pstmt.setInt(8, (int) product.getId());
+                
+                pstmt.executeUpdate();
+                
+                pstmt.close();
+            }  catch (SQLException e) {
+               e.printStackTrace();
+            }
         }
 
         conn.disconnect();
@@ -388,19 +263,11 @@ public class ProductDAO implements DAO<Product> {
     public void delete(Product product) {
         conn.connect();
         try {
-            if (product instanceof Food) {
-                String query2 = "DELETE FROM foods WHERE product = ?";
-                PreparedStatement pstmt2 = conn.getConnection().prepareStatement(query2);
-                pstmt2.setInt(1, (int) product.getId());
-                pstmt2.executeQuery();
-                pstmt2.close();
-            } else if (product instanceof Beverage) {
-                String query2 = "DELETE FROM beverages WHERE product = ?";
-                PreparedStatement pstmt2 = conn.getConnection().prepareStatement(query2);
-                pstmt2.setInt(1, (int) product.getId());
-                pstmt2.executeQuery();
-                pstmt2.close();
-            }
+            String query = "DELETE FROM products WHERE id = ?";
+            PreparedStatement pstmt = conn.getConnection().prepareStatement(query);
+            pstmt.setInt(1, (int) product.getId());
+            pstmt.executeQuery();
+            pstmt.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }

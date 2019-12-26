@@ -6,6 +6,7 @@ F:\Projects\SE360-Term-Project\src\main\java\com\eyse360\models\Table.java
 F:\Projects\SE360-Term-Project\src\main\java\com\eyse360\models\Category.java
 F:\Projects\SE360-Term-Project\src\main\java\com\eyse360\models\Check.java
 F:\Projects\SE360-Term-Project\src\main\java\com\eyse360\gui\LoginFrame.java
+F:\Projects\SE360-Term-Project\src\main\java\com\eyse360\gui\CheckLogTableModel.java
 F:\Projects\SE360-Term-Project\src\main\java\com\eyse360\models\Beverage.java
 F:\Projects\SE360-Term-Project\src\main\java\com\eyse360\models\Waiter.java
 F:\Projects\SE360-Term-Project\src\main\java\com\eyse360\models\BarUser.java
@@ -14,6 +15,7 @@ F:\Projects\SE360-Term-Project\src\main\java\com\eyse360\gui\TableCreateFrame.ja
 F:\Projects\SE360-Term-Project\src\main\java\com\eyse360\gui\SelectProductFrame.java
 F:\Projects\SE360-Term-Project\src\main\java\com\eyse360\DBConnection.java
 F:\Projects\SE360-Term-Project\src\main\java\com\eyse360\GUITest.java
+F:\Projects\SE360-Term-Project\src\main\java\com\eyse360\gui\TableContentFrameBackup.java
 F:\Projects\SE360-Term-Project\src\main\java\com\eyse360\models\Bar.java
 F:\Projects\SE360-Term-Project\src\main\java\com\eyse360\models\Food.java
 F:\Projects\SE360-Term-Project\src\main\java\com\eyse360\gui\TableContentFrame.java

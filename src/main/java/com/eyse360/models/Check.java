@@ -5,8 +5,9 @@ import java.util.Map;
 
 public class Check {
     private long id;
-    private Map<Product, Integer> products;
+    private HashMap<Product, Integer> products;
     private int time;
+    private int close_time;
     private Waiter waiter;
     private boolean isOpen;
 
@@ -22,11 +23,11 @@ public class Check {
         this.id = id;
     }
 
-    public Map<Product, Integer> getProducts() {
+    public HashMap<Product, Integer> getProducts() {
         return products;
     }
 
-    public void setProducts(Map<Product, Integer> products) {
+    public void setProducts(HashMap<Product, Integer> products) {
         this.products = products;
     }
 
@@ -37,6 +38,16 @@ public class Check {
     public void setTime(int time) {
         this.time = time;
     }
+
+    public int getClose_time() {
+        return close_time;
+    }
+
+    public void setClose_time(int close_time) {
+        this.close_time = close_time;
+    }
+    
+    
 
     public void addProduct(Product product, int quantity) {
         products.merge(product, quantity, Integer::sum);

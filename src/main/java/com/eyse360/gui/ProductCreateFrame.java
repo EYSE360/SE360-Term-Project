@@ -88,10 +88,6 @@ public class ProductCreateFrame extends javax.swing.JFrame {
             }
         });
 
-        AlcoholVolumeTextField.setEditable(false);
-
-        BrandTextField.setEditable(false);
-
         DescriptionTextArea.setColumns(20);
         DescriptionTextArea.setRows(5);
         jScrollPane1.setViewportView(DescriptionTextArea);
@@ -100,6 +96,12 @@ public class ProductCreateFrame extends javax.swing.JFrame {
         CancelButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 CancelButtonMouseClicked(evt);
+            }
+        });
+
+        CategoryComboBox.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                CategoryComboBoxItemStateChanged(evt);
             }
         });
 
@@ -172,6 +174,11 @@ public class ProductCreateFrame extends javax.swing.JFrame {
                 .addContainerGap(40, Short.MAX_VALUE))
         );
 
+        AlcoholVolumeLabel.setVisible(false);
+        BrandLabel.setVisible(false);
+        AlcoholVolumeTextField.setVisible(false);
+        BrandTextField.setVisible(false);
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
@@ -186,6 +193,7 @@ public class ProductCreateFrame extends javax.swing.JFrame {
             product.setName(NameTextField.getText());
             product.setDescription(DescriptionTextArea.getText());
             product.setCategory(cat);
+            product.setPrice(Double.valueOf(PriceTextField.getText()));
             product.setId(productDao.save(product));
             BarFrame.productModel.addElement(product);
         } else if (cat.getType().equals("beverage")) {
@@ -193,6 +201,7 @@ public class ProductCreateFrame extends javax.swing.JFrame {
             product.setName(NameTextField.getText());
             product.setDescription(DescriptionTextArea.getText());
             product.setCategory(cat);
+            product.setPrice(Double.valueOf(PriceTextField.getText()));
             product.setBrand(BrandTextField.getText());
             product.setAlcoholVolume(Double.valueOf(AlcoholVolumeTextField.getText()));
             product.setId(productDao.save(product));
@@ -201,6 +210,22 @@ public class ProductCreateFrame extends javax.swing.JFrame {
         }
         dispose();
     }//GEN-LAST:event_CreateButtonMouseClicked
+
+    private void CategoryComboBoxItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_CategoryComboBoxItemStateChanged
+        Category category = (Category) CategoryComboBox.getSelectedItem();
+        if(category.getType().equals("beverage")){
+            AlcoholVolumeLabel.setVisible(true);
+            AlcoholVolumeTextField.setVisible(true);
+            BrandLabel.setVisible(true);
+            BrandTextField.setVisible(true);
+        }
+        else{
+            AlcoholVolumeLabel.setVisible(false);
+            AlcoholVolumeTextField.setVisible(false);
+            BrandLabel.setVisible(false);
+            BrandTextField.setVisible(false);
+        }
+    }//GEN-LAST:event_CategoryComboBoxItemStateChanged
 
     /**
      * @param args the command line arguments

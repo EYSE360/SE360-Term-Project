@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
-<Form version="1.3" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
+<Form version="1.5" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="2"/>
     <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
@@ -136,11 +136,17 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Alcohol Volume:"/>
       </Properties>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="AlcoholVolumeLabel.setVisible(false);"/>
+      </AuxValues>
     </Component>
     <Component class="javax.swing.JLabel" name="BrandLabel">
       <Properties>
         <Property name="text" type="java.lang.String" value="Brand:"/>
       </Properties>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="BrandLabel.setVisible(false);"/>
+      </AuxValues>
     </Component>
     <Component class="javax.swing.JButton" name="CreateButton">
       <Properties>
@@ -155,14 +161,14 @@
     <Component class="javax.swing.JTextField" name="PriceTextField">
     </Component>
     <Component class="javax.swing.JTextField" name="AlcoholVolumeTextField">
-      <Properties>
-        <Property name="editable" type="boolean" value="false"/>
-      </Properties>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="AlcoholVolumeTextField.setVisible(false);"/>
+      </AuxValues>
     </Component>
     <Component class="javax.swing.JTextField" name="BrandTextField">
-      <Properties>
-        <Property name="editable" type="boolean" value="false"/>
-      </Properties>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="BrandTextField.setVisible(false);"/>
+      </AuxValues>
     </Component>
     <Container class="javax.swing.JScrollPane" name="jScrollPane1">
       <AuxValues>
@@ -193,6 +199,9 @@
           <StringArray count="0"/>
         </Property>
       </Properties>
+      <Events>
+        <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="CategoryComboBoxItemStateChanged"/>
+      </Events>
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;Category&gt;"/>
       </AuxValues>

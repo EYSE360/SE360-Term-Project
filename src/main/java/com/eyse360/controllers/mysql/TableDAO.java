@@ -2,17 +2,20 @@ package com.eyse360.controllers.mysql;
 
 import com.eyse360.DAO;
 import com.eyse360.DBConnection;
-import com.eyse360.GUITest;
+import com.eyse360.gui.BarFrame;
 import com.eyse360.models.Bar;
 import com.eyse360.models.Check;
+import com.eyse360.models.Product;
 import com.eyse360.models.Table;
+import com.eyse360.models.Waiter;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
-import java.util.Optional;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -152,7 +155,7 @@ public class TableDAO implements DAO<Table> {
             pstmt.setString(1, table.getShortCode());
             pstmt.setString(2, table.getName());
             pstmt.setInt(3, table.getCustomerCount());
-            pstmt.setInt(4, (int) GUITest.bar.getId());
+            pstmt.setInt(4, (int) BarFrame.currentBar.getId());
             pstmt.executeUpdate();
             ResultSet rs = pstmt.getGeneratedKeys();
 
@@ -171,11 +174,101 @@ public class TableDAO implements DAO<Table> {
 
     @Override
     public void update(Table table) {
-
+        conn.connect();
+        String query = "UPDATE tables SET shortcode = ?, name = ?, customerCount = ? WHERE id = ?";
+        
+        try {
+            PreparedStatement pstmt = conn.getConnection().prepareStatement(query);
+            pstmt.setString(1, table.getShortCode());
+            pstmt.setString(2, table.getName());
+            pstmt.setInt(3, table.getCustomerCount());
+            pstmt.setInt(4, (int) table.getId());
+            pstmt.executeUpdate();
+            
+            pstmt.close();
+        } catch(SQLException e) {
+            e.printStackTrace();
+        }
+        
+        conn.disconnect();
     }
 
     @Override
     public void delete(Table table) {
+        conn.connect();
+        String query = "DELETE FROM tables WHERE id = ?";
+        
+        try {
+            PreparedStatement pstmt = conn.getConnection().prepareStatement(query);
+            pstmt.setInt(1, (int) table.getId());
+            pstmt.executeUpdate();
+            
+            pstmt.close();
+        } catch(SQLException e) {
+            e.printStackTrace();
+        }
+        
+        conn.disconnect();
+    }
+    
+    public Check getOpenCheckDetailByTable(Table table) {
+        conn.connect();
+        BarUserDAO barUserDao = new BarUserDAO();
+        
+        Check check = null;
+        
+        String query = "SELECT * FROM checks WHERE id_table = ? AND is_open = 1";
+        try {
+            PreparedStatement pstmt = conn.getConnection().prepareStatement(query);
+            pstmt.setInt(1, (int) table.getId());
+            ResultSet rs = pstmt.executeQuery();
+            if (rs.next()) {
+                check = new Check();
+                check.setId(rs.getInt("id_check"));
+                check.setIsOpen(rs.getInt("is_open") == 1? true : false);
+                check.setTime(rs.getInt("time"));
+                check.setClose_time(rs.getInt("close_time"));
+                check.setWaiter((Waiter) barUserDao.getById(rs.getInt("id_waiter")));
+            }
+            rs.close();
+            pstmt.close();
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(TableDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        conn.disconnect();
+        return check;
+    }
+    
+    public HashMap<Product, Integer> getTableProducts(Check check) {
+        conn.connect();
+        ProductDAO productDao = new ProductDAO();
+        
+        HashMap<Product, Integer> products = null;
+        
+        String query = "SELECT cc.id_product, cc.quantity"
+                + "     FROM check_contents AS cc"
+                + "         LEFT JOIN products AS p ON p.id = cc.id_product"
+                + "     WHERE cc.id_check = ?";
+        PreparedStatement pstmt;
+        try {
+            pstmt = conn.getConnection().prepareStatement(query);
+            pstmt.setInt(1, (int) check.getId());
+            ResultSet rs = pstmt.executeQuery();
+            if (rs.next())
+                products = new HashMap<Product, Integer>();
 
+            rs.beforeFirst();
+
+            while (rs.next()) {
+                products.put(productDao.getById(rs.getInt("id_product")), rs.getInt("quantity"));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(TableDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+       
+        return products;
     }
 }
