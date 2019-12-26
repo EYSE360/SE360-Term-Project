@@ -120,7 +120,10 @@ public class SelectProductFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void SelectButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SelectButtonMouseClicked
-        // TODO add your handling code here:
+        Product product = ProductList.getSelectedValue();
+        TableContentFrame.currentCheck.addProduct(product, 1);
+        TableContentFrame.tableModel.fireTableDataChanged();
+        dispose();
     }//GEN-LAST:event_SelectButtonMouseClicked
 
     private void CategoryComboBox›temStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_CategoryComboBox›temStateChanged

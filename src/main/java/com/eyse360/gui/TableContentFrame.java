@@ -12,6 +12,7 @@ import com.eyse360.controllers.mysql.ProductDAO;
 import com.eyse360.controllers.mysql.TableDAO;
 import com.eyse360.models.Bar;
 import com.eyse360.models.Check;
+import com.eyse360.models.Product;
 import com.eyse360.models.Table;
 import java.sql.SQLException;
 
@@ -30,9 +31,9 @@ public class TableContentFrame extends javax.swing.JFrame {
     private static BarUserDAO barUserDAO;
     private static TableDAO tableDAO;
     private static Bar currentBar;
-    private static Check currentCheck;
+    public static Check currentCheck;
     private static Table currentTable;
-    private CheckLogTableModel tableModel;
+    public static CheckLogTableModel tableModel;
     
     public TableContentFrame() {
         initComponents();
@@ -52,8 +53,8 @@ public class TableContentFrame extends javax.swing.JFrame {
         
         AddProductButton.setEnabled(false);
         CustomerCountTextField.setEnabled(false);
-        DecrementCustomerCountButton.setEnabled(false);
-        IncrementCustomerCountButton.setEnabled(false);
+        DecrementQuantity.setEnabled(false);
+        IncrementQuantity.setEnabled(false);
         RemoveFromTableButton.setEnabled(false);
         TotalTextField.setEnabled(false);
         TotalTimeTextField.setEnabled(false);
@@ -68,8 +69,8 @@ public class TableContentFrame extends javax.swing.JFrame {
                 CustomerCountTextField.setEnabled(true);
                 CustomerCountTextField.setText(String.valueOf(table.getCustomerCount()));
 
-                DecrementCustomerCountButton.setEnabled(true);
-                IncrementCustomerCountButton.setEnabled(true);
+                DecrementQuantity.setEnabled(true);
+                IncrementQuantity.setEnabled(true);
 
                 RemoveFromTableButton.setEnabled(true);
                 TotalTextField.setEnabled(true);
@@ -86,6 +87,8 @@ public class TableContentFrame extends javax.swing.JFrame {
                 tableModel = new CheckLogTableModel(currentCheck.getProducts());
                 
                 CheckLogTable.setModel(tableModel);
+                
+                
             }
         }
     }
@@ -106,8 +109,8 @@ public class TableContentFrame extends javax.swing.JFrame {
         WaiterNameLabel = new javax.swing.JLabel();
         CustomerCountTextField = new javax.swing.JTextField();
         TotalTimeTextField = new javax.swing.JTextField();
-        IncrementCustomerCountButton = new javax.swing.JButton();
-        DecrementCustomerCountButton = new javax.swing.JButton();
+        IncrementQuantity = new javax.swing.JButton();
+        DecrementQuantity = new javax.swing.JButton();
         TableInfoLabel = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         CheckLogTable = new javax.swing.JTable();
@@ -166,29 +169,29 @@ public class TableContentFrame extends javax.swing.JFrame {
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         getContentPane().add(TotalTimeTextField, gridBagConstraints);
 
-        IncrementCustomerCountButton.setText("+");
-        IncrementCustomerCountButton.addMouseListener(new java.awt.event.MouseAdapter() {
+        IncrementQuantity.setText("+");
+        IncrementQuantity.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                IncrementCustomerCountButtonMouseClicked(evt);
+                IncrementQuantityMouseClicked(evt);
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 4;
         gridBagConstraints.gridy = 6;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        getContentPane().add(IncrementCustomerCountButton, gridBagConstraints);
+        getContentPane().add(IncrementQuantity, gridBagConstraints);
 
-        DecrementCustomerCountButton.setText("-");
-        DecrementCustomerCountButton.addMouseListener(new java.awt.event.MouseAdapter() {
+        DecrementQuantity.setText("-");
+        DecrementQuantity.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                DecrementCustomerCountButtonMouseClicked(evt);
+                DecrementQuantityMouseClicked(evt);
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 4;
         gridBagConstraints.gridy = 5;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        getContentPane().add(DecrementCustomerCountButton, gridBagConstraints);
+        getContentPane().add(DecrementQuantity, gridBagConstraints);
 
         TableInfoLabel.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         TableInfoLabel.setText("TABLE INFO");
@@ -281,18 +284,14 @@ public class TableContentFrame extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void IncrementCustomerCountButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_IncrementCustomerCountButtonMouseClicked
-        String s = CustomerCountTextField.getText();
-        int var = Integer.parseInt(s);
-        CustomerCountTextField.setText(Integer.toString(var++));
-    }//GEN-LAST:event_IncrementCustomerCountButtonMouseClicked
+    private void IncrementQuantityMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_IncrementQuantityMouseClicked
+      tableModel.incrementQ((Product) tableModel.getValueAt(CheckLogTable.getSelectedRow(),0));
 
-    private void DecrementCustomerCountButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DecrementCustomerCountButtonMouseClicked
-        String s = CustomerCountTextField.getText();
-        int var = Integer.parseInt(s);
-        if(var!=0)
-        CustomerCountTextField.setText(Integer.toString(var--));
-    }//GEN-LAST:event_DecrementCustomerCountButtonMouseClicked
+    }//GEN-LAST:event_IncrementQuantityMouseClicked
+
+    private void DecrementQuantityMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DecrementQuantityMouseClicked
+        
+    }//GEN-LAST:event_DecrementQuantityMouseClicked
 
     private void AddProductButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_AddProductButtonMouseClicked
         SelectProductFrame spf = new SelectProductFrame(currentTable, currentBar, currentCheck);
@@ -348,8 +347,8 @@ public class TableContentFrame extends javax.swing.JFrame {
     private javax.swing.JTable CheckLogTable;
     private javax.swing.JLabel CustomerCountLabel;
     private javax.swing.JTextField CustomerCountTextField;
-    private javax.swing.JButton DecrementCustomerCountButton;
-    private javax.swing.JButton IncrementCustomerCountButton;
+    private javax.swing.JButton DecrementQuantity;
+    private javax.swing.JButton IncrementQuantity;
     private javax.swing.JButton OpenCloseCheckButton;
     private javax.swing.JLabel QuantityLabel;
     private javax.swing.JButton RemoveFromTableButton;

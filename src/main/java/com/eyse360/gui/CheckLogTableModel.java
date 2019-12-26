@@ -9,6 +9,7 @@ import com.eyse360.models.Category;
 import com.eyse360.models.Product;
 import java.util.Map;
 import java.util.HashMap;
+import java.util.Vector;
 import javax.swing.table.AbstractTableModel;
 
 /**
@@ -56,7 +57,17 @@ public class CheckLogTableModel extends AbstractTableModel {
         }
         
         return null;
-    }   
+    }  
+    
+    public void incrementQ(Product p) {
+        products.merge(p, 1, Integer::sum);
+        fireTableDataChanged();
+    }
+    
+    public void addRow(Product product, Integer quantity) {
+        products.put(product, quantity);
+        fireTableDataChanged();
+    }
     
     public String getColumnName(int col) {
         return columnNames[col];
