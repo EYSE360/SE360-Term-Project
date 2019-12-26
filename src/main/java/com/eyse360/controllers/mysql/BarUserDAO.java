@@ -1,6 +1,7 @@
 package com.eyse360.controllers.mysql;
 
 import com.eyse360.DAO;
+import com.eyse360.DBConnection;
 import com.eyse360.GUITest;
 import com.eyse360.models.*;
 
@@ -10,18 +11,20 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class BarUserDAO implements DAO<BarUser> {
+    DBConnection conn = new DBConnection();
     @Override
     public BarUser get(BarUser barUser) {
-
-        GUITest.conn.connect();
+        conn.connect();
 
         BarUser returnUser = null;
 
         String query = "SELECT * FROM bar_users WHERE id = ? LIMIT 1";
         try {
-            PreparedStatement pstmt = GUITest.conn.getConnection().prepareStatement(query);
+            PreparedStatement pstmt = conn.getConnection().prepareStatement(query);
             pstmt.setInt(1, (int) barUser.getId());
             ResultSet rs = pstmt.executeQuery();
             if (rs.next()) {
@@ -48,25 +51,25 @@ public class BarUserDAO implements DAO<BarUser> {
             pstmt.close();
             rs.close();
 
-            GUITest.conn.disconnect();
+            conn.disconnect();
         } catch (SQLException e) {
             e.printStackTrace();
         }
 
-        GUITest.conn.disconnect();
+        conn.disconnect();
 
         return returnUser;
     }
 
     @Override
     public BarUser getById(int id) {
-        GUITest.conn.connect();
+        conn.connect();
 
         BarUser barUser = null;
 
         String query = "SELECT * FROM bar_users WHERE id = ? LIMIT 1";
         try {
-            PreparedStatement pstmt = GUITest.conn.getConnection().prepareStatement(query);
+            PreparedStatement pstmt = conn.getConnection().prepareStatement(query);
             pstmt.setInt(1, id);
             ResultSet rs = pstmt.executeQuery();
             if (rs.next()) {
@@ -93,14 +96,47 @@ public class BarUserDAO implements DAO<BarUser> {
             pstmt.close();
             rs.close();
 
-            GUITest.conn.disconnect();
+            conn.disconnect();
         } catch (SQLException e) {
             e.printStackTrace();
         }
 
-        GUITest.conn.disconnect();
+        conn.disconnect();
 
         return barUser;
+    }
+    
+    public List<Waiter> getAllWaitersByBar(Bar bar) {
+        conn.connect();
+        List<Waiter> waiters = null;
+        String query = "SELECT * FROM bar_users WHERE userRole = 'waiter' ";
+        try {
+            PreparedStatement pstmt = conn.getConnection().prepareStatement(query);
+            ResultSet rs = pstmt.executeQuery();
+            if(rs.next()){
+                waiters = new ArrayList<>();
+            }
+            rs.beforeFirst();
+            while(rs.next()){
+                Waiter waiter = new Waiter();
+                waiter.setId(rs.getLong("id"));
+                waiter.setUserName(rs.getString("username"));
+                waiter.setPassword(rs.getString("password"));
+                waiter.setSSN(rs.getString("SSN"));
+                waiter.setFullName(rs.getString("fullName"));
+                waiter.setPhoneNumber(rs.getString("phoneNumber"));
+                waiter.setRole(rs.getString("userRole"));
+                
+                waiters.add(waiter);
+            }
+            rs.close();
+            pstmt.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(BarUserDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        conn.disconnect();
+        
+        return waiters;
     }
 
     @Override
@@ -109,13 +145,13 @@ public class BarUserDAO implements DAO<BarUser> {
     }
 
     public List<BarUser> getAllByBar(Bar b) {
-        GUITest.conn.connect();
+        conn.connect();
 
         List<BarUser> barUserList = null;
 
         String query = "SELECT * FROM bar_users WHERE bar = ?";
         try {
-            PreparedStatement pstmt = GUITest.conn.getConnection().prepareStatement(query);
+            PreparedStatement pstmt = conn.getConnection().prepareStatement(query);
             pstmt.setInt(1, (int) b.getId());
             ResultSet rs = pstmt.executeQuery();
             if (rs.next()) {
@@ -151,20 +187,20 @@ public class BarUserDAO implements DAO<BarUser> {
             e.printStackTrace();
         }
 
-        GUITest.conn.disconnect();
+        conn.disconnect();
 
         return barUserList;
     }
 
     @Override
     public int save(BarUser barUser) {
-        GUITest.conn.connect();
+        conn.connect();
         String query = "INSERT INTO bar_users (username, password, SSN, fullName, phoneNumber, userRole, bar) VALUES (?, ?, ?, ?, ?, ?, ?)";
 
         int id = 0;
 
         try {
-            PreparedStatement pstmt = GUITest.conn.getConnection().prepareStatement(query, PreparedStatement.RETURN_GENERATED_KEYS);
+            PreparedStatement pstmt = conn.getConnection().prepareStatement(query, PreparedStatement.RETURN_GENERATED_KEYS);
             pstmt.setString(1, barUser.getUserName());
             pstmt.setString(2, barUser.getPassword());
             pstmt.setString(3, barUser.getSSN());
@@ -183,17 +219,17 @@ public class BarUserDAO implements DAO<BarUser> {
             e.printStackTrace();
         }
 
-        GUITest.conn.disconnect();
+        conn.disconnect();
         return id;
     }
 
     @Override
     public void update(BarUser barUser) {
-        GUITest.conn.connect();
+        conn.connect();
 
         String query = "UPDATE bar_users SET username = ?, password = ?, SSN = ?, fullName = ?, phoneNumber = ?, userRole = ? WHERE id = ? AND bar = ?";
         try {
-            PreparedStatement pstmt = GUITest.conn.getConnection().prepareStatement(query);
+            PreparedStatement pstmt = conn.getConnection().prepareStatement(query);
             pstmt.setString(1, barUser.getUserName());
             pstmt.setString(2, barUser.getPassword());
             pstmt.setString(3, barUser.getSSN());
@@ -208,7 +244,7 @@ public class BarUserDAO implements DAO<BarUser> {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        GUITest.conn.disconnect();
+        conn.disconnect();
 
     }
 

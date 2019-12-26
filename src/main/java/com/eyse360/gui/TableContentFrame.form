@@ -49,7 +49,6 @@
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
                           <Component id="TotalTimeTextField" max="32767" attributes="0"/>
                           <Component id="CustomerCountTextField" pref="100" max="32767" attributes="0"/>
-                          <Component id="TableNameTextField" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="IncrementCustomerCountButton" min="-2" max="-2" attributes="0"/>
@@ -92,14 +91,10 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="7" max="-2" attributes="0"/>
               <Component id="TableInfoLabel" min="-2" max="-2" attributes="0"/>
-              <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="TableNameLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="TableNameTextField" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace min="-2" pref="42" max="-2" attributes="0"/>
+                      <Component id="TableNameLabel" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="45" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="CustomerCountLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="CustomerCountTextField" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -140,7 +135,7 @@
                       <Component id="RemoveFromTableButton" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace pref="24" max="32767" attributes="0"/>
+              <EmptySpace pref="35" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -165,8 +160,6 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Waiter Name"/>
       </Properties>
-    </Component>
-    <Component class="javax.swing.JTextField" name="TableNameTextField">
     </Component>
     <Component class="javax.swing.JTextField" name="CustomerCountTextField">
       <Properties>

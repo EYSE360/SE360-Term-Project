@@ -8,6 +8,7 @@ public class Check {
     private Map<Product, Integer> products;
     private int time;
     private Waiter waiter;
+    private boolean isOpen;
 
     public Check() {
         products = new HashMap<>();
@@ -52,6 +53,16 @@ public class Check {
     public void setWaiter(Waiter waiter) {
         this.waiter = waiter;
     }
+
+    public boolean isIsOpen() {
+        return isOpen;
+    }
+
+    public void setIsOpen(boolean isOpen) {
+        this.isOpen = isOpen;
+    }
+    
+    
 
     @Override
     public String toString() {

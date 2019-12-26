@@ -3,19 +3,48 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ey.se360_termproject_bcrs;
+package com.eyse360.gui;
+
+import com.eyse360.controllers.mysql.BarDAO;
+import com.eyse360.controllers.mysql.BarUserDAO;
+import com.eyse360.controllers.mysql.CategoryDAO;
+import com.eyse360.controllers.mysql.ProductDAO;
+import com.eyse360.controllers.mysql.TableDAO;
+import com.eyse360.models.Bar;
+import com.eyse360.models.Table;
 
 /**
  *
  * @author Erel
  */
-public class TableContent extends javax.swing.JFrame {
+public class TableContentFrame extends javax.swing.JFrame {
 
     /**
      * Creates new form TableContent
      */
-    public TableContent() {
+    private static BarDAO barDao;
+    private static CategoryDAO catDao;
+    private static ProductDAO productDAO;
+    private static BarUserDAO barUserDAO;
+    private static TableDAO tableDAO;
+    private static Bar currentBar;
+    
+    public TableContentFrame() {
         initComponents();
+    }
+
+    public TableContentFrame(Table table) {
+        barDao = new BarDAO();
+        catDao = new CategoryDAO();
+        productDAO = new ProductDAO();
+        barUserDAO = new BarUserDAO();
+        tableDAO = new TableDAO();
+        currentBar = barDao.getById(1);
+        
+        initComponents();
+        
+        TableNameLabel.setText(table.getName());
+        
     }
 
     /**
@@ -31,7 +60,6 @@ public class TableContent extends javax.swing.JFrame {
         CustomerCountLabel = new javax.swing.JLabel();
         TotalTimeLabel = new javax.swing.JLabel();
         WaiterNameLabel = new javax.swing.JLabel();
-        TableNameTextField = new javax.swing.JTextField();
         CustomerCountTextField = new javax.swing.JTextField();
         TotalTimeTextField = new javax.swing.JTextField();
         IncrementCustomerCountButton = new javax.swing.JButton();
@@ -143,8 +171,7 @@ public class TableContent extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(TotalTimeTextField)
-                            .addComponent(CustomerCountTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
-                            .addComponent(TableNameTextField))
+                            .addComponent(CustomerCountTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(IncrementCustomerCountButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -175,13 +202,10 @@ public class TableContent extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(7, 7, 7)
                 .addComponent(TableInfoLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(TableNameLabel)
-                            .addComponent(TableNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(42, 42, 42)
+                        .addComponent(TableNameLabel)
+                        .addGap(45, 45, 45)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(CustomerCountLabel)
                             .addComponent(CustomerCountTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -213,7 +237,7 @@ public class TableContent extends javax.swing.JFrame {
                         .addComponent(DecrementQuantityButton)
                         .addGap(40, 40, 40)
                         .addComponent(RemoveFromTableButton)))
-                .addContainerGap(24, Short.MAX_VALUE))
+                .addContainerGap(35, Short.MAX_VALUE))
         );
 
         pack();
@@ -266,20 +290,20 @@ public class TableContent extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(TableContent.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TableContentFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(TableContent.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TableContentFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(TableContent.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TableContentFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(TableContent.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TableContentFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new TableContent().setVisible(true);
+                new TableContentFrame().setVisible(true);
             }
         });
     }
@@ -297,7 +321,6 @@ public class TableContent extends javax.swing.JFrame {
     private javax.swing.JButton RemoveFromTableButton;
     private javax.swing.JLabel TableInfoLabel;
     private javax.swing.JLabel TableNameLabel;
-    private javax.swing.JTextField TableNameTextField;
     private javax.swing.JLabel TotalLabel;
     private javax.swing.JTextField TotalTextField;
     private javax.swing.JLabel TotalTimeLabel;

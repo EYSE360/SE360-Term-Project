@@ -3,22 +3,87 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ey.se360_termproject_bcrs;
+package com.eyse360.gui;
 
 import com.bulenkov.darcula.DarculaLaf;
-import javax.swing.UnsupportedLookAndFeelException;
+import com.eyse360.controllers.mysql.*;
+import com.eyse360.models.Bar;
+import com.eyse360.models.Beverage;
+import com.eyse360.models.Category;
+import com.eyse360.models.Product;
+import com.eyse360.models.Table;
+import com.eyse360.models.Waiter;
+
+import javax.swing.*;
+import java.util.List;
 
 /**
  *
  * @author Erel
  */
-public class Bar extends javax.swing.JFrame {
+public class BarFrame extends javax.swing.JFrame {
 
     /**
      * Creates new form Bar
      */
-    public Bar() {
+    public static BarDAO barDao;
+    public static CategoryDAO categoryDao;
+    public static ProductDAO productDao;
+    public static BarUserDAO barUserDao;
+    public static TableDAO tableDao;
+    
+    public static Bar currentBar;
+    public static Category[] categoryArray;
+    
+    public static DefaultListModel<Category> categoryModel;
+    public static DefaultListModel<Product> productModel;
+    public static DefaultListModel<Table> tableModel;
+    public static DefaultListModel<Waiter> waiterModel;
+    
+    public static DefaultComboBoxModel<Category> categoryComboBoxModel;
+    
+    public BarFrame() {
+        barDao = new BarDAO();
+        categoryDao = new CategoryDAO();
+        productDao = new ProductDAO();
+        barUserDao = new BarUserDAO();
+        tableDao = new TableDAO();
+        currentBar = barDao.getById(1);
+        
         initComponents();
+        
+        categoryModel = new DefaultListModel<>();
+        CategoryList.setModel(categoryModel);
+        
+        productModel = new DefaultListModel<>();
+        ProductList.setModel(productModel);
+        
+        tableModel = new DefaultListModel<>();
+        TableList.setModel(tableModel);
+        
+        waiterModel = new DefaultListModel<>();
+        WaiterList.setModel(waiterModel);
+        
+        categoryComboBoxModel = new DefaultComboBoxModel<>();
+        ProductCategoryComboBox.setModel(categoryComboBoxModel);
+        
+        List<Table> tableList = tableDao.getAllByBar(currentBar);
+        for (Table table: tableList) {
+            JButton tableButton = new JButton(table.getName());
+            tableButton.addMouseListener(new java.awt.event.MouseAdapter() {
+                public void mouseClicked(java.awt.event.MouseEvent evt) {
+                    TableButtonMouseClicked(evt, table);
+                }
+            });
+            MainTableTab.add(tableButton);
+        }
+        
+        
+    }
+    
+    private void TableButtonMouseClicked(java.awt.event.MouseEvent evt, Table table) {
+        TableContentFrame tc = new TableContentFrame(table);
+        tc.setVisible(true);
     }
 
     /**
@@ -32,7 +97,6 @@ public class Bar extends javax.swing.JFrame {
 
         BarMainTabbedPane = new javax.swing.JTabbedPane();
         MainTableTab = new javax.swing.JPanel();
-        Table1Button = new javax.swing.JButton();
         ManagementTab = new javax.swing.JPanel();
         ManagementTabbedPane = new javax.swing.JTabbedPane();
         CategoryTab = new javax.swing.JPanel();
@@ -57,7 +121,7 @@ public class Bar extends javax.swing.JFrame {
         ProductNameLabel = new javax.swing.JLabel();
         ProductDescriptionLabel = new javax.swing.JLabel();
         ProductIDTextField = new javax.swing.JTextField();
-        ProductNameTextFİeld = new javax.swing.JTextField();
+        ProductNameTextField = new javax.swing.JTextField();
         jScrollPane4 = new javax.swing.JScrollPane();
         ProductDescriptionTextArea = new javax.swing.JTextArea();
         ProductPriceLabel = new javax.swing.JLabel();
@@ -103,22 +167,29 @@ public class Bar extends javax.swing.JFrame {
         setResizable(false);
 
         BarMainTabbedPane.setTabPlacement(javax.swing.JTabbedPane.LEFT);
-
-        MainTableTab.setLayout(new java.awt.GridLayout(3, 0));
-
-        Table1Button.setText("jButton1");
-        Table1Button.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                Table1ButtonMouseClicked(evt);
+        BarMainTabbedPane.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                BarMainTabbedPaneStateChanged(evt);
             }
         });
-        MainTableTab.add(Table1Button);
 
+        MainTableTab.setLayout(new java.awt.GridLayout(3, 0));
         BarMainTabbedPane.addTab("Table", MainTableTab);
 
         ManagementTabbedPane.setMinimumSize(new java.awt.Dimension(700, 700));
         ManagementTabbedPane.setPreferredSize(new java.awt.Dimension(700, 700));
+        ManagementTabbedPane.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                ManagementTabbedPaneStateChanged(evt);
+            }
+        });
 
+        CategoryList.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        CategoryList.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                CategoryListMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(CategoryList);
 
         CategoryIDLabel.setText("ID");
@@ -158,6 +229,7 @@ public class Bar extends javax.swing.JFrame {
             }
         });
 
+        CategoryTypeComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "food", "beverage" }));
         CategoryTypeComboBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 CategoryTypeComboBoxActionPerformed(evt);
@@ -236,6 +308,12 @@ public class Bar extends javax.swing.JFrame {
 
         ManagementTabbedPane.addTab("Categories", CategoryTab);
 
+        ProductList.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        ProductList.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                ProductListMouseClicked(evt);
+            }
+        });
         jScrollPane3.setViewportView(ProductList);
 
         ProductIDLabel.setText("ID");
@@ -246,12 +324,6 @@ public class Bar extends javax.swing.JFrame {
         ProductDescriptionLabel.setText("Description");
 
         ProductIDTextField.setEnabled(false);
-
-        ProductNameTextFİeld.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ProductNameTextFİeldActionPerformed(evt);
-            }
-        });
 
         ProductDescriptionTextArea.setColumns(20);
         ProductDescriptionTextArea.setRows(5);
@@ -267,8 +339,6 @@ public class Bar extends javax.swing.JFrame {
         });
 
         ProductCategoryLabel.setText("Category");
-
-        ProductCategoryComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         ProductAddButton.setText("Add");
         ProductAddButton.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -298,31 +368,29 @@ public class Bar extends javax.swing.JFrame {
 
         ProductBrandLabel.setText("Brand");
 
+        ProductBrandTextField.setEditable(false);
+
         ProductAlcoholVolumeLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         ProductAlcoholVolumeLabel.setText("Alcohol Volume");
         ProductAlcoholVolumeLabel.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
+
+        ProductAlcoholVolumeTextField.setEditable(false);
 
         javax.swing.GroupLayout ProductTabLayout = new javax.swing.GroupLayout(ProductTab);
         ProductTab.setLayout(ProductTabLayout);
         ProductTabLayout.setHorizontalGroup(
             ProductTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(ProductTabLayout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(12, 12, 12)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(ProductTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(ProductTabLayout.createSequentialGroup()
                         .addGroup(ProductTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(ProductTabLayout.createSequentialGroup()
-                                .addComponent(ProductCategoryLabel)
-                                .addGap(31, 31, 31))
-                            .addGroup(ProductTabLayout.createSequentialGroup()
-                                .addComponent(ProductNameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(33, 33, 33))
-                            .addGroup(ProductTabLayout.createSequentialGroup()
-                                .addComponent(ProductIDLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(33, 33, 33)))
-                        .addGap(0, 0, Short.MAX_VALUE))
+                            .addComponent(ProductCategoryLabel)
+                            .addComponent(ProductNameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(ProductIDLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 33, Short.MAX_VALUE))
                     .addGroup(ProductTabLayout.createSequentialGroup()
                         .addGroup(ProductTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(ProductPriceLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -340,7 +408,7 @@ public class Bar extends javax.swing.JFrame {
                     .addGroup(ProductTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addComponent(ProductBrandTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 230, Short.MAX_VALUE)
                         .addComponent(ProductAlcoholVolumeTextField)
-                        .addComponent(ProductNameTextFİeld)
+                        .addComponent(ProductNameTextField)
                         .addComponent(ProductCategoryComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jScrollPane4)
                         .addComponent(ProductPriceTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 230, Short.MAX_VALUE)
@@ -350,21 +418,22 @@ public class Bar extends javax.swing.JFrame {
         ProductTabLayout.setVerticalGroup(
             ProductTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(ProductTabLayout.createSequentialGroup()
+                .addGap(4, 4, 4)
                 .addGroup(ProductTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane3)
                     .addGroup(ProductTabLayout.createSequentialGroup()
-                        .addGap(4, 4, 4)
                         .addGroup(ProductTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(ProductIDLabel)
                             .addComponent(ProductIDTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(ProductTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(ProductNameLabel)
-                            .addComponent(ProductNameTextFİeld, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(ProductNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(12, 12, 12)
                         .addGroup(ProductTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(ProductCategoryComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(ProductCategoryLabel))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 9, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
                         .addGroup(ProductTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(ProductTabLayout.createSequentialGroup()
@@ -386,15 +455,13 @@ public class Bar extends javax.swing.JFrame {
                         .addGroup(ProductTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(ProductAddButton)
                             .addComponent(ProductRemoveButton)
-                            .addComponent(ProductUpdateButton)))
-                    .addGroup(ProductTabLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jScrollPane3)))
+                            .addComponent(ProductUpdateButton))))
                 .addContainerGap())
         );
 
         ManagementTabbedPane.addTab("Products", ProductTab);
 
+        WaiterList.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jScrollPane7.setViewportView(WaiterList);
 
         WaiterIDLabel.setText("ID");
@@ -509,6 +576,8 @@ public class Bar extends javax.swing.JFrame {
 
         ManagementTabbedPane.addTab("Waiters", WaiterTab);
 
+        TableList.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        TableList.setToolTipText("");
         jScrollPane6.setViewportView(TableList);
 
         TableAddButton.setText("Add");
@@ -635,21 +704,12 @@ public class Bar extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void ProductNameTextFİeldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ProductNameTextFİeldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_ProductNameTextFİeldActionPerformed
-
-    private void Table1ButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Table1ButtonMouseClicked
-        TableContent tc = new TableContent();
-        tc.setVisible(true);
-    }//GEN-LAST:event_Table1ButtonMouseClicked
-
     private void ProductPriceTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ProductPriceTextFieldActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_ProductPriceTextFieldActionPerformed
 
     private void ProductAddButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ProductAddButtonMouseClicked
-        ProductCreate pc = new ProductCreate();
+        ProductCreateFrame pc = new ProductCreateFrame();
         pc.setVisible(true);
     }//GEN-LAST:event_ProductAddButtonMouseClicked
 
@@ -662,7 +722,7 @@ public class Bar extends javax.swing.JFrame {
     }//GEN-LAST:event_WaiterNameTextFieldActionPerformed
 
     private void WaiterAddButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_WaiterAddButtonMouseClicked
-        WaiterCreate wc = new WaiterCreate();
+        WaiterCreateFrame wc = new WaiterCreateFrame();
         wc.setVisible(true);
     }//GEN-LAST:event_WaiterAddButtonMouseClicked
 
@@ -675,7 +735,7 @@ public class Bar extends javax.swing.JFrame {
     }//GEN-LAST:event_WaiterPhoneNumberTextFieldActionPerformed
 
     private void CategoryCreateButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CategoryCreateButtonMouseClicked
-       CategoryCreate cc = new CategoryCreate();
+       CategoryCreateFrame cc = new CategoryCreateFrame();
        cc.setVisible(true);
     }//GEN-LAST:event_CategoryCreateButtonMouseClicked
 
@@ -684,19 +744,61 @@ public class Bar extends javax.swing.JFrame {
     }//GEN-LAST:event_ProductAddButtonActionPerformed
 
     private void CategoryRemoveButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CategoryRemoveButtonMouseClicked
-        // TODO add your handling code here:
+        Category category = CategoryList.getSelectedValue();
+        int index = CategoryList.getSelectedIndex();
+        categoryDao.delete(category);
+        categoryModel.remove(index);
+        CategoryList.setSelectedIndex(-1);
+        CategoryIDTextField.setText("");
+        CategoryNameTextField.setText("");
+        CategoryDescriptionTextArea.setText("");
+        CategoryTypeComboBox.setSelectedIndex(0);
     }//GEN-LAST:event_CategoryRemoveButtonMouseClicked
 
     private void CategoryUpdateButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CategoryUpdateButtonMouseClicked
-        // TODO add your handling code here:
+        Category category = CategoryList.getSelectedValue();
+        category.setName(CategoryNameTextField.getText());
+        category.setDescription(CategoryDescriptionTextArea.getText());
+        category.setType((String) CategoryTypeComboBox.getSelectedItem());
+        categoryDao.update(category);
+        
+        CategoryList.updateUI();
     }//GEN-LAST:event_CategoryUpdateButtonMouseClicked
 
     private void ProductRemoveButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ProductRemoveButtonMouseClicked
-        // TODO add your handling code here:
+        Product product = ProductList.getSelectedValue();
+        int index = ProductList.getSelectedIndex();
+        productDao.delete(product);
+        productModel.remove(index);
+        
+        ProductIDTextField.setText("");
+        ProductNameTextField.setText("");
+        ProductPriceTextField.setText("");
+        ProductDescriptionTextArea.setText("");
+        
+        ProductCategoryComboBox.removeAllItems();       
+        
+        ProductBrandTextField.setEditable(false);
+        ProductBrandTextField.setText("");
+        ProductAlcoholVolumeTextField.setEditable(false);
+        ProductAlcoholVolumeTextField.setText("");
     }//GEN-LAST:event_ProductRemoveButtonMouseClicked
 
     private void ProductUpdateButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ProductUpdateButtonMouseClicked
-        // TODO add your handling code here:
+        Product product = ProductList.getSelectedValue();
+        product.setName(ProductNameTextField.getText());
+        product.setDescription(ProductDescriptionTextArea.getText());
+        product.setPrice(Double.parseDouble(ProductPriceTextField.getText()));
+        product.setCategory((Category) ProductCategoryComboBox.getSelectedItem());
+        
+        if (product instanceof Beverage) {
+            ((Beverage) product).setBrand(ProductBrandTextField.getText());
+            ((Beverage) product).setAlcoholVolume(Double.parseDouble(ProductBrandTextField.getText()));
+        }
+        
+        productDao.update(product);
+        
+        ProductList.updateUI();
     }//GEN-LAST:event_ProductUpdateButtonMouseClicked
 
     private void WaiterRemoveButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_WaiterRemoveButtonMouseClicked
@@ -708,7 +810,7 @@ public class Bar extends javax.swing.JFrame {
     }//GEN-LAST:event_WaiterUpdateButtonMouseClicked
 
     private void TableAddButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TableAddButtonMouseClicked
-       TableCreate tc = new TableCreate();
+       TableCreateFrame tc = new TableCreateFrame();
        tc.setVisible(true);
     }//GEN-LAST:event_TableAddButtonMouseClicked
 
@@ -719,6 +821,72 @@ public class Bar extends javax.swing.JFrame {
     private void CategoryTypeComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CategoryTypeComboBoxActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_CategoryTypeComboBoxActionPerformed
+
+    private void BarMainTabbedPaneStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_BarMainTabbedPaneStateChanged
+        if (BarMainTabbedPane.getSelectedIndex() == 1) {
+            categoryModel.addAll(categoryDao.getAllByBar(currentBar));
+            //categoryArray = categoryDao.getAllByBarToArray(currentBar);
+            //CategoryList.setListData(categoryArray);
+        }
+    }//GEN-LAST:event_BarMainTabbedPaneStateChanged
+
+    private void CategoryListMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CategoryListMouseClicked
+        Category selected = CategoryList.getSelectedValue();
+        CategoryIDTextField.setText(String.valueOf(selected.getId()));
+        CategoryNameTextField.setText(selected.getName());
+        CategoryDescriptionTextArea.setText(selected.getDescription());
+        CategoryTypeComboBox.setSelectedItem(selected.getType());
+    }//GEN-LAST:event_CategoryListMouseClicked
+
+    private void ManagementTabbedPaneStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_ManagementTabbedPaneStateChanged
+        // TODO add your handling code here:
+        System.out.println(ManagementTabbedPane.getSelectedIndex());
+        if (BarMainTabbedPane.getSelectedIndex() == 1) {
+            int currentIndex = ManagementTabbedPane.getSelectedIndex();
+            if (currentIndex == 0) {
+                categoryModel.removeAllElements();
+                categoryModel.addAll(categoryDao.getAllByBar(currentBar));   
+            } else if (currentIndex == 1) {
+                productModel.removeAllElements();
+                productModel.addAll(productDao.getAllByBar(currentBar));   
+            } else if (currentIndex == 2) {
+                waiterModel.removeAllElements();
+                waiterModel.addAll(barUserDao.getAllWaitersByBar(currentBar));   
+            } else if (currentIndex == 3) {
+                tableModel.removeAllElements();
+                tableModel.addAll(tableDao.getAllByBar(currentBar));   
+            }
+        }
+    }//GEN-LAST:event_ManagementTabbedPaneStateChanged
+
+    private void ProductListMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ProductListMouseClicked
+        // TODO add your handling code here:
+        Product selected = ProductList.getSelectedValue();
+        ProductIDTextField.setText(String.valueOf(selected.getId()));
+        ProductNameTextField.setText(selected.getName());
+        ProductPriceTextField.setText(String.valueOf(selected.getPrice()));
+        ProductDescriptionTextArea.setText(selected.getDescription());
+        
+        List<Category> categories = categoryDao.getAllByBar(currentBar);
+        
+        ProductCategoryComboBox.removeAllItems();
+        for (Category cat : categories) {
+            ProductCategoryComboBox.addItem(cat);
+        }
+        
+        ProductCategoryComboBox.setSelectedItem(selected.getCategory());
+        
+        if (selected instanceof Beverage) {
+            ProductBrandTextField.setEditable(true);
+            ProductBrandTextField.setText(((Beverage) selected).getBrand());
+            ProductAlcoholVolumeTextField.setEditable(true);
+            ProductAlcoholVolumeTextField.setText(String.valueOf(((Beverage) selected).getAlcoholVolume()));
+        } else {            
+            ProductBrandTextField.setEditable(false);
+            ProductAlcoholVolumeTextField.setEditable(false);
+        }
+        
+    }//GEN-LAST:event_ProductListMouseClicked
 
     /**
      * @param args the command line arguments
@@ -736,7 +904,7 @@ public class Bar extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Bar().setVisible(true);
+                new BarFrame().setVisible(true);
             }
         });
     }
@@ -749,7 +917,7 @@ public class Bar extends javax.swing.JFrame {
     private javax.swing.JLabel CategoryIDLabel;
     private javax.swing.JLabel CategoryIDLabel1;
     private javax.swing.JTextField CategoryIDTextField;
-    private javax.swing.JList<String> CategoryList;
+    public javax.swing.JList<Category> CategoryList;
     private javax.swing.JLabel CategoryNameLabel;
     private javax.swing.JTextField CategoryNameTextField;
     private javax.swing.JButton CategoryRemoveButton;
@@ -765,25 +933,24 @@ public class Bar extends javax.swing.JFrame {
     private javax.swing.JTextField ProductAlcoholVolumeTextField;
     private javax.swing.JLabel ProductBrandLabel;
     private javax.swing.JTextField ProductBrandTextField;
-    private javax.swing.JComboBox<String> ProductCategoryComboBox;
+    private javax.swing.JComboBox<Category> ProductCategoryComboBox;
     private javax.swing.JLabel ProductCategoryLabel;
     private javax.swing.JLabel ProductDescriptionLabel;
     private javax.swing.JTextArea ProductDescriptionTextArea;
     private javax.swing.JLabel ProductIDLabel;
     private javax.swing.JTextField ProductIDTextField;
-    private javax.swing.JList<String> ProductList;
+    private javax.swing.JList<Product> ProductList;
     private javax.swing.JLabel ProductNameLabel;
-    private javax.swing.JTextField ProductNameTextFİeld;
+    private javax.swing.JTextField ProductNameTextField;
     private javax.swing.JLabel ProductPriceLabel;
     private javax.swing.JTextField ProductPriceTextField;
     private javax.swing.JButton ProductRemoveButton;
     private javax.swing.JPanel ProductTab;
     private javax.swing.JButton ProductUpdateButton;
-    private javax.swing.JButton Table1Button;
     private javax.swing.JButton TableAddButton;
     private javax.swing.JLabel TableIDLabel;
     private javax.swing.JTextField TableIDTextField;
-    private javax.swing.JList<String> TableList;
+    private javax.swing.JList<Table> TableList;
     private javax.swing.JLabel TableNameLabel;
     private javax.swing.JTextField TableNameTextField;
     private javax.swing.JButton TableRemoveButton;
@@ -794,7 +961,7 @@ public class Bar extends javax.swing.JFrame {
     private javax.swing.JButton WaiterAddButton;
     private javax.swing.JLabel WaiterIDLabel;
     private javax.swing.JTextField WaiterIDTextField;
-    private javax.swing.JList<String> WaiterList;
+    private javax.swing.JList<Waiter> WaiterList;
     private javax.swing.JLabel WaiterNameLabel;
     private javax.swing.JTextField WaiterNameTextField;
     private javax.swing.JLabel WaiterPhoneNumberLabel;

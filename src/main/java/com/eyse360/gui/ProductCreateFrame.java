@@ -3,19 +3,41 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ey.se360_termproject_bcrs;
+package com.eyse360.gui;
+
+import com.eyse360.controllers.mysql.CategoryDAO;
+import com.eyse360.controllers.mysql.ProductDAO;
+import com.eyse360.models.Beverage;
+import com.eyse360.models.Category;
+import com.eyse360.models.Food;
+import com.eyse360.models.Product;
+import javax.swing.DefaultComboBoxModel;
 
 /**
  *
  * @author Erel
  */
-public class ProductCreate extends javax.swing.JFrame {
+public class ProductCreateFrame extends javax.swing.JFrame {
 
+    private static DefaultComboBoxModel<Category> categoryModel;
+    private static ProductDAO productDao;
+    private static CategoryDAO categoryDao;
+    
     /**
      * Creates new form ProductCreate
      */
-    public ProductCreate() {
+    public ProductCreateFrame() {
+        productDao = new ProductDAO();
+        categoryDao = new CategoryDAO();
+        
         initComponents();
+        
+        categoryModel = new DefaultComboBoxModel<>();
+        
+        CategoryComboBox.setModel(categoryModel);
+        
+        categoryModel.addAll(categoryDao.getAllByBar(BarFrame.currentBar));
+        
     }
 
     /**
@@ -45,7 +67,6 @@ public class ProductCreate extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(700, 450));
-        setPreferredSize(new java.awt.Dimension(0, 0));
         setResizable(false);
 
         CategoryLabel.setText("Category:");
@@ -67,6 +88,10 @@ public class ProductCreate extends javax.swing.JFrame {
             }
         });
 
+        AlcoholVolumeTextField.setEditable(false);
+
+        BrandTextField.setEditable(false);
+
         DescriptionTextArea.setColumns(20);
         DescriptionTextArea.setRows(5);
         jScrollPane1.setViewportView(DescriptionTextArea);
@@ -78,14 +103,12 @@ public class ProductCreate extends javax.swing.JFrame {
             }
         });
 
-        CategoryComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(111, Short.MAX_VALUE)
+                .addGap(111, 111, 111)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -97,14 +120,12 @@ public class ProductCreate extends javax.swing.JFrame {
                             .addComponent(CategoryLabel))
                         .addGap(158, 158, 158)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(BrandTextField, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(AlcoholVolumeTextField, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(CategoryComboBox, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(NameTextField, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(PriceTextField, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 106, Short.MAX_VALUE))))
+                            .addComponent(jScrollPane1)
+                            .addComponent(NameTextField)
+                            .addComponent(PriceTextField)
+                            .addComponent(CategoryComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(AlcoholVolumeTextField)
+                            .addComponent(BrandTextField)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(39, 39, 39)
                         .addComponent(CreateButton)
@@ -159,7 +180,25 @@ public class ProductCreate extends javax.swing.JFrame {
     }//GEN-LAST:event_CancelButtonMouseClicked
 
     private void CreateButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CreateButtonMouseClicked
-        //Add to list
+        Category cat = (Category) CategoryComboBox.getSelectedItem();
+        if (cat.getType().equals("food")) {
+            Food product = new Food();
+            product.setName(NameTextField.getText());
+            product.setDescription(DescriptionTextArea.getText());
+            product.setCategory(cat);
+            product.setId(productDao.save(product));
+            BarFrame.productModel.addElement(product);
+        } else if (cat.getType().equals("beverage")) {
+            Beverage product = new Beverage();
+            product.setName(NameTextField.getText());
+            product.setDescription(DescriptionTextArea.getText());
+            product.setCategory(cat);
+            product.setBrand(BrandTextField.getText());
+            product.setAlcoholVolume(Double.valueOf(AlcoholVolumeTextField.getText()));
+            product.setId(productDao.save(product));
+            BarFrame.productModel.addElement(product);
+            
+        }
         dispose();
     }//GEN-LAST:event_CreateButtonMouseClicked
 
@@ -180,20 +219,20 @@ public class ProductCreate extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ProductCreate.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ProductCreateFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ProductCreate.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ProductCreateFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ProductCreate.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ProductCreateFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ProductCreate.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ProductCreateFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ProductCreate().setVisible(true);
+                new ProductCreateFrame().setVisible(true);
             }
         });
     }
@@ -204,7 +243,7 @@ public class ProductCreate extends javax.swing.JFrame {
     private javax.swing.JLabel BrandLabel;
     private javax.swing.JTextField BrandTextField;
     private javax.swing.JButton CancelButton;
-    private javax.swing.JComboBox<String> CategoryComboBox;
+    private javax.swing.JComboBox<Category> CategoryComboBox;
     private javax.swing.JLabel CategoryLabel;
     private javax.swing.JButton CreateButton;
     private javax.swing.JLabel DescriptionLabel;

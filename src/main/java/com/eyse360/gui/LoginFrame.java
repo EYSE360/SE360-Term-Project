@@ -3,22 +3,22 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ey.se360_termproject_bcrs;
+package com.eyse360.gui;
 
 import com.bulenkov.darcula.DarculaLaf;
-import java.awt.event.ItemEvent;
+
 import javax.swing.UnsupportedLookAndFeelException;
 
 /**
  *
  * @author Erel
  */
-public class Login extends javax.swing.JFrame {
+public class LoginFrame extends javax.swing.JFrame {
 
     /**
      * Creates new form Login
      */
-    public Login() {
+    public LoginFrame() {
         initComponents();
     }
 
@@ -110,9 +110,9 @@ public class Login extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
-        Bar bar = new Bar();
+        BarFrame barFrame = new BarFrame();
         dispose();
-        bar.setVisible(true);
+        barFrame.setVisible(true);
     }//GEN-LAST:event_jButton1MouseClicked
 
     private void ShowPassword_CheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ShowPassword_CheckBoxActionPerformed
@@ -142,7 +142,7 @@ public class Login extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Login().setVisible(true);
+                new LoginFrame().setVisible(true);
             }
         });
     }

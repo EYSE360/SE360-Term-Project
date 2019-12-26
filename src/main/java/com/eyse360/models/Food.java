@@ -7,11 +7,6 @@ public class Food extends Product {
 
     @Override
     public String toString() {
-        return "Food{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", price=" + price +
-                ", description='" + description + '\'' +
-                '}';
+        return name;
     }
 }

@@ -1,9 +1,10 @@
 package com.eyse360.controllers.mysql;
 
 import com.eyse360.DAO;
+import com.eyse360.DBConnection;
 import com.eyse360.GUITest;
 import com.eyse360.models.Bar;
-import com.eyse360.models.Category;
+import com.eyse360.models.Check;
 import com.eyse360.models.Table;
 
 import java.sql.PreparedStatement;
@@ -12,18 +13,20 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class TableDAO implements DAO<Table> {
+    DBConnection conn = new DBConnection();
     @Override
     public Table get(Table table) {
-
-        GUITest.conn.connect();
+        conn.connect();
 
         Table returnTable = null;
 
         String query = "SELECT * FROM tables WHERE id = ? LIMIT 1";
         try {
-            PreparedStatement pstmt = GUITest.conn.getConnection().prepareStatement(query);
+            PreparedStatement pstmt = conn.getConnection().prepareStatement(query);
             pstmt.setInt(1, (int) table.getId());
             ResultSet rs = pstmt.executeQuery();
             if (rs.next()) {
@@ -36,25 +39,46 @@ public class TableDAO implements DAO<Table> {
             pstmt.close();
             rs.close();
 
-            GUITest.conn.disconnect();
+            conn.disconnect();
         } catch (SQLException e) {
             e.printStackTrace();
         }
 
-        GUITest.conn.disconnect();
+        conn.disconnect();
 
         return returnTable;
+    }
+    
+    public Check getTableCheck(Table table) {
+        CheckDAO checkDAO = new CheckDAO();
+        conn.connect();
+        Check check = null;
+        
+        String query = "SELECT id_check, is_open FROM checks WHERE id_table = ?";
+        try {
+            PreparedStatement pstmt = conn.getConnection().prepareStatement(query);
+            pstmt.setInt(1, (int) table.getId());
+            ResultSet rs = pstmt.executeQuery();
+            if (rs.next()) {
+                check = checkDAO.getById(rs.getInt("id_check"));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(TableDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        
+        return check;
     }
 
     @Override
     public Table getById(int id) {
-        GUITest.conn.connect();
+        conn.connect();
 
         Table table = null;
 
         String query = "SELECT * FROM tables WHERE id = ? LIMIT 1";
         try {
-            PreparedStatement pstmt = GUITest.conn.getConnection().prepareStatement(query);
+            PreparedStatement pstmt = conn.getConnection().prepareStatement(query);
             pstmt.setInt(1, id);
             ResultSet rs = pstmt.executeQuery();
             if (rs.next()) {
@@ -67,12 +91,12 @@ public class TableDAO implements DAO<Table> {
             pstmt.close();
             rs.close();
 
-            GUITest.conn.disconnect();
+            conn.disconnect();
         } catch (SQLException e) {
             e.printStackTrace();
         }
 
-        GUITest.conn.disconnect();
+        conn.disconnect();
 
         return table;
     }
@@ -83,13 +107,14 @@ public class TableDAO implements DAO<Table> {
     }
 
     public List<Table> getAllByBar(Bar bar) {
-        GUITest.conn.connect();
+        conn.connect();
 
         List<Table> tableList = null;
 
-        String query = "SELECT * FROM product_categories WHERE id_bar = ?";
+        String query = "SELECT * FROM tables WHERE id_bar = ?";
         try {
-            PreparedStatement pstmt = GUITest.conn.getConnection().prepareStatement(query);
+            PreparedStatement pstmt = conn.getConnection().prepareStatement(query);
+            System.out.println(pstmt.getMetaData());
             pstmt.setInt(1, (int) bar.getId());
             ResultSet rs = pstmt.executeQuery();
             if (rs.next()) {
@@ -110,20 +135,20 @@ public class TableDAO implements DAO<Table> {
             e.printStackTrace();
         }
 
-        GUITest.conn.disconnect();
+        conn.disconnect();
 
         return tableList;
     }
 
     @Override
     public int save(Table table) {
-        GUITest.conn.connect();
+        conn.connect();
         String query = "INSERT INTO tables (shortcode, name, customerCount, id_bar) VALUES (?, ?, ?, ?)";
 
         int id = 0;
 
         try {
-            PreparedStatement pstmt = GUITest.conn.getConnection().prepareStatement(query, PreparedStatement.RETURN_GENERATED_KEYS);
+            PreparedStatement pstmt = conn.getConnection().prepareStatement(query, PreparedStatement.RETURN_GENERATED_KEYS);
             pstmt.setString(1, table.getShortCode());
             pstmt.setString(2, table.getName());
             pstmt.setInt(3, table.getCustomerCount());
@@ -140,7 +165,7 @@ public class TableDAO implements DAO<Table> {
             e.printStackTrace();
         }
 
-        GUITest.conn.disconnect();
+        conn.disconnect();
         return id;
     }
 

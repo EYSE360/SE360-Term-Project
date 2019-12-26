@@ -1,5 +1,6 @@
 package com.eyse360.controllers.mysql;
 import com.eyse360.DAO;
+import com.eyse360.DBConnection;
 import com.eyse360.GUITest;
 import com.eyse360.models.Bar;
 import com.eyse360.models.Product;
@@ -12,15 +13,16 @@ import java.util.List;
 import java.util.Optional;
 
 public class BarDAO implements DAO<Bar> {
+    DBConnection conn = new DBConnection();
     @Override
     public Bar get(Bar bar) {
-        GUITest.conn.connect();
+        conn.connect();
 
         Bar returnBar = null;
 
         String query = "SELECT * FROM bars WHERE id = ? LIMIT 1";
         try {
-            PreparedStatement pstmt = GUITest.conn.getConnection().prepareStatement(query);
+            PreparedStatement pstmt = conn.getConnection().prepareStatement(query);
             pstmt.setInt(1, (int) bar.getId());
             ResultSet rs = pstmt.executeQuery();
             if (rs.next()) {
@@ -33,24 +35,24 @@ public class BarDAO implements DAO<Bar> {
             pstmt.close();
             rs.close();
 
-            GUITest.conn.disconnect();
+            conn.disconnect();
         } catch (SQLException e) {
             e.printStackTrace();
         }
 
-        GUITest.conn.disconnect();
+        conn.disconnect();
 
         return returnBar;
     }
 
     public Bar getById(int id) {
-        GUITest.conn.connect();
+        conn.connect();
 
         Bar bar = null;
 
         String query = "SELECT * FROM bars WHERE id = ? LIMIT 1";
         try {
-            PreparedStatement pstmt = GUITest.conn.getConnection().prepareStatement(query);
+            PreparedStatement pstmt = conn.getConnection().prepareStatement(query);
             pstmt.setInt(1, id);
             ResultSet rs = pstmt.executeQuery();
             if (rs.next()) {
@@ -63,25 +65,25 @@ public class BarDAO implements DAO<Bar> {
             pstmt.close();
             rs.close();
 
-            GUITest.conn.disconnect();
+            conn.disconnect();
         } catch (SQLException e) {
             e.printStackTrace();
         }
 
-        GUITest.conn.disconnect();
+        conn.disconnect();
 
         return bar;
     }
 
     @Override
     public List<Bar> getAll() {
-        GUITest.conn.connect();
+        conn.connect();
 
         List<Bar> barList = null;
 
         String query = "SELECT * FROM bars";
         try {
-            PreparedStatement pstmt = GUITest.conn.getConnection().prepareStatement(query);
+            PreparedStatement pstmt = conn.getConnection().prepareStatement(query);
             ResultSet rs = pstmt.executeQuery();
             if (rs.next()) {
                 barList = new ArrayList<>();
@@ -101,19 +103,19 @@ public class BarDAO implements DAO<Bar> {
             e.printStackTrace();
         }
 
-        GUITest.conn.disconnect();
+        conn.disconnect();
 
         return barList;
     }
 
     @Override
     public int save(Bar b) {
-        GUITest.conn.connect();
+        conn.connect();
         int id = 0;
 
         String query = "INSERT INTO bars (name, city, alcoholPermission) VALUES (?, ?, ?)";
         try {
-            PreparedStatement pstmt = GUITest.conn.getConnection().prepareStatement(query, PreparedStatement.RETURN_GENERATED_KEYS);
+            PreparedStatement pstmt = conn.getConnection().prepareStatement(query, PreparedStatement.RETURN_GENERATED_KEYS);
             pstmt.setString(1, b.getName());
             pstmt.setString(2, b.getCity());
             pstmt.setInt(3, b.getAlcoholPermission() ? 1 : 0);
@@ -128,7 +130,7 @@ public class BarDAO implements DAO<Bar> {
             e.printStackTrace();
         }
 
-        GUITest.conn.disconnect();
+        conn.disconnect();
 
         return id;
     }
@@ -137,7 +139,7 @@ public class BarDAO implements DAO<Bar> {
     public void update(Bar b) {
         String query = "UPDATE bars SET name = ?, city = ?, alcoholPermission = ? WHERE id = ?";
         try {
-            PreparedStatement pstmt = GUITest.conn.getConnection().prepareStatement(query);
+            PreparedStatement pstmt = conn.getConnection().prepareStatement(query);
             pstmt.setString(1, b.getName());
             pstmt.setString(2, b.getCity());
             pstmt.setInt(3, b.getAlcoholPermission() ? 1 : 0);
@@ -147,7 +149,7 @@ public class BarDAO implements DAO<Bar> {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        GUITest.conn.disconnect();
+        conn.disconnect();
     }
 
     @Override

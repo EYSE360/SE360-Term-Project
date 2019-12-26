@@ -1,7 +1,7 @@
 package com.eyse360.controllers.mysql;
 
 import com.eyse360.DAO;
-import com.eyse360.GUITest;
+import com.eyse360.DBConnection;
 import com.eyse360.models.Check;
 import com.eyse360.models.Table;
 import com.eyse360.models.Waiter;
@@ -13,9 +13,10 @@ import java.sql.SQLException;
 import java.util.List;
 
 public class CheckDAO implements DAO<Check> {
+    DBConnection conn = new DBConnection();
     @Override
     public Check get(Check check) {
-        GUITest.conn.connect();
+        conn.connect();
         ProductDAO productDAO = new ProductDAO();
         BarUserDAO barUserDAO = new BarUserDAO();
 
@@ -23,7 +24,7 @@ public class CheckDAO implements DAO<Check> {
 
         String query = "SELECT * FROM table_check WHERE id_check = ? LIMIT 1";
         try {
-            PreparedStatement pstmt = GUITest.conn.getConnection().prepareStatement(query);
+            PreparedStatement pstmt = conn.getConnection().prepareStatement(query);
             pstmt.setInt(1, (int) check.getId());
             ResultSet rs = pstmt.executeQuery();
             if (rs.next()) {
@@ -37,12 +38,44 @@ public class CheckDAO implements DAO<Check> {
             pstmt.close();
             rs.close();
 
-            GUITest.conn.disconnect();
+            conn.disconnect();
         } catch (SQLException e) {
             e.printStackTrace();
         }
 
-        GUITest.conn.disconnect();
+        conn.disconnect();
+
+        return returnCheck;
+    }
+    
+    
+    public Check getByTable(Table table) {
+        conn.connect();
+        BarUserDAO barUserDAO = new BarUserDAO();
+
+        Check returnCheck = null;
+
+        String query = "SELECT * FROM checks WHERE id_table = ?";
+        try {
+            PreparedStatement pstmt = conn.getConnection().prepareStatement(query);
+            pstmt.setInt(1, (int) table.getId());
+            ResultSet rs = pstmt.executeQuery();
+            if (rs.next()) {
+                returnCheck = new Check();
+                returnCheck.setId(rs.getInt("id_check"));
+                returnCheck.setTime(rs.getInt("time"));
+                returnCheck.setWaiter((Waiter) barUserDAO.getById(rs.getInt("id_waiter")));
+                returnCheck.setIsOpen(rs.getInt("is_open") == 1 ? true : false);
+            }
+            pstmt.close();
+            rs.close();
+
+            conn.disconnect();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        conn.disconnect();
 
         return returnCheck;
     }
@@ -63,12 +96,12 @@ public class CheckDAO implements DAO<Check> {
     }
 
     public int saveByTable(Check check, Table table) {
-        GUITest.conn.connect();
+        conn.connect();
         int id = 0;
 
         String query = "INSERT INTO table_check (id_table, time) VALUES (?, ?)";
         try {
-            PreparedStatement pstmt = GUITest.conn.getConnection().prepareStatement(query, PreparedStatement.RETURN_GENERATED_KEYS);
+            PreparedStatement pstmt = conn.getConnection().prepareStatement(query, PreparedStatement.RETURN_GENERATED_KEYS);
             pstmt.setInt(1, (int) table.getId());
             pstmt.setInt(2, (int) Tools.getCurrentUnixTime());
             pstmt.executeUpdate();

@@ -16,18 +16,23 @@ public class GUITest {
     static List<Category> categories;
 
     public static void main(String[] args) {
-        conn = new DBConnection();
         barDao = new BarDAO();
-        catDao = new CategoryDAO();
+        /*catDao = new CategoryDAO();
         productDAO = new ProductDAO();
-        barUserDAO = new BarUserDAO();
+        barUserDAO = new BarUserDAO();*/
         tableDAO = new TableDAO();
 
         bar = barDao.getById(1);
 
-        Table table = tableDAO.getById(2);
+        System.out.println(bar);
 
-        System.out.println(table);
+        List<Table> tableList = tableDAO.getAllByBar(bar);
+
+        System.out.println(tableList);
+
+//        Table table = tableDAO.getById(2);
+
+//        System.out.println(table);
 
         /*Table table1 = new Table();
         table1.setName("Garden 1");
