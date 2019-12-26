@@ -1,16 +1,13 @@
 package com.eyse360.controllers.mysql;
 import com.eyse360.DAO;
 import com.eyse360.DBConnection;
-import com.eyse360.GUITest;
 import com.eyse360.models.Bar;
-import com.eyse360.models.Product;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 public class BarDAO implements DAO<Bar> {
     DBConnection conn = new DBConnection();

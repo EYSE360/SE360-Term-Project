@@ -1,27 +1,23 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.eyse360.gui;
 
 import com.eyse360.models.Category;
 import com.eyse360.models.Product;
+import java.util.ArrayList;
 import java.util.Map;
-import java.util.HashMap;
-import java.util.Vector;
+import java.util.LinkedHashMap;
+import java.util.List;
 import javax.swing.table.AbstractTableModel;
 
-/**
- *
- * @author yagiz
- */
 public class CheckLogTableModel extends AbstractTableModel {
-    private String[] columnNames = {"Product", "Category", "Quantity"};
-    private HashMap<Product, Integer> products;
+    private String[] columnNames = {"Product", "Price", "Quantity"};
+    private LinkedHashMap<Product, Integer> products;
     
-    public CheckLogTableModel(HashMap<Product, Integer> map) {
+    public CheckLogTableModel(LinkedHashMap<Product, Integer> map) {
         products = map;
+    }
+    
+    public CheckLogTableModel() {
+        products = new LinkedHashMap<>();
     }
 
     @Override
@@ -50,23 +46,29 @@ public class CheckLogTableModel extends AbstractTableModel {
            return entry.getKey();
         }
         else if (col == 1) {
-           return entry.getKey().getCategory();
+           return entry.getKey().getPrice();
         }
         else if (col == 2) {
            return entry.getValue();
         }
         
         return null;
-    }  
-    
-    public void incrementQ(Product p) {
-        products.merge(p, 1, Integer::sum);
-        fireTableDataChanged();
     }
     
     public void addRow(Product product, Integer quantity) {
-        products.put(product, quantity);
+        //if (products)
+        int q = products.containsKey(product) ? products.get(product) + quantity : quantity;
+        products.put(product, q);
+        
+        if (products.get(product) <= 0)
+            removeRow(product);
         fireTableDataChanged();
+    }
+    
+    public void removeRow(Product product) {
+        int row = getProductMapIndex(products, product);
+        products.remove(product);
+        fireTableRowsDeleted(row, row);
     }
     
     public String getColumnName(int col) {
@@ -83,5 +85,11 @@ public class CheckLogTableModel extends AbstractTableModel {
         }
         
         return null;
+    }
+    
+    public int getProductMapIndex(Map map, Product product) {      
+        List indexes = new ArrayList<>(map.keySet());
+        
+        return indexes.indexOf(product);
     }
 }

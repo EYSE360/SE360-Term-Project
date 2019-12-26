@@ -5,18 +5,23 @@
  */
 package com.eyse360.gui;
 
-import com.bulenkov.darcula.DarculaLaf;
 import com.eyse360.controllers.mysql.*;
 import com.eyse360.models.Bar;
 import com.eyse360.models.BarUser;
 import com.eyse360.models.Beverage;
 import com.eyse360.models.Category;
+import com.eyse360.models.Check;
 import com.eyse360.models.Product;
 import com.eyse360.models.Table;
 import com.eyse360.models.Waiter;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Font;
 
 import javax.swing.*;
 import java.util.List;
+import java.util.Map;
+import javax.swing.Box.Filler;
 
 /**
  *
@@ -34,6 +39,7 @@ public class BarFrame extends javax.swing.JFrame {
     public static TableDAO tableDao;
     
     public static Bar currentBar;
+    public static BarUser currentUser;
     public static Category[] categoryArray;
     
     public static DefaultListModel<Category> categoryModel;
@@ -45,6 +51,7 @@ public class BarFrame extends javax.swing.JFrame {
     
     public BarFrame(BarUser user) {
         currentBar = user.getBar();
+        currentUser = user;
         
         barDao = new BarDAO();
         categoryDao = new CategoryDAO();
@@ -74,23 +81,10 @@ public class BarFrame extends javax.swing.JFrame {
             categoryComboBoxModel = new DefaultComboBoxModel<>();
             ProductCategoryComboBox.setModel(categoryComboBoxModel);
         }
-        
-        /*List<Table> tableList = tableDao.getAllByBar(currentBar);
-        for (Table table: tableList) {
-            JButton tableButton = new JButton(table.getName());
-            tableButton.addMouseListener(new java.awt.event.MouseAdapter() {
-                public void mouseClicked(java.awt.event.MouseEvent evt) {
-                    TableButtonMouseClicked(evt, table);
-                }
-            });
-            MainTableTab.add(tableButton);
-        }*/
-        
-        
     }
     
     private void TableButtonMouseClicked(java.awt.event.MouseEvent evt, Table table) {
-        TableContentFrame tc = new TableContentFrame(table);
+        TableContentFrame tc = new TableContentFrame(table, currentUser);
         tc.setVisible(true);
     }
 
@@ -904,13 +898,47 @@ public class BarFrame extends javax.swing.JFrame {
             MainTableTab.removeAll();
             List<Table> tableList = tableDao.getAllByBar(currentBar);
             for (Table table: tableList) {
-                JButton tableButton = new JButton(table.getName());
+                Filler topToBottomFiller = new Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 32767));
+                Filler bottomToTopFiller = new Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 32767));
+                JPanel tablePanel = new JPanel();
+                tablePanel.setBorder(BorderFactory.createLineBorder(Color.decode("#214283")));
+                tablePanel.setLayout(new BoxLayout(tablePanel, BoxLayout.Y_AXIS));
+                tablePanel.add(topToBottomFiller);
+                
+                JLabel tableButton = new JLabel(table.getName());
+                tableButton.setFont(new Font("Dialog", 1, 18));
+                tableButton.setHorizontalAlignment(SwingConstants.CENTER);
+                tableButton.setMaximumSize(new Dimension(350, 50));
+                tableButton.setPreferredSize(new java.awt.Dimension(150, 54));
                 tableButton.addMouseListener(new java.awt.event.MouseAdapter() {
                     public void mouseClicked(java.awt.event.MouseEvent evt) {
                         TableButtonMouseClicked(evt, table);
                     }
                 });
-                MainTableTab.add(tableButton);
+                tablePanel.add(tableButton);
+                
+                Check check = tableDao.getOpenCheckDetailByTable(table);
+                if (check != null) {
+                    if (check.isIsOpen()) {
+                        check.setProducts(tableDao.getTableProducts(check));
+
+                        double sum = 0;
+                        JLabel totalPriceLabel = new JLabel(String.valueOf(sum));
+                        totalPriceLabel.setHorizontalAlignment(SwingConstants.CENTER);
+                        totalPriceLabel.setMaximumSize(new Dimension(350, 50));
+                        if (check.getProducts() != null) {
+                            for (Map.Entry<Product, Integer> entry: check.getProducts().entrySet()) {
+                                sum += entry.getKey().getPrice() * entry.getValue();
+                            }
+                            System.out.println(sum);
+                            totalPriceLabel.setText(String.valueOf(sum));
+                        }
+                        tablePanel.add(totalPriceLabel);
+                        tablePanel.setBackground(Color.decode("#629755"));
+                    }
+                }
+                tablePanel.add(bottomToTopFiller);
+                MainTableTab.add(tablePanel);
             }
         } else if (BarMainTabbedPane.getSelectedIndex() == 1) {
             categoryModel.addAll(categoryDao.getAllByBar(currentBar));
@@ -1072,29 +1100,9 @@ public class BarFrame extends javax.swing.JFrame {
         TableShortCodeTextField.setText("");
         TableNameTextField.setText("");
     }
-    /**
-     * @param args the command line arguments
-     */
-//    public static void main(String args[]) throws UnsupportedLookAndFeelException {
-//        /* Set the Nimbus look and feel */
-//        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-//        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-//         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-//         */
-//       javax.swing.plaf.basic.BasicLookAndFeel darcula = new DarculaLaf();
-//        javax.swing.UIManager.setLookAndFeel(darcula);
-//        //</editor-fold>
-//
-//        /* Create and display the form */
-//        java.awt.EventQueue.invokeLater(new Runnable() {
-//            public void run() {
-//                new BarFrame().setVisible(true);
-//            }
-//        });
-//    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTabbedPane BarMainTabbedPane;
+    public static javax.swing.JTabbedPane BarMainTabbedPane;
     private javax.swing.JButton CategoryCreateButton;
     private javax.swing.JLabel CategoryDescriptionLabel;
     private javax.swing.JTextArea CategoryDescriptionTextArea;

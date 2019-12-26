@@ -1,18 +1,17 @@
 package com.eyse360.models;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.LinkedHashMap;
 
 public class Check {
     private long id;
-    private HashMap<Product, Integer> products;
+    private LinkedHashMap<Product, Integer> products;
     private int time;
     private int close_time;
-    private Waiter waiter;
+    private BarUser waiter;
     private boolean isOpen;
 
     public Check() {
-        products = new HashMap<>();
+        products = new LinkedHashMap<>();
     }
 
     public long getId() {
@@ -23,11 +22,11 @@ public class Check {
         this.id = id;
     }
 
-    public HashMap<Product, Integer> getProducts() {
+    public LinkedHashMap<Product, Integer> getProducts() {
         return products;
     }
 
-    public void setProducts(HashMap<Product, Integer> products) {
+    public void setProducts(LinkedHashMap<Product, Integer> products) {
         this.products = products;
     }
 
@@ -57,11 +56,11 @@ public class Check {
         products.remove(product);
     }
 
-    public Waiter getWaiter() {
+    public BarUser getWaiter() {
         return waiter;
     }
 
-    public void setWaiter(Waiter waiter) {
+    public void setWaiter(BarUser waiter) {
         this.waiter = waiter;
     }
 

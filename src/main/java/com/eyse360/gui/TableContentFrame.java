@@ -1,55 +1,41 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.eyse360.gui;
 
-import com.eyse360.controllers.mysql.BarDAO;
-import com.eyse360.controllers.mysql.BarUserDAO;
-import com.eyse360.controllers.mysql.CategoryDAO;
-import com.eyse360.controllers.mysql.ProductDAO;
 import com.eyse360.controllers.mysql.TableDAO;
 import com.eyse360.models.Bar;
+import com.eyse360.models.BarUser;
 import com.eyse360.models.Check;
 import com.eyse360.models.Product;
 import com.eyse360.models.Table;
-import java.sql.SQLException;
+import com.eyse360.tools.Tools;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Map;
+import javax.swing.event.TableModelEvent;
+import javax.swing.event.TableModelListener;
 
 /**
  *
  * @author Erel
  */
 public class TableContentFrame extends javax.swing.JFrame {
-
-    /**
-     * Creates new form TableContent
-     */
-    private static BarDAO barDao;
-    private static CategoryDAO catDao;
-    private static ProductDAO productDAO;
-    private static BarUserDAO barUserDAO;
     private static TableDAO tableDAO;
     private static Bar currentBar;
     public static Check currentCheck;
     private static Table currentTable;
+    private static BarUser currentUser;
     public static CheckLogTableModel tableModel;
     
     public TableContentFrame() {
         initComponents();
     }
 
-    public TableContentFrame(Table table) {
+    public TableContentFrame(Table table, BarUser user) {
         currentTable = table;
-        barDao = new BarDAO();
-        catDao = new CategoryDAO();
-        productDAO = new ProductDAO();
-        barUserDAO = new BarUserDAO();
         tableDAO = new TableDAO();
         currentBar = BarFrame.currentBar;
+        currentUser = user;
         
         initComponents();
-        
         
         AddProductButton.setEnabled(false);
         CustomerCountTextField.setEnabled(false);
@@ -60,37 +46,52 @@ public class TableContentFrame extends javax.swing.JFrame {
         TotalTimeTextField.setEnabled(false);
         UpdateCustomerCountButton.setEnabled(false);
         
-        TableNameLabel.setText(table.getName());
+        TableNameLabel.setText(currentTable.getName());
         
-        currentCheck = tableDAO.getOpenCheckDetailByTable(table);
+        tableModel = new CheckLogTableModel();
+
+        tableModel.addTableModelListener(new TableModelListener() {
+            public void tableChanged(TableModelEvent e) {
+                double sum = 0;
+                if (currentCheck.getProducts() != null) {
+                    for (Map.Entry<Product, Integer> entry: currentCheck.getProducts().entrySet()) {
+                        sum += entry.getKey().getPrice() * entry.getValue();
+                    }
+                }
+
+                TotalTextField.setText(String.valueOf(sum));
+            }
+        });
+        
+        currentCheck = tableDAO.getOpenCheckDetailByTable(currentTable);
         if (currentCheck != null) {
             if (currentCheck.isIsOpen()) {
+                OpenCloseCheckButton.setText("Close");
                 AddProductButton.setEnabled(true);
                 CustomerCountTextField.setEnabled(true);
-                CustomerCountTextField.setText(String.valueOf(table.getCustomerCount()));
+                CustomerCountTextField.setText(String.valueOf(currentTable.getCustomerCount()));
 
                 DecrementQuantity.setEnabled(true);
                 IncrementQuantity.setEnabled(true);
 
                 RemoveFromTableButton.setEnabled(true);
-                TotalTextField.setEnabled(true);
-                TotalTimeTextField.setEnabled(true);
-                TotalTimeTextField.setText(String.valueOf(currentCheck.getTime()));
+                
+                DateFormat dateFormat = new SimpleDateFormat("dd-MM-YYYY hh:mm:ss");  
+                TotalTimeTextField.setText(dateFormat.format(Tools.setCurrentTime(currentCheck.getTime())));
 
                 UpdateCustomerCountButton.setEnabled(true);
                 
                 WaiterNameLabel.setText(currentCheck.getWaiter().getFullName());
                 
                 currentCheck.setProducts(tableDAO.getTableProducts(currentCheck));
-                System.out.println(currentCheck);
-                
-                tableModel = new CheckLogTableModel(currentCheck.getProducts());
-                
-                CheckLogTable.setModel(tableModel);
-                
-                
+                for (Map.Entry<Product, Integer> entry: currentCheck.getProducts().entrySet()) {
+                    tableModel.addRow(entry.getKey(), entry.getValue());
+                }
+                tableModel.fireTableDataChanged();                
             }
         }
+
+        CheckLogTable.setModel(tableModel);
     }
 
     /**
@@ -141,7 +142,7 @@ public class TableContentFrame extends javax.swing.JFrame {
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         getContentPane().add(CustomerCountLabel, gridBagConstraints);
 
-        TotalTimeLabel.setText("Total Time:");
+        TotalTimeLabel.setText("Open Time:");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 2;
@@ -162,6 +163,8 @@ public class TableContentFrame extends javax.swing.JFrame {
         gridBagConstraints.gridwidth = 2;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         getContentPane().add(CustomerCountTextField, gridBagConstraints);
+
+        TotalTimeTextField.setEditable(false);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 2;
@@ -208,8 +211,29 @@ public class TableContentFrame extends javax.swing.JFrame {
             new String [] {
                 "Product", "Category", "Quantity"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        CheckLogTable.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        CheckLogTable.getTableHeader().setReorderingAllowed(false);
+        CheckLogTable.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                CheckLogTablePropertyChange(evt);
+            }
+        });
         jScrollPane1.setViewportView(CheckLogTable);
+        CheckLogTable.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        if (CheckLogTable.getColumnModel().getColumnCount() > 0) {
+            CheckLogTable.getColumnModel().getColumn(0).setHeaderValue("Product");
+            CheckLogTable.getColumnModel().getColumn(1).setHeaderValue("Category");
+            CheckLogTable.getColumnModel().getColumn(2).setHeaderValue("Quantity");
+        }
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -276,6 +300,11 @@ public class TableContentFrame extends javax.swing.JFrame {
         getContentPane().add(UpdateCustomerCountButton, gridBagConstraints);
 
         OpenCloseCheckButton.setText("Open");
+        OpenCloseCheckButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                OpenCloseCheckButtonMouseClicked(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 4;
         gridBagConstraints.gridy = 0;
@@ -285,12 +314,15 @@ public class TableContentFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void IncrementQuantityMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_IncrementQuantityMouseClicked
-      tableModel.incrementQ((Product) tableModel.getValueAt(CheckLogTable.getSelectedRow(),0));
-
+        Product p = (Product) tableModel.getValueAt(CheckLogTable.getSelectedRow(),0);
+        tableDAO.addProductToCheck(p, currentCheck, 1);
+        tableModel.addRow(p, 1);
     }//GEN-LAST:event_IncrementQuantityMouseClicked
 
     private void DecrementQuantityMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DecrementQuantityMouseClicked
-        
+        Product p = (Product) tableModel.getValueAt(CheckLogTable.getSelectedRow(), 0);
+        tableDAO.addProductToCheck(p, currentCheck, -1);
+        tableModel.addRow(p, -1);
     }//GEN-LAST:event_DecrementQuantityMouseClicked
 
     private void AddProductButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_AddProductButtonMouseClicked
@@ -299,7 +331,9 @@ public class TableContentFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_AddProductButtonMouseClicked
 
     private void RemoveFromTableButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_RemoveFromTableButtonMouseClicked
-        // TODO add your handling code here:
+        Product p = (Product) tableModel.getValueAt(CheckLogTable.getSelectedRow(), 0);
+        tableDAO.removeProductFromCheck(p, currentCheck);
+        tableModel.removeRow(p);
     }//GEN-LAST:event_RemoveFromTableButtonMouseClicked
 
     private void UpdateCustomerCountButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_UpdateCustomerCountButtonMouseClicked
@@ -307,40 +341,42 @@ public class TableContentFrame extends javax.swing.JFrame {
         tableDAO.update(currentTable);
     }//GEN-LAST:event_UpdateCustomerCountButtonMouseClicked
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(TableContentFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(TableContentFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(TableContentFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(TableContentFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
+    private void CheckLogTablePropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_CheckLogTablePropertyChange
+        
+    }//GEN-LAST:event_CheckLogTablePropertyChange
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new TableContentFrame().setVisible(true);
+    private void OpenCloseCheckButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_OpenCloseCheckButtonMouseClicked
+        if (currentCheck != null) {
+            if (currentCheck.isIsOpen()) {
+                tableDAO.closeCheck(currentTable);
+                dispose();
             }
-        });
-    }
+        } else {
+            tableDAO.openCheck(currentTable, currentUser);
+            
+            currentCheck = tableDAO.getOpenCheckDetailByTable(currentTable);
+            OpenCloseCheckButton.setText("Close");
+            AddProductButton.setEnabled(true);
+            CustomerCountTextField.setEnabled(true);
+            CustomerCountTextField.setText(String.valueOf(currentTable.getCustomerCount()));
+
+            DecrementQuantity.setEnabled(true);
+            IncrementQuantity.setEnabled(true);
+
+            RemoveFromTableButton.setEnabled(true);
+
+            DateFormat dateFormat = new SimpleDateFormat("dd-MM-YYYY hh:mm:ss");  
+            TotalTimeTextField.setText(dateFormat.format(Tools.setCurrentTime(currentCheck.getTime())));
+
+            UpdateCustomerCountButton.setEnabled(true);
+
+            WaiterNameLabel.setText(currentCheck.getWaiter().getFullName());
+
+            currentCheck.setProducts(tableDAO.getTableProducts(currentCheck));
+
+            tableModel.fireTableDataChanged();
+        }
+    }//GEN-LAST:event_OpenCloseCheckButtonMouseClicked
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton AddProductButton;

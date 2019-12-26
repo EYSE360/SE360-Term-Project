@@ -2,7 +2,6 @@ package com.eyse360.controllers.mysql;
 
 import com.eyse360.DAO;
 import com.eyse360.DBConnection;
-import com.eyse360.GUITest;
 import com.eyse360.gui.BarFrame;
 import com.eyse360.models.*;
 
@@ -11,7 +10,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 

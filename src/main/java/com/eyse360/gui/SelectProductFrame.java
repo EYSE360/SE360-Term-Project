@@ -1,12 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.eyse360.gui;
 
 import com.eyse360.controllers.mysql.CategoryDAO;
 import com.eyse360.controllers.mysql.ProductDAO;
+import com.eyse360.controllers.mysql.TableDAO;
 import com.eyse360.models.Bar;
 import com.eyse360.models.Category;
 import com.eyse360.models.Check;
@@ -15,10 +11,6 @@ import com.eyse360.models.Table;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
 
-/**
- *
- * @author Erel
- */
 public class SelectProductFrame extends javax.swing.JFrame {
 
     private Bar currentBar;
@@ -27,12 +19,12 @@ public class SelectProductFrame extends javax.swing.JFrame {
     private DefaultListModel defaultListModel;
     private static CategoryDAO catDao;
     private static ProductDAO productDao;
-    /**
-     * Creates new form AddCategoryTOTable
-     */
+    private static TableDAO tableDao;
+    
     public SelectProductFrame(Table table, Bar bar, Check check) {
         catDao = new CategoryDAO();
         productDao = new ProductDAO();
+        tableDao = new TableDAO();
         currentBar = bar;
         
         initComponents();
@@ -121,13 +113,15 @@ public class SelectProductFrame extends javax.swing.JFrame {
 
     private void SelectButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SelectButtonMouseClicked
         Product product = ProductList.getSelectedValue();
-        TableContentFrame.currentCheck.addProduct(product, 1);
-        TableContentFrame.tableModel.fireTableDataChanged();
+        TableContentFrame.tableModel.addRow(product, 1);
+        tableDao.addProductToCheck(product, TableContentFrame.currentCheck, 1);
+        
         dispose();
     }//GEN-LAST:event_SelectButtonMouseClicked
 
     private void CategoryComboBox›temStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_CategoryComboBox›temStateChanged
         Category category = (Category) CategoryComboBox.getSelectedItem();
+        defaultListModel.removeAllElements();
         defaultListModel.addAll(productDao.getAllByBarAndCategory(currentBar, category));
     }//GEN-LAST:event_CategoryComboBox›temStateChanged
 

@@ -4,18 +4,19 @@ import com.eyse360.DAO;
 import com.eyse360.DBConnection;
 import com.eyse360.gui.BarFrame;
 import com.eyse360.models.Bar;
+import com.eyse360.models.BarUser;
 import com.eyse360.models.Check;
 import com.eyse360.models.Product;
 import com.eyse360.models.Table;
 import com.eyse360.models.Waiter;
+import com.eyse360.tools.Tools;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -228,7 +229,7 @@ public class TableDAO implements DAO<Table> {
                 check.setIsOpen(rs.getInt("is_open") == 1? true : false);
                 check.setTime(rs.getInt("time"));
                 check.setClose_time(rs.getInt("close_time"));
-                check.setWaiter((Waiter) barUserDao.getById(rs.getInt("id_waiter")));
+                check.setWaiter(barUserDao.getById(rs.getInt("id_waiter")));
             }
             rs.close();
             pstmt.close();
@@ -241,11 +242,65 @@ public class TableDAO implements DAO<Table> {
         return check;
     }
     
-    public HashMap<Product, Integer> getTableProducts(Check check) {
+    public void addProductToCheck(Product p, Check c, int quantity) {
+        conn.connect();
+        
+        String query = "SELECT quantity FROM check_contents WHERE id_check = ? AND id_product = ?";
+        try {
+            PreparedStatement pstmt = conn.getConnection().prepareStatement(query);
+            pstmt.setInt(1, (int) c.getId());
+            pstmt.setInt(2, (int) p.getId());
+            ResultSet rs = pstmt.executeQuery();
+            if (rs.next()) {
+                System.out.println("product is already in check");
+                String query2 = "UPDATE check_contents SET quantity = quantity + ? WHERE id_check = ? AND id_product = ?";
+                PreparedStatement pstmt2 = conn.getConnection().prepareStatement(query2);
+                pstmt2.setInt(1, quantity);
+                pstmt2.setInt(2, (int) c.getId());
+                pstmt2.setInt(3, (int) p.getId());
+                pstmt2.executeUpdate();
+                
+                pstmt2.close();
+            } else {
+                System.out.println("product not in check");
+                String query2 = "INSERT INTO check_contents (id_check, id_product, quantity) VALUES (?, ?, ?)";
+                PreparedStatement pstmt2 = conn.getConnection().prepareStatement(query2);
+                pstmt2.setInt(1, (int) c.getId());
+                pstmt2.setInt(2, (int) p.getId());
+                pstmt2.setInt(3, quantity);
+                pstmt2.executeUpdate();
+                
+                pstmt2.close();
+            }
+            rs.close();
+            pstmt.close();
+        } catch(SQLException ex) {
+            Logger.getLogger(TableDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        conn.disconnect();
+    }
+    
+    
+    public void removeProductFromCheck(Product p, Check c) {
+        conn.connect();
+        
+        String query = "DELETE FROM check_contents WHERE id_check = ? AND id_product = ?";
+        try {
+            PreparedStatement pstmt = conn.getConnection().prepareStatement(query);
+            pstmt.setInt(1, (int) c.getId());
+            pstmt.setInt(2, (int) p.getId());
+            pstmt.executeQuery();
+            pstmt.close();
+        } catch(SQLException ex) {
+            Logger.getLogger(TableDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public LinkedHashMap<Product, Integer> getTableProducts(Check check) {
         conn.connect();
         ProductDAO productDao = new ProductDAO();
         
-        HashMap<Product, Integer> products = null;
+        LinkedHashMap<Product, Integer> products = new LinkedHashMap<>();
         
         String query = "SELECT cc.id_product, cc.quantity"
                 + "     FROM check_contents AS cc"
@@ -256,19 +311,55 @@ public class TableDAO implements DAO<Table> {
             pstmt = conn.getConnection().prepareStatement(query);
             pstmt.setInt(1, (int) check.getId());
             ResultSet rs = pstmt.executeQuery();
-            if (rs.next())
-                products = new HashMap<Product, Integer>();
+            if (rs.next()) {
+                rs.beforeFirst();
 
-            rs.beforeFirst();
-
-            while (rs.next()) {
-                products.put(productDao.getById(rs.getInt("id_product")), rs.getInt("quantity"));
+                while (rs.next()) {
+                    products.put(productDao.getById(rs.getInt("id_product")), rs.getInt("quantity"));
+                }
             }
         } catch (SQLException ex) {
             Logger.getLogger(TableDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         
+        conn.disconnect();
        
         return products;
+    }
+    
+    public void openCheck(Table table, BarUser user) {
+        conn.connect();
+        
+        String query = "INSERT INTO checks (id_table, id_waiter, is_open, time) VALUES (?, ?, ?, ?)";
+        
+        try {
+            PreparedStatement pstmt = conn.getConnection().prepareStatement(query);
+            pstmt.setInt(1, (int) table.getId());
+            pstmt.setInt(2, (int) user.getId());
+            pstmt.setInt(3, 1);
+            pstmt.setInt(4, (int) Tools.getCurrentUnixTime());
+            pstmt.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(TableDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        conn.disconnect();
+    }
+    public void closeCheck(Table table) {
+        conn.connect();
+        
+        String query = "UPDATE checks SET is_open = ?, close_time = ? WHERE id_table = ? AND is_open = 1";
+        
+        try {
+            PreparedStatement pstmt = conn.getConnection().prepareStatement(query);
+            pstmt.setInt(1, 0);
+            pstmt.setInt(2, (int) Tools.getCurrentUnixTime());
+            pstmt.setInt(3, (int) table.getId());
+            pstmt.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(TableDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        conn.disconnect();
     }
 }
