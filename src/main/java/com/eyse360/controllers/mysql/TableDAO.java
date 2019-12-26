@@ -226,7 +226,7 @@ public class TableDAO implements DAO<Table> {
             if (rs.next()) {
                 check = new Check();
                 check.setId(rs.getInt("id_check"));
-                check.setIsOpen(rs.getInt("is_open") == 1? true : false);
+                check.setIsOpen(rs.getInt("is_open") == 1);
                 check.setTime(rs.getInt("time"));
                 check.setClose_time(rs.getInt("close_time"));
                 check.setWaiter(barUserDao.getById(rs.getInt("id_waiter")));

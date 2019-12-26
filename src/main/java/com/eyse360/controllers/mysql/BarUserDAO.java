@@ -150,9 +150,10 @@ public class BarUserDAO implements DAO<BarUser> {
     public List<Waiter> getAllWaitersByBar(Bar bar) {
         conn.connect();
         List<Waiter> waiters = null;
-        String query = "SELECT * FROM bar_users WHERE userRole = 'waiter' ";
+        String query = "SELECT * FROM bar_users WHERE userRole = 'waiter' AND bar = ?";
         try {
             PreparedStatement pstmt = conn.getConnection().prepareStatement(query);
+            pstmt.setInt(1, (int) bar.getId());
             ResultSet rs = pstmt.executeQuery();
             if(rs.next()){
                 waiters = new ArrayList<>();

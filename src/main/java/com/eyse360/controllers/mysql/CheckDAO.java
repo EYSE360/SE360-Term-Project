@@ -31,7 +31,7 @@ public class CheckDAO implements DAO<Check> {
                 returnCheck = new Check();
                 returnCheck.setId(rs.getInt("id_check"));
                 returnCheck.setTime(rs.getInt("time"));
-                returnCheck.setWaiter((Waiter) barUserDAO.getById(rs.getInt("id_waiter")));
+                returnCheck.setWaiter(barUserDAO.getById(rs.getInt("id_waiter")));
 
                 String productQuery = "SELECT * FROM check_logs WHERE id_check = ? GROUP BY id_check";
             }
@@ -64,8 +64,8 @@ public class CheckDAO implements DAO<Check> {
                 returnCheck = new Check();
                 returnCheck.setId(rs.getInt("id_check"));
                 returnCheck.setTime(rs.getInt("time"));
-                returnCheck.setWaiter((Waiter) barUserDAO.getById(rs.getInt("id_waiter")));
-                returnCheck.setIsOpen(rs.getInt("is_open") == 1 ? true : false);
+                returnCheck.setWaiter(barUserDAO.getById(rs.getInt("id_waiter")));
+                returnCheck.setIsOpen(rs.getInt("is_open") == 1);
             }
             pstmt.close();
             rs.close();

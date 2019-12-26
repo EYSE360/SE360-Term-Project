@@ -49,6 +49,7 @@ public class TableContentFrame extends javax.swing.JFrame {
         TableNameLabel.setText(currentTable.getName());
         
         currentCheck = tableDAO.getOpenCheckDetailByTable(currentTable);
+        tableModel = new CheckLogTableModel();
         if (currentCheck != null) {
             if (currentCheck.isIsOpen()) {
                 OpenCloseCheckButton.setText("Close");

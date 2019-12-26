@@ -1,0 +1,14 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="SE360-Term-Project:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/SE360_Term_Project_jar</output-path>
+    <root id="archive" name="SE360-Term-Project.jar">
+      <element id="directory" name="META-INF">
+        <element id="file-copy" path="$PROJECT_DIR$/src/META-INF/MANIFEST.MF" />
+      </element>
+      <element id="module-output" name="SE360-Term-Project" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/mariadb/jdbc/mariadb-java-client/2.5.2/mariadb-java-client-2.5.2.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/com/bulenkov/darcula/2018.2/darcula-2018.2.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/jetbrains/annotations/16.0.1/annotations-16.0.1.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>

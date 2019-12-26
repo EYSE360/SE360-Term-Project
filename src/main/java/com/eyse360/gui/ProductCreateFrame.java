@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.eyse360.gui;
 
 import com.eyse360.controllers.mysql.CategoryDAO;
@@ -10,7 +5,6 @@ import com.eyse360.controllers.mysql.ProductDAO;
 import com.eyse360.models.Beverage;
 import com.eyse360.models.Category;
 import com.eyse360.models.Food;
-import com.eyse360.models.Product;
 import javax.swing.DefaultComboBoxModel;
 import java.util.List;
 
@@ -23,10 +17,7 @@ public class ProductCreateFrame extends javax.swing.JFrame {
     private static DefaultComboBoxModel<Category> categoryModel;
     private static ProductDAO productDao;
     private static CategoryDAO categoryDao;
-    
-    /**
-     * Creates new form ProductCreate
-     */
+
     public ProductCreateFrame() {
         productDao = new ProductDAO();
         categoryDao = new CategoryDAO();
@@ -229,41 +220,6 @@ public class ProductCreateFrame extends javax.swing.JFrame {
             BrandTextField.setVisible(false);
         }
     }//GEN-LAST:event_CategoryComboBoxItemStateChanged
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ProductCreateFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ProductCreateFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ProductCreateFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ProductCreateFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new ProductCreateFrame().setVisible(true);
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel AlcoholVolumeLabel;

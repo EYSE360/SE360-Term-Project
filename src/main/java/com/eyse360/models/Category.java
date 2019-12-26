@@ -99,10 +99,7 @@ public class Category {
         if (!Objects.equals(this.description, other.description)) {
             return false;
         }
-        if (!Objects.equals(this.type, other.type)) {
-            return false;
-        }
-        return true;
+        return Objects.equals(this.type, other.type);
     }
     
     

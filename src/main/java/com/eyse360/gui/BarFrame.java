@@ -58,7 +58,7 @@ public class BarFrame extends javax.swing.JFrame {
         productDao = new ProductDAO();
         barUserDao = new BarUserDAO();
         tableDao = new TableDAO();
-        currentBar = barDao.getById(1);
+        currentBar = barDao.get(currentBar);
         
         initComponents();
         
@@ -897,53 +897,58 @@ public class BarFrame extends javax.swing.JFrame {
         if (BarMainTabbedPane.getSelectedIndex() == 0) {
             MainTableTab.removeAll();
             List<Table> tableList = tableDao.getAllByBar(currentBar);
-            for (Table table: tableList) {
-                Filler topToBottomFiller = new Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 32767));
-                Filler bottomToTopFiller = new Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 32767));
-                JPanel tablePanel = new JPanel();
-                tablePanel.setBorder(BorderFactory.createLineBorder(Color.decode("#214283")));
-                tablePanel.setLayout(new BoxLayout(tablePanel, BoxLayout.Y_AXIS));
-                tablePanel.add(topToBottomFiller);
-                
-                JLabel tableButton = new JLabel(table.getName());
-                tableButton.setFont(new Font("Dialog", 1, 18));
-                tableButton.setHorizontalAlignment(SwingConstants.CENTER);
-                tableButton.setMaximumSize(new Dimension(350, 50));
-                tableButton.setPreferredSize(new java.awt.Dimension(150, 54));
-                tableButton.addMouseListener(new java.awt.event.MouseAdapter() {
-                    public void mouseClicked(java.awt.event.MouseEvent evt) {
-                        TableButtonMouseClicked(evt, table);
-                    }
-                });
-                tablePanel.add(tableButton);
-                
-                Check check = tableDao.getOpenCheckDetailByTable(table);
-                if (check != null) {
-                    if (check.isIsOpen()) {
-                        check.setProducts(tableDao.getTableProducts(check));
+            if (tableList != null) {
+                for (Table table : tableList) {
+                    Filler topToBottomFiller = new Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 32767));
+                    Filler bottomToTopFiller = new Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 32767));
+                    JPanel tablePanel = new JPanel();
+                    tablePanel.setBorder(BorderFactory.createLineBorder(Color.decode("#214283")));
+                    tablePanel.setLayout(new BoxLayout(tablePanel, BoxLayout.Y_AXIS));
+                    tablePanel.add(topToBottomFiller);
 
-                        double sum = 0;
-                        JLabel totalPriceLabel = new JLabel(String.valueOf(sum));
-                        totalPriceLabel.setHorizontalAlignment(SwingConstants.CENTER);
-                        totalPriceLabel.setMaximumSize(new Dimension(350, 50));
-                        if (check.getProducts() != null) {
-                            for (Map.Entry<Product, Integer> entry: check.getProducts().entrySet()) {
-                                sum += entry.getKey().getPrice() * entry.getValue();
-                            }
-                            System.out.println(sum);
-                            totalPriceLabel.setText(String.valueOf(sum));
+                    JLabel tableButton = new JLabel(table.getName());
+                    tableButton.setFont(new Font("Dialog", 1, 18));
+                    tableButton.setHorizontalAlignment(SwingConstants.CENTER);
+                    tableButton.setMaximumSize(new Dimension(350, 50));
+                    tableButton.setPreferredSize(new java.awt.Dimension(150, 54));
+                    tableButton.addMouseListener(new java.awt.event.MouseAdapter() {
+                        public void mouseClicked(java.awt.event.MouseEvent evt) {
+                            TableButtonMouseClicked(evt, table);
                         }
-                        tablePanel.add(totalPriceLabel);
-                        tablePanel.setBackground(Color.decode("#629755"));
+                    });
+                    tablePanel.add(tableButton);
+
+                    Check check = tableDao.getOpenCheckDetailByTable(table);
+                    if (check != null) {
+                        if (check.isIsOpen()) {
+                            check.setProducts(tableDao.getTableProducts(check));
+
+                            double sum = 0;
+                            JLabel totalPriceLabel = new JLabel(String.valueOf(sum));
+                            totalPriceLabel.setHorizontalAlignment(SwingConstants.CENTER);
+                            totalPriceLabel.setMaximumSize(new Dimension(350, 50));
+                            if (check.getProducts() != null) {
+                                for (Map.Entry<Product, Integer> entry : check.getProducts().entrySet()) {
+                                    sum += entry.getKey().getPrice() * entry.getValue();
+                                }
+                                System.out.println(sum);
+                                totalPriceLabel.setText(String.valueOf(sum));
+                            }
+                            tablePanel.add(totalPriceLabel);
+                            tablePanel.setBackground(Color.decode("#629755"));
+                        }
                     }
+                    tablePanel.add(bottomToTopFiller);
+                    MainTableTab.add(tablePanel);
                 }
-                tablePanel.add(bottomToTopFiller);
-                MainTableTab.add(tablePanel);
             }
         } else if (BarMainTabbedPane.getSelectedIndex() == 1) {
+            categoryModel.removeAllElements();
             List<Category> categoryList = categoryDao.getAllByBar(currentBar);
-            for (Category category : categoryList)
-                categoryModel.addElement(category);
+            if (categoryList != null) {
+                for (Category category : categoryList)
+                    categoryModel.addElement(category);
+            }
         }
     }//GEN-LAST:event_BarMainTabbedPaneStateChanged
 
@@ -962,24 +967,32 @@ public class BarFrame extends javax.swing.JFrame {
             if (currentIndex == 0) {
                 categoryModel.removeAllElements();
                 List<Category> categoryList = categoryDao.getAllByBar(currentBar);
-                for (Category category : categoryList)
-                    categoryModel.addElement(category);
+                if (categoryList != null) {
+                    for (Category category : categoryList)
+                        categoryModel.addElement(category);
+                }
             } else if (currentIndex == 1) {
                 resetProductForm();
                 productModel.removeAllElements();
                 List<Product> productList = productDao.getAllByBar(currentBar);
-                for (Product product : productList)
-                    productModel.addElement(product);
+                if (productList != null) {
+                    for (Product product : productList)
+                        productModel.addElement(product);
+                }
             } else if (currentIndex == 2) {
                 waiterModel.removeAllElements();
                 List<Waiter> waiterList = barUserDao.getAllWaitersByBar(currentBar);
-                for (Waiter waiter : waiterList)
-                    waiterModel.addElement(waiter);
+                if (waiterList != null) {
+                    for (Waiter waiter : waiterList)
+                        waiterModel.addElement(waiter);
+                }
             } else if (currentIndex == 3) {
                 tableModel.removeAllElements();
                 List<Table> tableList = tableDao.getAllByBar(currentBar);
-                for (Table table : tableList)
-                    tableModel.addElement(table);
+                if (tableList != null) {
+                    for (Table table : tableList)
+                        tableModel.addElement(table);
+                }
             }
         }
     }//GEN-LAST:event_ManagementTabbedPaneStateChanged

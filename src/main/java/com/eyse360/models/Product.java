@@ -84,10 +84,7 @@ public abstract class Product {
         if (!Objects.equals(this.description, other.description)) {
             return false;
         }
-        if (!Objects.equals(this.category, other.category)) {
-            return false;
-        }
-        return true;
+        return Objects.equals(this.category, other.category);
     }
     
     
