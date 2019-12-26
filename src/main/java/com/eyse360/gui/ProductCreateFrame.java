@@ -12,6 +12,7 @@ import com.eyse360.models.Category;
 import com.eyse360.models.Food;
 import com.eyse360.models.Product;
 import javax.swing.DefaultComboBoxModel;
+import java.util.List;
 
 /**
  *
@@ -35,8 +36,10 @@ public class ProductCreateFrame extends javax.swing.JFrame {
         categoryModel = new DefaultComboBoxModel<>();
         
         CategoryComboBox.setModel(categoryModel);
-        
-        categoryModel.addAll(categoryDao.getAllByBar(BarFrame.currentBar));
+
+        List<Category> categoryList = categoryDao.getAllByBar(BarFrame.currentBar);
+        for (Category category : categoryList)
+            categoryModel.addElement(category);
         
     }
 

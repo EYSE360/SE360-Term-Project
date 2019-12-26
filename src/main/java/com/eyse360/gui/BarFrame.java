@@ -349,7 +349,7 @@ public class BarFrame extends javax.swing.JFrame {
 
         ProductCategoryComboBox.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                ProductCategoryComboBoxÝtemStateChanged(evt);
+                ProductCategoryComboBoxItemStateChanged(evt);
             }
         });
         ProductCategoryComboBox.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
@@ -941,7 +941,9 @@ public class BarFrame extends javax.swing.JFrame {
                 MainTableTab.add(tablePanel);
             }
         } else if (BarMainTabbedPane.getSelectedIndex() == 1) {
-            categoryModel.addAll(categoryDao.getAllByBar(currentBar));
+            List<Category> categoryList = categoryDao.getAllByBar(currentBar);
+            for (Category category : categoryList)
+                categoryModel.addElement(category);
         }
     }//GEN-LAST:event_BarMainTabbedPaneStateChanged
 
@@ -959,17 +961,25 @@ public class BarFrame extends javax.swing.JFrame {
             int currentIndex = ManagementTabbedPane.getSelectedIndex();
             if (currentIndex == 0) {
                 categoryModel.removeAllElements();
-                categoryModel.addAll(categoryDao.getAllByBar(currentBar));   
+                List<Category> categoryList = categoryDao.getAllByBar(currentBar);
+                for (Category category : categoryList)
+                    categoryModel.addElement(category);
             } else if (currentIndex == 1) {
                 resetProductForm();
                 productModel.removeAllElements();
-                productModel.addAll(productDao.getAllByBar(currentBar));   
+                List<Product> productList = productDao.getAllByBar(currentBar);
+                for (Product product : productList)
+                    productModel.addElement(product);
             } else if (currentIndex == 2) {
                 waiterModel.removeAllElements();
-                waiterModel.addAll(barUserDao.getAllWaitersByBar(currentBar));   
+                List<Waiter> waiterList = barUserDao.getAllWaitersByBar(currentBar);
+                for (Waiter waiter : waiterList)
+                    waiterModel.addElement(waiter);
             } else if (currentIndex == 3) {
                 tableModel.removeAllElements();
-                tableModel.addAll(tableDao.getAllByBar(currentBar));   
+                List<Table> tableList = tableDao.getAllByBar(currentBar);
+                for (Table table : tableList)
+                    tableModel.addElement(table);
             }
         }
     }//GEN-LAST:event_ManagementTabbedPaneStateChanged
@@ -985,9 +995,9 @@ public class BarFrame extends javax.swing.JFrame {
         List<Category> categories = categoryDao.getAllByBar(currentBar);
         
         categoryComboBoxModel.removeAllElements();
-        //for (Category cat : categories) {
-            categoryComboBoxModel.addAll(categories);
-        //}
+        for (Category cat : categories) {
+            categoryComboBoxModel.addElement(cat);
+        }
         
         ProductCategoryComboBox.setSelectedItem(selected.getCategory());
         
@@ -1023,9 +1033,9 @@ public class BarFrame extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_ProductCategoryComboBoxPropertyChange
 
-    private void ProductCategoryComboBoxÝtemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_ProductCategoryComboBoxÝtemStateChanged
+    private void ProductCategoryComboBoxItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_ProductCategoryComboBoxï¿½temStateChanged
         
-    }//GEN-LAST:event_ProductCategoryComboBoxÝtemStateChanged
+    }//GEN-LAST:event_ProductCategoryComboBoxï¿½temStateChanged
 
     private void WaiterListMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_WaiterListMouseClicked
         Waiter selected = WaiterList.getSelectedValue();

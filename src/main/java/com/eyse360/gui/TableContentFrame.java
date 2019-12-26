@@ -48,21 +48,6 @@ public class TableContentFrame extends javax.swing.JFrame {
         
         TableNameLabel.setText(currentTable.getName());
         
-        tableModel = new CheckLogTableModel();
-
-        tableModel.addTableModelListener(new TableModelListener() {
-            public void tableChanged(TableModelEvent e) {
-                double sum = 0;
-                if (currentCheck.getProducts() != null) {
-                    for (Map.Entry<Product, Integer> entry: currentCheck.getProducts().entrySet()) {
-                        sum += entry.getKey().getPrice() * entry.getValue();
-                    }
-                }
-
-                TotalTextField.setText(String.valueOf(sum));
-            }
-        });
-        
         currentCheck = tableDAO.getOpenCheckDetailByTable(currentTable);
         if (currentCheck != null) {
             if (currentCheck.isIsOpen()) {
@@ -84,9 +69,20 @@ public class TableContentFrame extends javax.swing.JFrame {
                 WaiterNameLabel.setText(currentCheck.getWaiter().getFullName());
                 
                 currentCheck.setProducts(tableDAO.getTableProducts(currentCheck));
-                for (Map.Entry<Product, Integer> entry: currentCheck.getProducts().entrySet()) {
-                    tableModel.addRow(entry.getKey(), entry.getValue());
-                }
+                tableModel = new CheckLogTableModel(currentCheck.getProducts());
+
+                tableModel.addTableModelListener(new TableModelListener() {
+                    public void tableChanged(TableModelEvent e) {
+                        double sum = 0;
+                        if (currentCheck.getProducts() != null) {
+                            for (Map.Entry<Product, Integer> entry: currentCheck.getProducts().entrySet()) {
+                                sum += entry.getKey().getPrice() * entry.getValue();
+                            }
+                        }
+
+                        TotalTextField.setText(String.valueOf(sum));
+                    }
+                });
                 tableModel.fireTableDataChanged();                
             }
         }
@@ -317,12 +313,14 @@ public class TableContentFrame extends javax.swing.JFrame {
         Product p = (Product) tableModel.getValueAt(CheckLogTable.getSelectedRow(),0);
         tableDAO.addProductToCheck(p, currentCheck, 1);
         tableModel.addRow(p, 1);
+        tableModel.fireTableDataChanged();
     }//GEN-LAST:event_IncrementQuantityMouseClicked
 
     private void DecrementQuantityMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DecrementQuantityMouseClicked
         Product p = (Product) tableModel.getValueAt(CheckLogTable.getSelectedRow(), 0);
         tableDAO.addProductToCheck(p, currentCheck, -1);
         tableModel.addRow(p, -1);
+        tableModel.fireTableDataChanged();
     }//GEN-LAST:event_DecrementQuantityMouseClicked
 
     private void AddProductButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_AddProductButtonMouseClicked

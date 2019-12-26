@@ -129,11 +129,9 @@ public class LoginFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void LoginButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LoginButtonMouseClicked
-        //String userName = UserName.getText();
-        //String password = PasswordField_TextField.getText();
-        
-        String userName = "smguy9";
-        String password = "mybeteth";
+        String userName = UserName.getText();
+        String password = PasswordField_TextField.getText();
+
         BarUser user = barUserDao.login(userName, password);
         
         if (user != null) {
